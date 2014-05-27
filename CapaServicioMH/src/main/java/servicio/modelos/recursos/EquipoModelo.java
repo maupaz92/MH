@@ -10,7 +10,7 @@ public class EquipoModelo {
 	
 	private String nombre;
 	private String pais;
-	private boolean tipo;
+	private Boolean tipo;
 	
 	public EquipoModelo(){}
 
@@ -33,11 +33,11 @@ public class EquipoModelo {
 	}
 
 	@XmlElement
-	public boolean isTipo() {
+	public Boolean isTipo() {
 		return tipo;
 	}
 
-	public void setTipo(boolean tipo) {
+	public void setTipo(Boolean tipo) {
 		this.tipo = tipo;
 	}
 	
