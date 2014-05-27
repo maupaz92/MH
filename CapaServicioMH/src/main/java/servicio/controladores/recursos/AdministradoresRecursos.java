@@ -1,5 +1,5 @@
 package servicio.controladores.recursos;
 
-public class Administradores {
+public class AdministradoresRecursos {
 
 }

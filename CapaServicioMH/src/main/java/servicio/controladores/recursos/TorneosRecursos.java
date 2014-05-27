@@ -1,5 +1,5 @@
 package servicio.controladores.recursos;
 
-public class Jugadores {
+public class TorneosRecursos {
 
 }

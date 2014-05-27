@@ -12,7 +12,7 @@ public class Aplicacion extends Application{
 	
 	public Aplicacion()
 	{
-		singletons.add(new Equipos());
+		singletons.add(new EquiposRecursos());
 		
 	}
 	

@@ -10,9 +10,9 @@ import servicio.modelos.recursos.EquipoModelo;
 
 
 @Path("/equipos")
-public class Equipos {
+public class EquiposRecursos {
 
-	public Equipos(){}
+	public EquiposRecursos(){}
 	
 	@GET
 	@Path("{nombre}")
