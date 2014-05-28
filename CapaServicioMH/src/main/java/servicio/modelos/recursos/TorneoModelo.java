@@ -10,7 +10,7 @@ public class TorneoModelo {
 	private String nombre;
 	private String tipo;
 	private String sede;
-	private boolean copa;
+	private Boolean copa;
 	
 	public TorneoModelo(){
 		
@@ -43,11 +43,11 @@ public class TorneoModelo {
 	}
 
 	@XmlElement
-	public boolean isCopa() {
+	public Boolean isCopa() {
 		return copa;
 	}
 
-	public void setCopa(boolean copa) {
+	public void setCopa(Boolean copa) {
 		this.copa = copa;
 	}
 	
