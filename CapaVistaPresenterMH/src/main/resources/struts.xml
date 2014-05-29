@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	
+    
+    <constant name="struts.devMode" value="true" />    
+
+    <package name="default" extends="struts-default" namespace = "/">
+        	
+        <action name="registroTorneo">
+        	<result>/formularioTorneo.jsp</result>
+        </action>        
+        <!-- 
+        se define la accion, especificando la clase donde debe de ir el request, 
+        ademas del posible metodo al que debe responder la accion, ademas de sus resultados esperados 
+        -->        
+        <action name = "registrarTorneo" class = "acciones.TorneoAccion" method = "registrarNuevoTorneo">
+        	<result name = "success">/TorneoRegistradoPrueba.jsp</result>        	
+        </action>
+        
+    </package>
+     
+
+    <!-- Add packages here -->
+
+</struts>
