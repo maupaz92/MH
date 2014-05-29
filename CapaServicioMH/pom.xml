@@ -45,7 +45,12 @@
 	    <artifactId>resteasy-jaxb-provider</artifactId>
 	    <version>3.0.7.Final</version>
 	</dependency>
-    
+
+	<dependency>
+		<groupId>MH</groupId>
+		<artifactId>ModeloDeRecursos</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</dependency>
   </dependencies>
   <build>
     <finalName>CapaServicioMH</finalName>
