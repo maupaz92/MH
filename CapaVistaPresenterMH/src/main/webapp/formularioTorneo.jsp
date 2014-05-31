@@ -12,10 +12,10 @@
 	<body>
 		<h3>Formulario nuevo Torneo</h3>		
 		<s:form action = "registrarTorneo">
-			<s:textfield name = "torneo.nombre" label = "Nombre del torneo"/>
-			<!-- <s:textfield name = "torneo.tipo" label = "tipo del torneo"/> -->
+			<s:textfield name = "torneo.nombre" label = "Nombre del torneo"/>			
 			<s:textfield name = "torneo.sede" label = "sede del torneo"/>
-			<s:select name = "torneo.tipo" label = "tipo del torneo" list="{'Java Lang','Mauricio'}"></s:select>
+			<s:select name = "torneo.tipo" label = "tipo de torneo" list="{'selecciones','clubes'}"></s:select>
+			<s:radio name = "esCopaTorneo" label = "Es de copa?" list="{'si','no'}"></s:radio>
 			<s:submit align = "center"></s:submit>
 		</s:form>
 	

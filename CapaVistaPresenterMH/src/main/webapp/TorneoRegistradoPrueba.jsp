@@ -9,6 +9,9 @@
 		<title>Insert title here</title>
 	</head>
 	<body>
-		<s:property value = "torneo.nombre"/>				
+		<s:property value = "torneo.nombre"/><br>
+		<s:property value = "torneo.sede"/><br>
+		<s:property value = "torneo.tipo"/><br>
+		<s:property value = "torneo.copa"/><br>	
 	</body>
 </html>
