@@ -13,7 +13,6 @@ public class TorneoModelo {
 	private Boolean copa;
 	
 	public TorneoModelo(){
-		
 	}
 	@XmlAttribute
 	public String getNombre() {
