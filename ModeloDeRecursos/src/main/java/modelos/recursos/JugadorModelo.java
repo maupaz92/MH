@@ -4,6 +4,12 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * clase que modela una entidad jugador, 
+ * anotada para soporte de conversion a formato xml
+ * @author maupaz92
+ *
+ */
 @XmlRootElement
 public class JugadorModelo {
 
@@ -18,6 +24,8 @@ public class JugadorModelo {
 			
 	public JugadorModelo(){}
 
+	
+	//----------getters & setters
 	@XmlAttribute
 	public String getPasaporte() {
 		return pasaporte;
