@@ -38,6 +38,7 @@ public class TorneoAccion extends ActionSupport{
 			this.getTorneo().setCopa(true);	
 		clienteTorneos = new ClienteTorneos();
 		clienteTorneos.enviarRegistroNuevoTorneo(getTorneo());
+		clienteTorneos.enviarSolcitudTorneosRegistrados();
 		return SUCCESS;
 	}
 	
