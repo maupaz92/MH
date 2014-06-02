@@ -7,5 +7,6 @@ public class pruebaRepo {
 	private String mauricio;
 	
 	private int edad;
+	private int tel;
 	
 }
