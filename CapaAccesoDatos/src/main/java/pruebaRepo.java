@@ -6,4 +6,6 @@ public class pruebaRepo {
 	{}
 	private String mauricio;
 	
+	private int edad;
+	
 }
