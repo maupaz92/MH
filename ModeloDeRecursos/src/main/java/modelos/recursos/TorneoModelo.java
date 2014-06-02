@@ -59,6 +59,10 @@ public class TorneoModelo {
 	}
 
 	
+	public String toString()
+	{
+		return nombre+" sede en: "+sede+" tipo: "+tipo+" es de copa: "+copa;
+	}
 	
 	
 	

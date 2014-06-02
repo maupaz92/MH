@@ -10,9 +10,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-
-
-
+import org.jboss.resteasy.logging.Logger;
 
 import modelos.recursos.ConjuntoDeTorneosModelo;
 import modelos.recursos.TorneoModelo;
@@ -27,6 +25,9 @@ import modelos.recursos.TorneoModelo;
  */
 @Path("/torneos")
 public class AccesoTorneos {
+	
+	private final Logger log = Logger.getLogger(AccesoTorneos.class);
+	
 
 	public AccesoTorneos()
 	{
@@ -74,7 +75,7 @@ public class AccesoTorneos {
 	@Consumes(MediaType.APPLICATION_XML)
 	public void registrarNuevoTorneo(TorneoModelo torneo)
 	{		
-		System.out.println(torneo.getNombre());
+		log.error("error");
 		//throw new WebApplicationException(Response.Status.NOT_FOUND);
 	}
 	
