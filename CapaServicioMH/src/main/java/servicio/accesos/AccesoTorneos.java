@@ -82,7 +82,7 @@ public class AccesoTorneos {
 	
 	@PUT
 	@Consumes(MediaType.APPLICATION_XML)
-	public void modificarTorneo(@PathParam("nombre") String nombreTorneo, TorneoModelo torneo)
+	public void modificarTorneos(@PathParam("nombre") String nombreTorneo, TorneoModelo torneo)
 	{
 		
 	}
