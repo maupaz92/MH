@@ -15,12 +15,15 @@
       <scope>test</scope>
     </dependency>
     
-        <dependency>
+    
+    <!-- para uso de java serlvet api -->
+    <dependency>
 		<groupId>javax.servlet</groupId>
 		<artifactId>servlet-api</artifactId>
 		<version>3.0-alpha-1</version>
 	</dependency>
-	
+
+	<!-- requeridas para web service estilo rest usando JAX-RS 2.0-->	
 	<dependency>
 		<groupId>org.jboss.resteasy</groupId>
 		 <artifactId>resteasy-jaxrs</artifactId>
@@ -33,6 +36,7 @@
             <version>3.0.7.Final</version>
     </dependency>
     
+    <!-- requerido para que el servlet de resteasy inicie y acepte solicitudes http -->
     <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-servlet-initializer</artifactId>
@@ -46,16 +50,43 @@
 	    <version>3.0.7.Final</version>
 	</dependency>
 
+    <!-- proyecto personalizado -->
 	<dependency>
 		<groupId>MH</groupId>
 		<artifactId>ModeloDeRecursos</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</dependency>
+	
+	<!-- requeridas para el mapeo de java beans a formato JSON -->
 	<dependency>
 		<groupId>org.jboss.resteasy</groupId>
 		<artifactId>resteasy-jackson-provider</artifactId>
 		<version>3.0.7.Final</version>
 	</dependency>
+	
+	<!-- Loggings -->
+	<!-- Se define que debe omitirse el provisto por el framework (commons) -->
+	<dependency>
+  		<groupId>commons-logging</groupId>
+  		<artifactId>commons-logging</artifactId>
+  		<version>1.1.1</version>
+  		<scope>provided</scope>
+	</dependency>
+	
+	<!-- utilizada la api de SLF4J -->
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>slf4j-api</artifactId>
+		<version>1.7.7</version>
+	</dependency>
+	
+	<!-- SLF4J: implementando "simple" -->	
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>slf4j-simple</artifactId>
+		<version>1.7.7</version>
+	</dependency>
+	
   </dependencies>
   <build>
     <finalName>CapaServicioMH</finalName>
