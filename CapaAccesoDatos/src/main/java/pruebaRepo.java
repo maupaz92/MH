@@ -9,5 +9,6 @@ public class pruebaRepo {
 	private int edad;
 	private int tel;
 	private String nombre;
+	private String email;
 	
 }
