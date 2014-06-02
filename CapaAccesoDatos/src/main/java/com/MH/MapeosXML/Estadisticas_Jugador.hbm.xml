@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+<hibernate-mapping package="com.MH.XMLMapeos">
+ <class name="Estadistica_Jugador" table="Estadisticas_Jugador">
+      <meta attribute="class-description">
+         Esta clase contiene los metadatos necesarios para mapear a la base de 
+         datos los objetos de Estadistica asociados a un Jugador.
+      </meta>
+      <id name="Pasaporte_XFIFA" type="int" column="Pasaporte_XFIFA">
+         <generator class="native"/>
+      </id>
+      <property name="firstName" column="first_name" type="string"/>
+      <property name="lastName" column="last_name" type="string"/>
+      <property name="salary" column="salary" type="int"/>
+   </class>
+    
+</hibernate-mapping>
