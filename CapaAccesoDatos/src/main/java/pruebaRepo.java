@@ -10,4 +10,6 @@ public class pruebaRepo {
 	private int tel;
 	private String nombre;
 	
+	private int otracosa;
+	
 }
