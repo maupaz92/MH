@@ -11,5 +11,6 @@ public class pruebaRepo {
 	private String nombre;
 	
 	private int otracosa;
+	private String email;
 	
 }
