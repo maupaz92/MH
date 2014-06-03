@@ -21,19 +21,7 @@ public class EstadisticasJugadorSeleccionModelo {
 	private int juegos_Perdidos;
 	private int juegos_Empatados;
 	private int minutos_Jugados;
-	private int balones_Recuperados;
-	public int getAno() {
-		return ano;
-	}
-	public void setAno(int ano) {
-		this.ano = ano;
-	}
-	public String getTorneo() {
-		return torneo;
-	}
-	public void setTorneo(String torneo) {
-		this.torneo = torneo;
-	}
+	private int balones_Recuperados;	
 	private int asistencias;
 	private int tiros_Marco;
 	private int tarjetas_amarillas;
@@ -142,7 +130,18 @@ public class EstadisticasJugadorSeleccionModelo {
 	public void setRemates_Salvados(int remates_Salvados) {
 		this.remates_Salvados = remates_Salvados;
 	}
-	
+	public int getAno() {
+		return ano;
+	}
+	public void setAno(int ano) {
+		this.ano = ano;
+	}
+	public String getTorneo() {
+		return torneo;
+	}
+	public void setTorneo(String torneo) {
+		this.torneo = torneo;
+	}	
 	
 	
 }
