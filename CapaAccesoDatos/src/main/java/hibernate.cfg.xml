@@ -15,6 +15,7 @@
 	    <property name="hbm2ddl.auto">update</property>
 	    <mapping resource="com/MH/XMLMapeos/Torneo.hbm.xml"></mapping>
 	    <mapping resource="com/MH/XMLMapeos/Administrador.hbm.xml"></mapping>
-	
+	    <mapping resource="com/MH/XMLMapeos/Jugador.hbm.xml"></mapping>
+		
 	</session-factory>
 </hibernate-configuration>
