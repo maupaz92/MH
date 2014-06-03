@@ -17,6 +17,13 @@
 	    <artifactId>hibernate-entitymanager</artifactId>
 	    <version>4.3.5.Final</version>
 	</dependency>
+	
+	<!-- proyecto personalizado -->
+	<dependency>
+		<groupId>MH</groupId>
+		<artifactId>ModeloDeRecursos</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</dependency>
   
   </dependencies>
   
