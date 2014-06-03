@@ -8,7 +8,7 @@ import java.sql.Date;
  * @author DiegoJ
  **/
 
-public class Administrador {
+public class AdministradorModelo {
 	
 	//Atributos 
 	
@@ -23,7 +23,7 @@ public class Administrador {
 	
 	//Constructor
 	
-	public Administrador(){}
+	public AdministradorModelo(){}
 	
 	//----------getters & setters
 	
