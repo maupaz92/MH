@@ -1,5 +1,7 @@
 package modelos.recursos;
 
+import java.util.Set;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -21,7 +23,11 @@ public class JugadorModelo {
 	private Float altura;
 	private Float peso;
 	private String fechaNacimiento;
+	private Set<EstadisticasJugadorRegularesModelo> estadisticasregulares;
+	private Set<EstadisticasJugadorSeleccionModelo> estadisticasSeleccion;
 			
+	
+
 	public JugadorModelo(){}
 
 	
@@ -99,6 +105,25 @@ public class JugadorModelo {
 	}
 	
 	
+	public Set<EstadisticasJugadorRegularesModelo> getEstadisticasregulares() {
+		return estadisticasregulares;
+	}
+
+
+	public void setEstadisticasregulares(Set<EstadisticasJugadorRegularesModelo> estadisticasregulares) {
+		this.estadisticasregulares = estadisticasregulares;
+	}
+
+
+	public Set<EstadisticasJugadorSeleccionModelo> getEstadisticasSeleccion() {
+		return estadisticasSeleccion;
+	}
+
+
+	public void setEstadisticasSeleccion(Set<EstadisticasJugadorSeleccionModelo> estadisticasSeleccion) {
+		this.estadisticasSeleccion = estadisticasSeleccion;
+	}
+
 	
 	
 	

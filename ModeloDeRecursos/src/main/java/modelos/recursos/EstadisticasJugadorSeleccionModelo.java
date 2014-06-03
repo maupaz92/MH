@@ -32,6 +32,8 @@ public class EstadisticasJugadorSeleccionModelo {
 	private int ano;
 	private String torneo;
 	
+	public EstadisticasJugadorSeleccionModelo(){}
+	
 	//----------getters & setters
 	
 	public JugadorModelo getJugador() {

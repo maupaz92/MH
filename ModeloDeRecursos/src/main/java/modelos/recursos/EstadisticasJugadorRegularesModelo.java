@@ -25,7 +25,7 @@ public class EstadisticasJugadorRegularesModelo {
 	private int ano;
 	private String club;
 	
-	
+	public EstadisticasJugadorRegularesModelo(){}
 	
 	
 	
