@@ -13,7 +13,7 @@ public class EstadisticasJugadorSeleccionModelo {
 	 * Se hace referencia al jugador al que pertenece el objeto EstadisticaJugadorSelecciónModelo.
 	 * Actúa como una FK a nivel de base de datos. 
 	 *  */
-	private JugadorModelo jugador;
+	private String pasaporte_XFIFA;
 	private Float nota_XFIFA;
 	private int juegos_Totales;
 	private int goles_Anotados;
@@ -36,11 +36,11 @@ public class EstadisticasJugadorSeleccionModelo {
 	
 	//----------getters & setters
 	
-	public JugadorModelo getJugador() {
-		return jugador;
+	public String getJugador() {
+		return pasaporte_XFIFA;
 	}
-	public void setJugador(JugadorModelo jugador) {
-		this.jugador = jugador;
+	public void setJugador(String pasaporte) {
+		this.pasaporte_XFIFA = pasaporte;
 	}
 	public Float getNota_XFIFA() {
 		return nota_XFIFA;

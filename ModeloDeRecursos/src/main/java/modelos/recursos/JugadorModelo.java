@@ -18,7 +18,7 @@ public class JugadorModelo {
 	private String pasaporte;
 	private String nombre;
 	private Boolean estado;
-	private EquipoModelo equipoActual;
+	private String equipoActual;
 	private String posicion;
 	private Float altura;
 	private Float peso;
@@ -60,11 +60,11 @@ public class JugadorModelo {
 	}
 
 	@XmlElement
-	public EquipoModelo getEquipoActual() {
+	public String getEquipoActual() {
 		return equipoActual;
 	}
 
-	public void setEquipoActual(EquipoModelo equipoActual) {
+	public void setEquipoActual(String equipoActual) {
 		this.equipoActual = equipoActual;
 	}
 
