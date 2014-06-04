@@ -51,7 +51,7 @@ public class ConjuntoDeTorneosModelo {
 	
 	
 	//----getters & setters
-	@XmlElement(name = "torneo")
+	@XmlElement(name = "records")
 	public List<TorneoModelo> getListaTorneos() {
 		return listaTorneos;
 	}
