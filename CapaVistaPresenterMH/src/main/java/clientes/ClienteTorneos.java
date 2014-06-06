@@ -1,6 +1,8 @@
 package clientes;
 
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
 import javax.ws.rs.client.Client;
@@ -61,13 +63,36 @@ public class ClienteTorneos {
 		WebTarget urlObjetivo = cliente.target(URI+rootResourceURI);
 		//se ejecuta el request con el metodo "get", y se almacena en un objeto "Response"
 		Response respuesta = urlObjetivo.request().get();
+		String respuestaString = respuesta.getEntity().toString(); 
+		
+		FileWriter escritor;
+		try {
+			escritor = new FileWriter("src/main/webapp/mauricio.txt");
+			escritor.write(respuestaString);
+			escritor.flush();
+			escritor.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		//se obtiene el objeto deseado, y se indica el mapeo segun la clase
+		/*
 		ConjuntoDeTorneosModelo lista = respuesta.readEntity(ConjuntoDeTorneosModelo.class);
-		if(respuesta.getStatus() != 200)		
+		if(respuesta.getStatus() == 200)
+		{
 			listaRecuperada = lista.getListaTorneos();
+			for(int conteo = 0; conteo < listaRecuperada.size(); conteo++)
+			{
+				TorneoModelo torneo = listaRecuperada.get(conteo);
+				System.out.println(torneo.getNombre());
+			}
+		}
 		else
-			System.out.println("fuck");		
+			System.out.println(respuesta.getStatus());
+			
+		 */
 		respuesta.close();
+		
 		return listaRecuperada;
 	}
 	
@@ -76,7 +101,22 @@ public class ClienteTorneos {
 	
 
 	
-	
+	public static void main(String[] args)
+	{
+		
+		ClienteTorneos cliente = new ClienteTorneos();
+		cliente.enviarSolcitudTorneosRegistrados();
+		
+/*		try {
+			FileWriter escritor = new FileWriter("src/main/webapp/mauricio.txt");
+			escritor.write("mauricio");
+			escritor.flush();
+			escritor.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} */
+	}
 	
 	
 	

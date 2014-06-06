@@ -32,16 +32,7 @@ public class AccesoTorneos {
 	public AccesoTorneos()
 	{
 		
-	}	
-		
-	
-	@GET
-	@Path("/{nombre}")
-	@Produces(MediaType.APPLICATION_XML)
-	public TorneoModelo getTorneoPorNombre(@PathParam("nombre") String nombre)
-	{
-		return null;
-	}
+	}		
 	
 	/**
 	 * metodo que retorna los torneos registrados en el sistema a traves
@@ -50,22 +41,24 @@ public class AccesoTorneos {
 	 * @return
 	 */
 	@GET	
-	@Produces({"application/xml", "application/json"})
+	@Produces({"application/json", "application/xml"})
 	public ConjuntoDeTorneosModelo getTorneosRegistrados()
 	{
 		TorneoModelo t1 = new TorneoModelo();
-		t1.setNombre("Brasil 2014");
+		t1.setNombre("Brasil 2014");		
+		t1.setTipo("selecciones");
 		t1.setSede("Brasil");
 		t1.setCopa(true);
-		t1.setTipo("selecciones");
 		
 		TorneoModelo t2 = new TorneoModelo();		
 		t2.setNombre("Russia 2018");
+		t2.setTipo("clubes");
+		t2.setSede("Russia");
+		t2.setCopa(false);
 		
 		ConjuntoDeTorneosModelo lista = new ConjuntoDeTorneosModelo();
 		lista.agregarTorneo(t1);
-		lista.agregarTorneo(t2);
-		
+		lista.agregarTorneo(t2);		
 		//return Response.ok(lista).build();
 		return lista;
 	}
@@ -75,7 +68,7 @@ public class AccesoTorneos {
 	@Consumes(MediaType.APPLICATION_XML)
 	public void registrarNuevoTorneo(TorneoModelo torneo)
 	{		
-		log.error("error");
+		log.info("error");
 		//throw new WebApplicationException(Response.Status.NOT_FOUND);
 	}
 	
@@ -85,9 +78,7 @@ public class AccesoTorneos {
 	public void modificarTorneos2(@PathParam("nombre") String nombreTorneo, TorneoModelo torneo)
 	{
 		
-	}
-	
-	
+	}	
 	
 	
 	

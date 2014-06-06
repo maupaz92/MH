@@ -1,0 +1,53 @@
+
+html{
+	/*background-color: yellow;*/
+}
+
+a{	
+	color: black;
+}
+
+#header{
+	border: 1px solid black;
+	height: 150px;
+	margin: 10px;	
+}
+
+#menu{	
+	border: 1px solid #007e7e; 	
+	width: 20%;
+}
+
+.center{
+	width: 20%;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 20px;
+	border: 1px solid black;
+}
+
+.cuerpo{
+	border: thin solid red;	
+	padding-left: 30px;
+	height: 400px;
+	width: 75%;
+	clear: right;		
+}
+
+.leftFloat{
+	float: left;
+}
+
+.floatRight{
+	float: right;
+}
+
+#loginTile{	
+}
+
+#logo{
+	width: 150px;
+	heigth: 150px;
+}
+
+

@@ -9,7 +9,9 @@
 		<title>Insert title here</title>
 	</head>
 	<body>
+		<h1>TorneoRegistradoPrueba.jsp</h1>
 		<s:property value = "torneo.nombre"/><br>
+		<s:textfield name = "" value = "%{torneo.nombre}"  ></s:textfield>
 		<s:property value = "torneo.sede"/><br>
 		<s:property value = "torneo.tipo"/><br>
 		<s:property value = "torneo.copa"/><br>	

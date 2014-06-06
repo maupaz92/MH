@@ -28,7 +28,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement(name = "torneos")
 public class ConjuntoDeTorneosModelo {
-
 	
 	private List<TorneoModelo> listaTorneos;
 

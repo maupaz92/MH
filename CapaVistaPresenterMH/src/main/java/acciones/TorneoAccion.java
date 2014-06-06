@@ -1,5 +1,10 @@
 package acciones;
 
+//import org.jboss.resteasy.logging.Logger;
+
+
+import org.jboss.resteasy.logging.Logger;
+
 import modelos.recursos.TorneoModelo;
 import clientes.ClienteTorneos;
 
@@ -22,6 +27,9 @@ public class TorneoAccion extends ActionSupport{
 	private TorneoModelo torneo;
 	private String esCopaTorneo;
 	private ClienteTorneos clienteTorneos;
+	private final Logger log = Logger.getLogger(TorneoAccion.class);
+	private String cambiosEquipo1 = "algo";
+	private String cambiosEquipo2 = "algo";
 	
 	/**
 	 * metodo encargado de obtener los datos del formulario
@@ -30,15 +38,19 @@ public class TorneoAccion extends ActionSupport{
 	 */
 	public String registrarNuevoTorneo()
 	{	
+		/*
 		//se le define al objeto torneo inicialmente la bandera de copa como false
 		//debido a que no ha sido iniciado previamente
 		this.getTorneo().setCopa(false);
 		//se compara si en el formulario se selecciono "si" para el dato de esDeCopa?
 		if(this.getEsCopaTorneo().equalsIgnoreCase("si"))			
-			this.getTorneo().setCopa(true);	
+			this.getTorneo().setCopa(true);		
 		clienteTorneos = new ClienteTorneos();
 		clienteTorneos.enviarRegistroNuevoTorneo(getTorneo());
 		clienteTorneos.enviarSolcitudTorneosRegistrados();
+		*/
+		log.info(cambiosEquipo1);
+		log.info(cambiosEquipo2);
 		return SUCCESS;
 	}
 	
@@ -63,7 +75,25 @@ public class TorneoAccion extends ActionSupport{
 	
 	public void setEsCopaTorneo(String esCopaTorneo) {
 		this.esCopaTorneo = esCopaTorneo;
-	}	
+	}
+
+	public String getCambiosEquipo1() {
+		return cambiosEquipo1;
+	}
+
+	public void setCambiosEquipo1(String cambiosEquipo1) {
+		this.cambiosEquipo1 = cambiosEquipo1;
+	}
+
+	public String getCambiosEquipo2() {
+		return cambiosEquipo2;
+	}
+
+	public void setCambiosEquipo2(String cambiosEquipo2) {
+		this.cambiosEquipo2 = cambiosEquipo2;
+	}
+
+
 	
 }
 
