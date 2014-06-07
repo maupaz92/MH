@@ -25,12 +25,12 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</dependency>
 	
-	
-	<dependency> 
-        <groupId>com.org.sqlserver</groupId>
-        <artifactId>sqljar</artifactId>
-        <version>4.0</version>
-   </dependency>
+	<dependency>
+		<groupId>com.org.sqlserver</groupId>
+		<artifactId>sqljar</artifactId>
+		<version>4.0</version>
+	</dependency>
+
   
   </dependencies>
   

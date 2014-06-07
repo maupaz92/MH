@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+	<definition name="baseLayout" template="/plantillas/baseLayout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header" value="/plantillas/headLayout.jsp" />		
+		<put-attribute name="menu" value="" />
+		<put-attribute name="body" value="" />
+	</definition>
+	
+	<definition name="login" extends="baseLayout">
+		<put-attribute name="title" value="Log-in" />
+		<put-attribute name="body" value="/vistas/login.jsp" />		
+	</definition>
+	
+	<definition name="perfil" extends="baseLayout">
+		<put-attribute name="title" value="Perfil" />
+		<put-attribute name="menu" value="/plantillas/menuLayout.jsp" />
+		<put-attribute name="body" value="/vistas/perfil.jsp" />	
+	</definition>
+	
+	<definition name="registrarTorneo" extends="baseLayout">
+		<put-attribute name="title" value="Torneos" />
+		<put-attribute name="menu" value="/plantillas/menuLayout.jsp" />
+		<put-attribute name="body" value="/vistas/torneoRegistro.jsp" />	
+	</definition>
+	
+	<definition name="editarTorneo" extends="baseLayout">
+		<put-attribute name="title" value="Torneos" />
+		<put-attribute name="menu" value="/plantillas/menuLayout.jsp" />
+		<put-attribute name="body" value="/vistas/torneoEdicion.jsp" />	
+	</definition>
+		
+
+</tiles-definitions>
