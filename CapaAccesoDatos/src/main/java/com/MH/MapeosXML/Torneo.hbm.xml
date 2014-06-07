@@ -3,8 +3,8 @@
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
  
-<hibernate-mapping package="com.MH.Modelo">
- <class name="Torneo" table="Torneo">
+<hibernate-mapping package="modelo.recursos">
+ <class name="TorneoModelo" table="TORNEOS">
       <meta attribute="class-description">
          Esta clase contiene los metadatos necesarios para mapear a la base de 
          datos los objetos Torneo.

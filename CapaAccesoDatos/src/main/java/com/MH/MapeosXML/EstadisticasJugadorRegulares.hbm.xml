@@ -3,15 +3,16 @@
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
  
-<hibernate-mapping package="com.MH.XMLMapeos">
- <class name="Estadistica_Jugador" table="Estadisticas_Jugador">
+<hibernate-mapping package="modelos.recursos">
+ <class name="EstadisticaJugadorRegularesModelo" table="Estadisticas_Regulares">
       <meta attribute="class-description">
          Esta clase contiene los metadatos necesarios para mapear a la base de 
-         datos los objetos de Estadistica asociados a un Jugador.
+         datos los objetos de Estadisticas Regulares asociados a un Jugador.
       </meta>
-      <id name="Pasaporte_XFIFA" type="int" column="Pasaporte_XFIFA">
-         <generator class="native"/>
-      </id>
+      <composite-id name="id" class="Order$Id">
+        <key-property name="customerId" length="10"/>
+        <key-property name="orderNumber"/>
+    </composite-id>
       <property name="firstName" column="first_name" type="string"/>
       <property name="lastName" column="last_name" type="string"/>
       <property name="salary" column="salary" type="int"/>

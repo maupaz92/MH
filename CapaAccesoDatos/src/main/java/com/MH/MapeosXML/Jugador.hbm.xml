@@ -19,14 +19,14 @@
             <key>
                 <column name="Pasaporte_XFIFA" not-null="true"></column>
             </key>
-            <one-to-many class="EstadisticasJugadorRegulares"/>
+            <one-to-many class="EstadisticasJugadorRegularesModelo"/>
         </set>
         
         <set name="estadisticasSeleccion" table="Estadisticas_Seleccion" fetch="select">
             <key>
                 <column name="Pasaporte_XFIFA" not-null="true"></column>
             </key>
-            <one-to-many class="EstadisticasJugadorSeleccion"/>
+            <one-to-many class="EstadisticasJugadorSeleccionModelo"/>
         </set>
     </class>
      
