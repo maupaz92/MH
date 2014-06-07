@@ -7,8 +7,8 @@
 		<li><a href="<s:url action=""/>">Perfil</a></li>
 		<li>Torneos			
 			<ul>
-				<li><a href="<s:url action="registrarTorneoLinkTorneos"/>">Registar Torneo</a></li>
-				<li><a href="<s:url action="editarTorneoLinkTorneos"/>">Editar Torneo</a></li>
+				<li><a href="<s:url action="vistaRegistrarTorneoLinkTorneos"/>">Registar Torneo</a></li>
+				<li><a href="<s:url action="vistaEdicionTorneoLinkTorneos"/>">Editar Torneo</a></li>
 			</ul>
 		</li>		
 		<li>Equipos			

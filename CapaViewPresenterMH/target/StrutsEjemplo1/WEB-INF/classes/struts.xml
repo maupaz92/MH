@@ -25,8 +25,9 @@
         </action>
         
         <action name="*LinkTorneos" method = "{1}" class = "struts.acciones.TorneosAction">
+        	<result name="vistaRegistrarTorneo" type="tiles">vistaRegistrarTorneo</result>
+        	<result name="vistaEdicionTorneo" type="tiles">vistaEdicionTorneo</result>
         	<result name="registrarTorneo" type="tiles">registrarTorneo</result>
-        	<result name="editarTorneo" type="tiles">editarTorneo</result>
         </action>          
                 
     </package>

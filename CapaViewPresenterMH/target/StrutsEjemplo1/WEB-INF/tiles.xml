@@ -22,13 +22,13 @@
 		<put-attribute name="body" value="/vistas/perfil.jsp" />	
 	</definition>
 	
-	<definition name="registrarTorneo" extends="baseLayout">
+	<definition name="vistaRegistrarTorneo" extends="baseLayout">
 		<put-attribute name="title" value="Torneos" />
 		<put-attribute name="menu" value="/plantillas/menuLayout.jsp" />
 		<put-attribute name="body" value="/vistas/torneoRegistro.jsp" />	
 	</definition>
 	
-	<definition name="editarTorneo" extends="baseLayout">
+	<definition name="vistaEdicionTorneo" extends="baseLayout">
 		<put-attribute name="title" value="Torneos" />
 		<put-attribute name="menu" value="/plantillas/menuLayout.jsp" />
 		<put-attribute name="body" value="/vistas/torneoEdicion.jsp" />	
