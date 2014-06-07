@@ -11,6 +11,9 @@
         <dependent-module archiveName="CapaLogicaMH-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/CapaLogicaMH/CapaLogicaMH">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="CapaAccesoDatos-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/CapaAccesoDatos/CapaAccesoDatos">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="CapaServicioMH"/>
         <property name="java-output-path" value="/CapaServicioMH/target/classes"/>
     </wb-module>
