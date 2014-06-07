@@ -59,6 +59,12 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</dependency>
 	
+	<dependency>
+		<groupId>MH</groupId>
+		<artifactId>CapaLogicaMH</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</dependency>
+	
 	<!-- requeridas para el mapeo de java beans a formato JSON -->
 	<dependency>
 		<groupId>org.jboss.resteasy</groupId>

@@ -1,5 +1,6 @@
 package logica;
 
+import accesos.recursos.AccesoDatosTorneos;
 import modelos.recursos.TorneoModelo;
 
 public class GestorTorneos {
@@ -16,6 +17,8 @@ public class GestorTorneos {
 	 * @return: true si el torneo pudo ser registrado, false en caso contrario
 	 */
 	public boolean registrarNuevoTorneo(TorneoModelo torneo){
+		AccesoDatosTorneos acceso = new AccesoDatosTorneos();
+		acceso.crearRecurso(torneo);;
 		return true;
 	}
 	

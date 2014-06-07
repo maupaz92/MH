@@ -9,5 +9,10 @@
   		<artifactId>ModeloDeRecursos</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
+  	<dependency>
+  		<groupId>MH</groupId>
+  		<artifactId>CapaAccesoDatos</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
   </dependencies>
 </project>
