@@ -9,6 +9,12 @@
 		<property name="connection.username">sa</property>
 		<property name="connection.password">eabmodel</property>
 		<property name="hibernate.current_session_context_class">thread</property>
+		
+		 <!-- Use the C3P0 connection pool. -->  
+        <property name="c3p0.min_size">3</property>  
+        <property name="c3p0.max_size">5</property>  
+        <property name="c3p0.timeout">1800</property>  
+        
 		<property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
 	    <property name="hibernate.show_sql">true</property>	    
 	    <property name="hbm2ddl.auto">update</property>
