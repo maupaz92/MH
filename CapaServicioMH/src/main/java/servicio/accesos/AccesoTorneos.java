@@ -69,7 +69,8 @@ public class AccesoTorneos {
 	@Consumes(MediaType.APPLICATION_XML)
 	public void registrarNuevoTorneo(TorneoModelo torneo)
 	{		
-		
+		GestorTorneos gestor = new GestorTorneos();
+		gestor.registrarNuevoTorneo(torneo);
 		log.info("ingresado torneo: "+torneo.getNombre());
 		//throw new WebApplicationException(Response.Status.NOT_FOUND);
 	}
