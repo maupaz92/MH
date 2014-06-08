@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.jboss.resteasy.logging.Logger;
 
+import logica.GestorTorneos;
 import modelos.recursos.ConjuntoDeTorneosModelo;
 import modelos.recursos.TorneoModelo;
 

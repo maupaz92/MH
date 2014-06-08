@@ -22,5 +22,4 @@ public class GestorTorneos {
 		return true;
 	}
 	
-	
 }

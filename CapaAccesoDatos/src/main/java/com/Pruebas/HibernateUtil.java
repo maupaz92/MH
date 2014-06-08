@@ -22,6 +22,9 @@ public class HibernateUtil {
     //Método para la creación del SessionFactory utilizando el archivo "hibernate.cfg.xml" para la configuración.
     private static SessionFactory buildSessionFactory() {
         try {
+        	//necesario para linkear el connector a tomcat, sino no lee el driver
+        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        	
             // Create the SessionFactory from hibernate.cfg.xml
             Configuration configuration = new Configuration();
             configuration.configure("hibernate.cfg.xml");
