@@ -1,6 +1,5 @@
 package logica;
 
-import accesos.recursos.AccesoDatos;
 import accesos.recursos.AccesoDatosTorneos;
 import modelos.recursos.ConjuntoDeTorneosModelo;
 import modelos.recursos.TorneoModelo;
@@ -8,7 +7,7 @@ import modelos.recursos.TorneoModelo;
 public class GestorTorneos {
 
 	
-	private AccesoDatos accesoTorneos;
+	private AccesoDatosTorneos accesoTorneos;
 	
 	public GestorTorneos()
 	{
@@ -27,11 +26,11 @@ public class GestorTorneos {
 	}
 	
 	
-	public ConjuntoDeTorneosModelo getListaTorneosRegistrados(Boolean esDeSelecciones){
-		return new ConjuntoDeTorneosModelo(getAccesoTorneos().darListaRecursos(esDeSelecciones));
+	public ConjuntoDeTorneosModelo getListaTorneosRegistrados(){
+		return new ConjuntoDeTorneosModelo(getAccesoTorneos().getTorneosRegistrados());
 	}
 
-	private AccesoDatos getAccesoTorneos() {
+	private AccesoDatosTorneos getAccesoTorneos() {
 		return accesoTorneos;
 	}
 	

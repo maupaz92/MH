@@ -1,41 +1,37 @@
 package accesos.recursos;
 
-import java.util.List;
+
+
+import org.hibernate.Session;
+
+import com.HibernateUtil.HibernateUtil;
 
 public abstract class AccesoDatos {
 
-	protected List<String> parametrosMetodo;
+	
 	
 	/**
-	 * Metodo para obtener un recurso 
-	 * de la base de datos.  
-	 * @return
-	 */
-	public abstract Object darRecurso(String identificador);
-	
-	/**
-	 * Metodo para modificar un objeto en 
-	 * la base de datos.
-	 */
-	public abstract void modificarRecurso(Object objeto);
-	
-	/**
-	 * Metodo para crear un nuevo registro en la base
+	 * Metodo común para crear un nuevo registro en la base
 	 * de datos.
 	 */
-	public abstract void crearRecurso(Object objeto);
+	public void crearRecurso(Object objeto) {
+		 	//Get Session
+			System.out.println("CreandoRecurso");
+	        Session session1 = HibernateUtil.getSessionFactory().openSession();
+	        //start transaction
+	        session1.beginTransaction();
+	        //Save the Model object
+	        System.out.println("Guardando en DB");
+	        session1.save(objeto);
+	        //Commit transaction
+	        session1.getTransaction().commit();              
+	}
 	
-	
-	/**
-	 * Metodo para agregar Parametros a los metodos
-	 * anteriores.
-	 * @param parametro
-	 */
-	public void agregarParametro(String parametro)
+	private Boolean existeTorneoRegistrado(String identificador)
 	{
-		parametrosMetodo.add(parametro);
-				
-	};
+		return true;
+		
+	}
 	
-	public abstract List<Object> darListaRecursos(Object identificador);
+	
 }

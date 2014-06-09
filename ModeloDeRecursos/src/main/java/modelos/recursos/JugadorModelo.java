@@ -1,6 +1,6 @@
 package modelos.recursos;
 
-import java.util.Set;
+
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -15,17 +15,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class JugadorModelo {
 
-	private String pasaporte;
+	private int pasaporte;
 	private String nombre;
 	private Boolean estado;
-	private String equipoActual;
+	private int equipoActual;
 	private String posicion;
-	private Float altura;
-	private Float peso;
+	private Double altura;
+	private Double peso;
 	private String fechaNacimiento;
-	private Set<EstadisticasJugadorRegularesModelo> estadisticasregulares;
-	private Set<EstadisticasJugadorSeleccionModelo> estadisticasSeleccion;
-			
+	
 	
 
 	public JugadorModelo(){}
@@ -33,11 +31,11 @@ public class JugadorModelo {
 	
 	//----------getters & setters
 	@XmlAttribute
-	public String getPasaporte() {
+	public int getPasaporte() {
 		return pasaporte;
 	}
 
-	public void setPasaporte(String pasaporte) {
+	public void setPasaporte(int pasaporte) {
 		this.pasaporte = pasaporte;
 	}
 
@@ -60,11 +58,11 @@ public class JugadorModelo {
 	}
 
 	@XmlElement
-	public String getEquipoActual() {
+	public int getEquipoActual() {
 		return equipoActual;
 	}
 
-	public void setEquipoActual(String equipoActual) {
+	public void setEquipoActual(int equipoActual) {
 		this.equipoActual = equipoActual;
 	}
 
@@ -78,20 +76,20 @@ public class JugadorModelo {
 	}
 
 	@XmlElement
-	public Float getAltura() {
+	public Double getAltura() {
 		return altura;
 	}
 
-	public void setAltura(Float altura) {
+	public void setAltura(Double altura) {
 		this.altura = altura;
 	}
 
 	@XmlElement
-	public Float getPeso() {
+	public Double getPeso() {
 		return peso;
 	}
 
-	public void setPeso(Float peso) {
+	public void setPeso(Double peso) {
 		this.peso = peso;
 	}
 
@@ -103,28 +101,9 @@ public class JugadorModelo {
 	public void setFechaNacimiento(String fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
-	
-	
-	public Set<EstadisticasJugadorRegularesModelo> getEstadisticasregulares() {
-		return estadisticasregulares;
-	}
-
-
-	public void setEstadisticasregulares(Set<EstadisticasJugadorRegularesModelo> estadisticasregulares) {
-		this.estadisticasregulares = estadisticasregulares;
-	}
-
-
-	public Set<EstadisticasJugadorSeleccionModelo> getEstadisticasSeleccion() {
-		return estadisticasSeleccion;
-	}
-
-
-	public void setEstadisticasSeleccion(Set<EstadisticasJugadorSeleccionModelo> estadisticasSeleccion) {
-		this.estadisticasSeleccion = estadisticasSeleccion;
-	}
-
-	
-	
-	
 }
+
+	
+	
+	
+

@@ -60,10 +60,10 @@ public class AccesoTorneos {
 		
 		ConjuntoDeTorneosModelo lista = new ConjuntoDeTorneosModelo();
 		lista.agregarTorneo(t1);
-		lista.agregarTorneo(t2);*/
+		lista.agregarTorneo(t2);
 		
-		
-		return this.getGestor().getListaTorneosRegistrados(true);
+		return lista;*/
+		return this.getGestor().getListaTorneosRegistrados();
 	}
 	
 	
