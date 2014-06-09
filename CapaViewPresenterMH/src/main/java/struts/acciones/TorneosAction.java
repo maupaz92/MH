@@ -34,9 +34,37 @@ public class TorneosAction extends ActionSupport{
 	}
 
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public String registrarTorneo(){
-		
-		
+		//se define los datos ingresados en el formulario
+		this.setDatosTorneo();
+		clienteTorneos = new ClienteTorneos();
+		clienteTorneos.enviarRegistroNuevoTorneo(getTorneo());
+		this.setTorneo(null);
+		return "vistaRegistrarTorneo";
+	}
+	
+	
+	public String actualizarTorneo(){
+		//se define los datos ingresados en el formulario
+		this.setDatosTorneo();
+		clienteTorneos = new ClienteTorneos();
+		clienteTorneos.enviarModificacionTorneo(getTorneo());
+		this.setTorneo(null);
+		return "vistaEdicionTorneo";
+	}
+	
+	
+	
+	/**
+	 * metodo encargado de cargar al objeto TorneoModelo de la clase
+	 * los valores que fueron ingresados en el formuario de registro y edicion 
+	 * de torneos
+	 */
+	private void setDatosTorneo(){
 		//se le define al objeto torneo inicialmente la bandera de copa como false
 		//debido a que no ha sido iniciado previamente
 		this.getTorneo().setCopa(false);
@@ -46,12 +74,12 @@ public class TorneosAction extends ActionSupport{
 			this.getTorneo().setCopa(true);
 		if(this.getTipoSelecciones().equalsIgnoreCase("si"))			
 			this.getTorneo().setTipoSelecciones(true);
-		clienteTorneos = new ClienteTorneos();
-		clienteTorneos.enviarRegistroNuevoTorneo(getTorneo());
-		this.setTorneo(null);
-		return "vistaRegistrarTorneo";
 	}
-
+	
+	
+	
+	//getters y setters
+	
 	public TorneoModelo getTorneo() {
 		return torneo;
 	}
@@ -79,5 +107,6 @@ public class TorneosAction extends ActionSupport{
 	public void setTipoSelecciones(String tipoSelecciones) {
 		this.tipoSelecciones = tipoSelecciones;
 	}
+	
 	
 }

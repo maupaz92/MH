@@ -94,7 +94,7 @@
 		
 		<div>
 			<h2>Torneo</h2>		
-			<s:form action = "">
+			<s:form action = "actualizarTorneoLinkTorneos">
 				<s:textfield id = "torneo.nombre"  label = "Nombre del torneo"/>			
 				<s:textfield id = "torneo.sede" label = "sede del torneo"/>
 				<s:select id = "tipoSelecciones"  label = "tipo selecciones" list="{'si','no'}"></s:select>

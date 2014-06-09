@@ -40,8 +40,18 @@ public class ClienteTorneos {
 		respuesta.close();
 		return true;
 	}
+	
+	public boolean enviarModificacionTorneo(TorneoModelo torneo){
+		//se define la url del servicio que se requiere
+		WebTarget urlObjetivo = cliente.target(URI+rootResourceURI);
+		//se ejecuta el request con el metodo "put", y se almacena en un objeto "Response"
+		Response respuesta = urlObjetivo.request().put(Entity.xml(torneo));
+		this.getLog().info("respuesta del servicio "+respuesta.getStatus());
+		respuesta.close();		
+		return true;
+	}
 
-	public Logger getLog() {
+	private Logger getLog() {
 		return log;
 	}
 	

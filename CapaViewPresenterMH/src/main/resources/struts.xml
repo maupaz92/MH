@@ -28,6 +28,7 @@
         	<result name="vistaRegistrarTorneo" type="tiles">vistaRegistrarTorneo</result>
         	<result name="vistaEdicionTorneo" type="tiles">vistaEdicionTorneo</result>
         	<result name="registrarTorneo" type="tiles">registrarTorneo</result>
+        	<result name="actualizarTorneo" type="tiles">actualizarTorneo</result>
         </action>
         
         <action name="*LinkEquipos" method = "{1}" class = "struts.acciones.EquiposAction">
