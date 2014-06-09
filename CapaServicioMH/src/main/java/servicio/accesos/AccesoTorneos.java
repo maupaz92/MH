@@ -28,11 +28,12 @@ import modelos.recursos.TorneoModelo;
 public class AccesoTorneos {
 	
 	private final Logger log = Logger.getLogger(AccesoTorneos.class);
-	
+	private GestorTorneos gestor;
+
 
 	public AccesoTorneos()
 	{
-		
+		gestor = new GestorTorneos();
 	}		
 	
 	/**
@@ -45,7 +46,7 @@ public class AccesoTorneos {
 	@Produces({"application/json", "application/xml"})
 	public ConjuntoDeTorneosModelo getTorneosRegistrados()
 	{
-		TorneoModelo t1 = new TorneoModelo();
+		/*TorneoModelo t1 = new TorneoModelo();
 		t1.setNombre("Brasil 2014");		
 		t1.setTipoSelecciones(true);
 		t1.setSede("Brasil");
@@ -59,18 +60,18 @@ public class AccesoTorneos {
 		
 		ConjuntoDeTorneosModelo lista = new ConjuntoDeTorneosModelo();
 		lista.agregarTorneo(t1);
-		lista.agregarTorneo(t2);		
-		//return Response.ok(lista).build();
-		return lista;
+		lista.agregarTorneo(t2);*/
+		
+		
+		return this.getGestor().getListaTorneosRegistrados(true);
 	}
 	
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
 	public void registrarNuevoTorneo(TorneoModelo torneo)
-	{		
-		GestorTorneos gestor = new GestorTorneos();
-		gestor.registrarNuevoTorneo(torneo);
+	{				
+		this.getGestor().registrarNuevoTorneo(torneo);
 		log.info("ingresado torneo: "+torneo.getNombre());
 		//throw new WebApplicationException(Response.Status.NOT_FOUND);
 	}
@@ -84,7 +85,9 @@ public class AccesoTorneos {
 	}	
 	
 	
-	
+	private GestorTorneos getGestor() {
+		return gestor;
+	}
 	
 	
 	

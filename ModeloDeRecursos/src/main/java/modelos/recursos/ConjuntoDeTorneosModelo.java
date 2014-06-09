@@ -37,6 +37,14 @@ public class ConjuntoDeTorneosModelo {
 		listaTorneos = new ArrayList<TorneoModelo>();
 	}
 	
+	public ConjuntoDeTorneosModelo(List<Object> torneos){
+		listaTorneos = new ArrayList<TorneoModelo>();
+		for(int conteo = 0; conteo < torneos.size(); conteo++){
+			TorneoModelo torneo = (TorneoModelo)torneos.get(conteo);
+			listaTorneos.add(torneo);
+		}
+	}
+	
 	
 	/**
 	 * Agrega un nuevo objeto torneo tipo "TorneoModelo" al 

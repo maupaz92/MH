@@ -33,7 +33,7 @@
 							torneos.push({
 								recid: conteo,
 								nombre: value[conteo].nombre, 
-								tipo: value[conteo].tipoSelecciones,
+								tipoSelecciones: value[conteo].tipoSelecciones,
 								sede: value[conteo].sede,
 								copa: value[conteo].copa,
 								
@@ -62,8 +62,7 @@
 							document.getElementById("torneo.nombre").value = elemento.nombre;
 							document.getElementById("torneo.sede").value = elemento.sede;
 							
-							var esTipoSelecciones = elemento.tipoSelecciones;
-							alert(esTipoSelecciones);
+							var esTipoSelecciones = elemento.tipoSelecciones;					
 							if(esTipoSelecciones){
 								document.getElementById("tipoSelecciones").value = "si";
 							}else{
