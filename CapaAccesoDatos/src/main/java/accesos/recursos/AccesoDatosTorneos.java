@@ -60,10 +60,11 @@ public class AccesoDatosTorneos extends AccesoDatos{
 	}
 
 	@Override
-	public List<Object> darListaRecursos(String identificador) {
+	public List<Object> darListaRecursos(Object identificador) {
+		Boolean tipo = (Boolean)identificador;
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		Query query = session.createQuery("from TorneoModelo where tipo = :tipo ");
-		query.setParameter("tipo", identificador);
+		Query query = session.createQuery("from TorneoModelo where tipoSelecciones = :tipo ");
+		query.setParameter("tipo", tipo);
 		List<Object> list = query.list();
 		return list;
 	}

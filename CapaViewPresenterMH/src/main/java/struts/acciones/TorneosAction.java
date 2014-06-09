@@ -40,6 +40,7 @@ public class TorneosAction extends ActionSupport{
 		//se le define al objeto torneo inicialmente la bandera de copa como false
 		//debido a que no ha sido iniciado previamente
 		this.getTorneo().setCopa(false);
+		this.getTorneo().setTipoSelecciones(false);
 		//se compara si en el formulario se selecciono "si" para el dato de esDeCopa?
 		if(this.getEsCopaTorneo().equalsIgnoreCase("si"))			
 			this.getTorneo().setCopa(true);

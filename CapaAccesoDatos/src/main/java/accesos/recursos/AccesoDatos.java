@@ -37,5 +37,5 @@ public abstract class AccesoDatos {
 				
 	};
 	
-	public abstract List<Object> darListaRecursos(String identificador);
+	public abstract List<Object> darListaRecursos(Object identificador);
 }

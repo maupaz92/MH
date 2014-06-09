@@ -7,14 +7,10 @@ import accesos.recursos.AccesoDatosTorneos;
 
 public class PruebaMain {
 
-	public static void main(String[] args) {
-		TorneoModelo torneonuevo= new TorneoModelo();
-		torneonuevo.setNombre("Australia 2030");
-		torneonuevo.setSede("Australia");
-		torneonuevo.setTipoSelecciones(true);
-		torneonuevo.setCopa(true);
+	public static void main(String[] args) {		
 		AccesoDatosTorneos torneos = new AccesoDatosTorneos();
-		torneos.crearRecurso(torneonuevo);
+		List<Object> resultado= torneos.darListaRecursos(false);
+		System.out.println(resultado.toString());
 	}
 
 }
