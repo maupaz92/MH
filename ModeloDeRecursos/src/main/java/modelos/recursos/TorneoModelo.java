@@ -54,7 +54,7 @@ public class TorneoModelo {
 	{
 		return nombre+" sede en: "+sede+" tipo selecciones: "+tipoSelecciones+" es de copa: "+copa;
 	}
-
+	@XmlElement
 	public Boolean getTipoSelecciones() {
 		return tipoSelecciones;
 	}

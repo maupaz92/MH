@@ -59,10 +59,11 @@
 						event.onComplete = function(){
 							var filaSeleccionada = w2ui['torneosEdicion'].getSelection();
 							var elemento = w2ui['torneosEdicion'].get(filaSeleccionada);
-							document.getElementById("nombreTorneo").value = elemento.nombre;
-							document.getElementById("sedeTorneo").value = elemento.sede;
+							document.getElementById("torneo.nombre").value = elemento.nombre;
+							document.getElementById("torneo.sede").value = elemento.sede;
 							
 							var esTipoSelecciones = elemento.tipoSelecciones;
+							alert(esTipoSelecciones);
 							if(esTipoSelecciones){
 								document.getElementById("tipoSelecciones").value = "si";
 							}else{
@@ -81,8 +82,8 @@
 					});
 					w2ui.torneosEdicion.on('unselect', function(event){
 						event.onComplete = function(){														
-							document.getElementById("nombreTorneo").value = "";	
-							document.getElementById("sedeTorneo").value = "";
+							document.getElementById("torneo.nombre").value = "";	
+							document.getElementById("torneo.sede").value = "";
 							document.getElementById("tipoSelecciones").value = "";
 							document.getElementById("esCopaTorneo").value = "";
 						};
