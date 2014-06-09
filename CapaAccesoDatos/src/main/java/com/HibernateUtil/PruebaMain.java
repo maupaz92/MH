@@ -1,4 +1,4 @@
-package com.Pruebas;
+package com.HibernateUtil;
 
 import java.util.List;
 
@@ -9,9 +9,9 @@ public class PruebaMain {
 
 	public static void main(String[] args) {
 		TorneoModelo torneonuevo= new TorneoModelo();
-		torneonuevo.setNombre("Brasil");
-		torneonuevo.setSede("Brasil");
-		torneonuevo.setTipo("selecciones");
+		torneonuevo.setNombre("Australia 2030");
+		torneonuevo.setSede("Australia");
+		torneonuevo.setTipo(true);
 		torneonuevo.setCopa(true);
 		AccesoDatosTorneos torneos = new AccesoDatosTorneos();
 		torneos.crearRecurso(torneonuevo);
