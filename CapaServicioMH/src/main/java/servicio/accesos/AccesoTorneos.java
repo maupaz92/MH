@@ -81,7 +81,7 @@ public class AccesoTorneos {
 	@Consumes(MediaType.APPLICATION_XML)	
 	public void modificarTorneo(TorneoModelo torneo)
 	{
-		
+		this.getGestor().modificarTorneo(torneo);
 	}	
 	
 	

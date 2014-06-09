@@ -29,7 +29,7 @@ public class AccesoDatosTorneos extends AccesoDatos implements TorneosDAO{
 		
 	}
 
-	public Boolean existeTorneoRegistrado(String identificador) {
+	private Boolean existeTorneoRegistrado(String identificador) {
 		
 		Boolean resultado;
         Session session = HibernateUtil.getSessionFactory().openSession();       

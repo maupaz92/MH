@@ -15,10 +15,10 @@ import accesos.recursos.AccesoDatosTorneos;
 public class PruebaMain {
 
 	public static void main(String[] args)  {	
-		AccesoDatosTorneos acceso = new AccesoDatosTorneos();
+		/*AccesoDatosTorneos acceso = new AccesoDatosTorneos();
 		Boolean resultado = acceso.existeTorneoRegistrado("Qatar 2022");
 		System.out.println(resultado);
-		
+		*/
 	
 		
 		

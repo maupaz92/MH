@@ -33,6 +33,11 @@ public class GestorTorneos {
 		return respuesta;
 	}
 	
+	public boolean modificarTorneo(TorneoModelo torneo)
+	{
+		this.getAccesoTorneos().modificarTorneo(torneo);
+		return true;
+	}
 	
 	public ConjuntoDeTorneosModelo getListaTorneosRegistrados(){
 		return new ConjuntoDeTorneosModelo(getAccesoTorneos().getTorneosRegistrados());
