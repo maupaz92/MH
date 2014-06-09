@@ -28,7 +28,11 @@
         	<result name="vistaRegistrarTorneo" type="tiles">vistaRegistrarTorneo</result>
         	<result name="vistaEdicionTorneo" type="tiles">vistaEdicionTorneo</result>
         	<result name="registrarTorneo" type="tiles">registrarTorneo</result>
-        </action>          
+        </action>
+        
+        <action name="*LinkPartidos" method = "{1}" class = "struts.acciones.PartidosAction">
+        	<result name = "vistaRegistrarPartido">vistaRegistrarPartido</result>
+        </action>     
                 
     </package>
      

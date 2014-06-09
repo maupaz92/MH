@@ -25,7 +25,7 @@
 			</ul>
 		</li>
 		
-		<li><a href="<s:url action=""/>">Registrar Partido</a></li>
+		<li><a href="<s:url action="vistaRegistrarPartidoLinkPartidos"/>">Registrar Partido</a></li>
 		
 	</ul>	
 

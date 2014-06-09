@@ -1,0 +1,39 @@
+.leftFloat{
+	float: left;
+}
+
+.rightFloat{
+	float: right;
+}
+
+#contenedorTorneos{
+	width: 25%;		
+	overflow: hidden;
+}
+
+
+
+#contenedorPartido{
+	/*padding: 20px;*/	
+	width: 73%; 
+	/* border: thin solid black; */	
+	
+}
+
+.estadisticas{
+	width: auto; 
+	height: 200px; 
+	margin: 10px;
+}
+
+#detallesPartido{
+	/* border: thin solid black; */
+	padding: 20px;
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;	
+}
+	
+
+
+

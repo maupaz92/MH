@@ -3,19 +3,6 @@ html{
 	/*background-color: yellow;*/
 }
 
-a{	
-	color: black;
-}
-
-#header{	
-	height: 150px;
-	margin: 10px;	
-}
-
-#menu{	
-	width: 20%;
-}
-
 .center{
 	width: 80%;
 	height: 400px;
@@ -36,9 +23,6 @@ a{
 	float: right;
 }
 
-#logo{
-	width: 150px;
-	heigth: 150px;
-}
+
 
 

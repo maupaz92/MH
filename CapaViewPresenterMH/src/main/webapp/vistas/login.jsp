@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "s" uri = "/struts-tags" %>
 
+<link rel="stylesheet" type="text/css" href="<s:url value='/css/estilos.css'/>" />
+
 <div class = "center">
 	<div class = "center">
 		<h2>Log in</h2>

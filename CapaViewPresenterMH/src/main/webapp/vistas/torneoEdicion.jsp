@@ -6,6 +6,7 @@
 
 <head>
 
+<link rel="stylesheet" type="text/css" href="<s:url value='/css/estilos.css'/>" />
 <link rel="stylesheet" type="text/css" href="<s:url value='/scripts/w2ui-1.3.2.min.css'/>" />
 <script src="<s:url value='/scripts/jquery-2.1.1.min.js'/>"></script>
 <script type="text/javascript" src="<s:url value='/scripts/w2ui-1.3.2.min.js'/>"></script>

@@ -1,6 +1,6 @@
 <%@taglib uri="/struts-tags" prefix="s"%>
 
-<link rel="stylesheet" type="text/css" href="css/estilos.css" />
+<link rel="stylesheet" type="text/css" href="css/menuLayout.css" />
 
 <div id="menu">
 	<ul>
@@ -13,19 +13,19 @@
 		</li>		
 		<li>Equipos			
 			<ul>
-				<li>Registrar Equipo</li>
+				<li><a href="<s:url action="vistaRegistrarEquipoLinkEquipos"/>">Registar Equipo</a></li>
 				<li>Editar Equipo</li>
 			</ul>
 		</li>
 		
 		<li>Jugadores			
 			<ul>
-				<li>Registrar Jugador</li>
+				<li><a href="<s:url action=""/>">Registar Jugador</a></li>
 				<li>Editar Jugador</li>
 			</ul>
 		</li>
 		
-		<li><a href="<s:url action=""/>">Registrar Partido</a></li>
+		<li><a href="<s:url action="vistaRegistrarPartidoLinkPartidos"/>">Registrar Partido</a></li>
 		
 	</ul>	
 

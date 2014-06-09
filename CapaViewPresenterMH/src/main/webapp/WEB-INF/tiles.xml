@@ -33,6 +33,20 @@
 		<put-attribute name="menu" value="/plantillas/menuLayout.jsp" />
 		<put-attribute name="body" value="/vistas/torneoEdicion.jsp" />	
 	</definition>
+	
+	<definition name="vistaRegistrarPartido" extends="baseLayout">
+		<put-attribute name="title" value="Partidos" />
+		<put-attribute name="menu" value="/plantillas/menuLayout.jsp" />
+		<put-attribute name="body" value="/vistas/partidoEstadisticas.jsp" />	
+	</definition>
+	
+	<definition name="vistaRegistrarEquipo" extends="baseLayout">
+		<put-attribute name="title" value="Equipos" />
+		<put-attribute name="menu" value="/plantillas/menuLayout.jsp" />
+		<put-attribute name="body" value="/vistas/equipoRegistro.jsp" />	
+	</definition>
+	
+	
 		
 
 </tiles-definitions>
