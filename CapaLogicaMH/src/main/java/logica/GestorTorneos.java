@@ -1,5 +1,6 @@
 package logica;
 
+import accesos.excepciones.RecursoRepetidoException;
 import accesos.recursos.AccesoDatosTorneos;
 import modelos.recursos.ConjuntoDeTorneosModelo;
 import modelos.recursos.TorneoModelo;
@@ -20,9 +21,16 @@ public class GestorTorneos {
 	 * @param torneo: torneo a ser registrado
 	 * @return: true si el torneo pudo ser registrado, false en caso contrario
 	 */
-	public boolean registrarNuevoTorneo(TorneoModelo torneo){		
-		this.getAccesoTorneos().crearRecurso(torneo);;
-		return true;
+	public boolean registrarNuevoTorneo(TorneoModelo torneo){
+		boolean respuesta=true;
+		
+		try {
+			this.getAccesoTorneos().crearRecurso(torneo);
+		} catch (RecursoRepetidoException e) {
+			e.printStackTrace();
+			respuesta = false;
+		};
+		return respuesta;
 	}
 	
 	

@@ -8,22 +8,18 @@ import org.hibernate.Transaction;
 
 import modelos.recursos.JugadorModelo;
 import modelos.recursos.TorneoModelo;
+import accesos.excepciones.RecursoRepetidoException;
 import accesos.recursos.AccesoDatos;
 import accesos.recursos.AccesoDatosTorneos;
 
 public class PruebaMain {
 
-	public static void main(String[] args) {	
-		JugadorModelo jugador= new JugadorModelo();
-		jugador.setPasaporte(1);
-		jugador.setAltura(173.4);
-		jugador.setEquipoActual(3);
-		jugador.setEstado(true);
-		jugador.setFechaNacimiento("Hola");
-		jugador.setNombre("Ronaldo");
-		jugador.setPeso(65.4);
-		jugador.setPosicion("Delantero");
+	public static void main(String[] args)  {	
+		AccesoDatosTorneos acceso = new AccesoDatosTorneos();
+		Boolean resultado = acceso.existeTorneoRegistrado("Qatar 2022");
+		System.out.println(resultado);
 		
+	
 		
 		
 		

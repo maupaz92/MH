@@ -9,6 +9,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import accesos.dao.TorneosDAO;
+import accesos.excepciones.RecursoRepetidoException;
+import accesos.excepciones.TorneoRepetidoException;
 
 import com.HibernateUtil.HibernateUtil;
 
@@ -28,8 +30,20 @@ public class AccesoDatosTorneos extends AccesoDatos implements TorneosDAO{
 	}
 
 	public Boolean existeTorneoRegistrado(String identificador) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Boolean resultado;
+        Session session = HibernateUtil.getSessionFactory().openSession();       
+        session.beginTransaction();        
+        TorneoModelo torneoResultado = (TorneoModelo) session.get(TorneoModelo.class, identificador);       
+        session.getTransaction().commit();     
+		if (torneoResultado!=null){
+			resultado = true;
+			}
+		else
+		{
+			resultado = false;
+		}
+		return resultado;
 	}
 
 	public void modificarTorneo(TorneoModelo torneo) {
@@ -53,7 +67,23 @@ public class AccesoDatosTorneos extends AccesoDatos implements TorneosDAO{
         }     
 		
 	}
+	
+	@Override
+	public void crearRecurso(Object objeto) throws RecursoRepetidoException {
+		TorneoModelo torneo = (TorneoModelo) objeto;
+		Boolean existe = existeTorneoRegistrado(torneo.getNombre());
+		if(existe)
+		{
+			throw new TorneoRepetidoException("El torneo: " +torneo.getNombre() +" ya existe en la base de datos");		
+		}
+		else
+		{
+			super.crearRecurso(objeto);
+		}
+	}
 
+
+	
 	/*
 	
 	@Override
@@ -70,32 +100,7 @@ public class AccesoDatosTorneos extends AccesoDatos implements TorneosDAO{
 		return torneoResultado;
 	}
 
-	
-	@Override
-	public void modificarRecurso(Object objeto) {
-		 //Get Session
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaccion = null;
-        TorneoModelo TorneoUpdate;
-        try
-        {
-        	transaccion = session.beginTransaction();
-        	TorneoUpdate = (TorneoModelo)objeto;
-        	TorneoModelo torneo = (TorneoModelo) session.get(TorneoModelo.class, TorneoUpdate.getNombre());
-        	torneo.setTipoSelecciones(TorneoUpdate.getTipoSelecciones());
-        	torneo.setSede(TorneoUpdate.getSede());
-        	torneo.setCopa(TorneoUpdate.isCopa());
-        	session.update(torneo);
-        	transaccion.commit();       	
-        }catch(HibernateException e)
-        {      	
-        	if(transaccion!=null) transaccion.rollback();
-        	e.printStackTrace();
-        }     
-                   
-	}
-	
-	
+		
 	*/
 	
 
