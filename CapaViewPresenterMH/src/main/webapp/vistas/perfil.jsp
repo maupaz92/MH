@@ -3,7 +3,8 @@
 
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
-<link rel="stylesheet" type="text/css" href="css/.css" />    
+<link rel="stylesheet" type="text/css" href="<s:url value='/css/estilos.css'/>" />
+
 <div id = "perfil" class = "cuerpo floatRight">
 	<h1>Hello!</h1>
 	<!-- 

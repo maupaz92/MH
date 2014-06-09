@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class TorneoModelo {
 
 	private String nombre;
-	private String tipo;
+	private Boolean tipoSelecciones;
 	private String sede;
 	private Boolean copa;
 	
@@ -29,15 +29,6 @@ public class TorneoModelo {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	@XmlElement
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
 	}
 
 	@XmlElement
@@ -61,7 +52,15 @@ public class TorneoModelo {
 	
 	public String toString()
 	{
-		return nombre+" sede en: "+sede+" tipo: "+tipo+" es de copa: "+copa;
+		return nombre+" sede en: "+sede+" tipo selecciones: "+tipoSelecciones+" es de copa: "+copa;
+	}
+
+	public Boolean getTipoSelecciones() {
+		return tipoSelecciones;
+	}
+
+	public void setTipoSelecciones(Boolean tipoSelecciones) {
+		this.tipoSelecciones = tipoSelecciones;
 	}
 	
 	

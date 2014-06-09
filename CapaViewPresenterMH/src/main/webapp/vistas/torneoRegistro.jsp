@@ -47,7 +47,7 @@
 			<s:form action = "registrarTorneoLinkTorneos">
 				<s:textfield name = "torneo.nombre" label = "Nombre del torneo"/>			
 				<s:textfield name = "torneo.sede" label = "sede del torneo"/>
-				<s:select name = "torneo.tipo" label = "tipo de torneo" list="{'selecciones','clubes'}"></s:select>
+				<s:select name = "tipoSelecciones" label = "es de Selecciones?" list="{'si','no'}"></s:select>
 				<s:select name = "esCopaTorneo" label = "es de Copa?" list="{'si','no'}"></s:select>
 				<s:submit align = "center"></s:submit>
 			</s:form>

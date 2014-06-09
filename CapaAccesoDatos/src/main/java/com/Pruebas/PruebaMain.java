@@ -11,7 +11,7 @@ public class PruebaMain {
 		TorneoModelo torneonuevo= new TorneoModelo();
 		torneonuevo.setNombre("Brasil");
 		torneonuevo.setSede("Brasil");
-		torneonuevo.setTipo("selecciones");
+		torneonuevo.setTipoSelecciones(true);
 		torneonuevo.setCopa(true);
 		AccesoDatosTorneos torneos = new AccesoDatosTorneos();
 		torneos.crearRecurso(torneonuevo);

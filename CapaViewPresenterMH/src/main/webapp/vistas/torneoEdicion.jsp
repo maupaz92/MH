@@ -33,7 +33,7 @@
 							torneos.push({
 								recid: conteo,
 								nombre: value[conteo].nombre, 
-								tipo: value[conteo].tipo,
+								tipo: value[conteo].tipoSelecciones,
 								sede: value[conteo].sede,
 								copa: value[conteo].copa,
 								
@@ -48,7 +48,7 @@
 						columns: 
 						[				
 							{ field: 'nombre', caption: 'Nombre', size: '30%'},
-							{ field: 'tipo', caption: 'Nombre', size: '30%', hidden: true},
+							{ field: 'tipoSelecciones', caption: 'Nombre', size: '30%', hidden: true},
 							{ field: 'sede', caption: 'Nombre', size: '30%', hidden: true},
 							{ field: 'copa', caption: 'Tipo', size: '30%', hidden: true}
 						],
@@ -61,12 +61,19 @@
 							var elemento = w2ui['torneosEdicion'].get(filaSeleccionada);
 							document.getElementById("nombreTorneo").value = elemento.nombre;
 							document.getElementById("sedeTorneo").value = elemento.sede;
-							document.getElementById("tipoTorneo").value = elemento.tipo;
+							
+							var esTipoSelecciones = elemento.tipoSelecciones;
+							if(esTipoSelecciones){
+								document.getElementById("tipoSelecciones").value = "si";
+							}else{
+								document.getElementById("tipoSelecciones").value = "no";
+							}
+														
 							var esDeCopa = elemento.copa;
 							if(esDeCopa){
-								document.getElementById("copaTorneo").value = "si";
+								document.getElementById("esCopaTorneo").value = "si";
 							}else{
-								document.getElementById("copaTorneo").value = "no";
+								document.getElementById("esCopaTorneo").value = "no";
 							}
 								
 								
@@ -76,8 +83,8 @@
 						event.onComplete = function(){														
 							document.getElementById("nombreTorneo").value = "";	
 							document.getElementById("sedeTorneo").value = "";
-							document.getElementById("tipoTorneo").value = "";
-							document.getElementById("copaTorneo").value = "";
+							document.getElementById("tipoSelecciones").value = "";
+							document.getElementById("esCopaTorneo").value = "";
 						};
 					});
 				}				
@@ -88,10 +95,10 @@
 		<div>
 			<h2>Torneo</h2>		
 			<s:form action = "">
-				<s:textfield id = "nombreTorneo" name = "nombre" label = "Nombre del torneo"/>			
-				<s:textfield id = "sedeTorneo" name = "sede" label = "sede del torneo"/>
-				<s:select id = "tipoTorneo" name = "tipo" label = "tipo de torneo" list="{'selecciones','clubes'}"></s:select>
-				<s:select id = "copaTorneo" name = "copa" label = "es de Copa?" list="{'si','no'}"></s:select>
+				<s:textfield id = "torneo.nombre"  label = "Nombre del torneo"/>			
+				<s:textfield id = "torneo.sede" label = "sede del torneo"/>
+				<s:select id = "tipoSelecciones"  label = "tipo selecciones" list="{'si','no'}"></s:select>
+				<s:select id = "esCopaTorneo"  label = "es de Copa?" list="{'si','no'}"></s:select>
 				<s:submit align = "center"></s:submit>
 			</s:form>
 		</div>

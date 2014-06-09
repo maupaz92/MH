@@ -47,13 +47,13 @@ public class AccesoTorneos {
 	{
 		TorneoModelo t1 = new TorneoModelo();
 		t1.setNombre("Brasil 2014");		
-		t1.setTipo("selecciones");
+		t1.setTipoSelecciones(true);
 		t1.setSede("Brasil");
 		t1.setCopa(true);
 		
 		TorneoModelo t2 = new TorneoModelo();		
 		t2.setNombre("Russia 2018");
-		t2.setTipo("clubes");
+		t2.setTipoSelecciones(true);
 		t2.setSede("Russia");
 		t2.setCopa(false);
 		

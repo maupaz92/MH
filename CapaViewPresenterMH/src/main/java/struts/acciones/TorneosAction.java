@@ -13,6 +13,7 @@ public class TorneosAction extends ActionSupport{
 	private static final long serialVersionUID = 1L;
 	private TorneoModelo torneo;
 	private String esCopaTorneo;
+	private String tipoSelecciones;
 	private ClienteTorneos clienteTorneos;
 	private final Logger log = Logger.getLogger(TorneosAction.class);
 	
@@ -41,7 +42,9 @@ public class TorneosAction extends ActionSupport{
 		this.getTorneo().setCopa(false);
 		//se compara si en el formulario se selecciono "si" para el dato de esDeCopa?
 		if(this.getEsCopaTorneo().equalsIgnoreCase("si"))			
-			this.getTorneo().setCopa(true);		
+			this.getTorneo().setCopa(true);
+		if(this.getTipoSelecciones().equalsIgnoreCase("si"))			
+			this.getTorneo().setTipoSelecciones(true);
 		clienteTorneos = new ClienteTorneos();
 		clienteTorneos.enviarRegistroNuevoTorneo(getTorneo());
 		this.setTorneo(null);
@@ -66,6 +69,14 @@ public class TorneosAction extends ActionSupport{
 
 	public Logger getLog() {
 		return log;
+	}
+
+	public String getTipoSelecciones() {
+		return tipoSelecciones;
+	}
+
+	public void setTipoSelecciones(String tipoSelecciones) {
+		this.tipoSelecciones = tipoSelecciones;
 	}
 	
 }
