@@ -95,10 +95,10 @@
 		<div>
 			<h2>Torneo</h2>		
 			<s:form action = "actualizarTorneoLinkTorneos">
-				<s:textfield id = "torneo.nombre"  label = "Nombre del torneo"/>			
-				<s:textfield id = "torneo.sede" label = "sede del torneo"/>
-				<s:select id = "tipoSelecciones"  label = "tipo selecciones" list="{'si','no'}"></s:select>
-				<s:select id = "esCopaTorneo"  label = "es de Copa?" list="{'si','no'}"></s:select>
+				<s:textfield id = "torneo.nombre" name = "torneo.nombre"  label = "Nombre del torneo"/>			
+				<s:textfield id = "torneo.sede" name = "torneo.sede" label = "sede del torneo"/>
+				<s:select id = "tipoSelecciones" name = "tipoSelecciones"  label = "tipo selecciones" list="{'si','no'}"></s:select>
+				<s:select id = "esCopaTorneo" name = "esCopaTorneo"  label = "es de Copa?" list="{'si','no'}"></s:select>
 				<s:submit align = "center"></s:submit>
 			</s:form>
 		</div>
