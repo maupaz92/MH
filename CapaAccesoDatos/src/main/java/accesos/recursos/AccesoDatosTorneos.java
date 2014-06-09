@@ -6,7 +6,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import com.Pruebas.HibernateUtil;
+import com.HibernateUtil.HibernateUtil;
 
 import modelos.recursos.TorneoModelo;
 

@@ -1,4 +1,4 @@
-package com.Pruebas;
+package com.HibernateUtil;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
