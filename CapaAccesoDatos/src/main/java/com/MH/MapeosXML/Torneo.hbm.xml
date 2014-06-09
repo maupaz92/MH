@@ -10,7 +10,7 @@
          datos los objetos Torneo.
       </meta>
       <id name="nombre" type="string" column="Nombre_Torneo"></id>
-      <property name="tipo" column="Tipo_Torneo" type="boolean"/>
+      <property name="tipoSelecciones" column="Tipo_Torneo" type="boolean"/>
       <property name="sede" column="Sede_Torneo" type="string"/>
       <property name="copa" column="Copa" type="boolean"/>
    </class>
