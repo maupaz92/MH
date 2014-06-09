@@ -1,0 +1,28 @@
+
+html{
+	/*background-color: yellow;*/
+}
+
+.center{
+	width: 80%;
+	height: 400px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 20px;
+}
+
+.cuerpo{			
+	width: 78%;	
+}
+
+.leftFloat{
+	float: left;
+}
+
+.floatRight{
+	float: right;
+}
+
+
+
+

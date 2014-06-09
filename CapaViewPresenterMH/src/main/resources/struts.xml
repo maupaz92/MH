@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.custom.i18n.resources" value="ApplicationResources" />
+
+    <package name="default" extends="struts-default" namespace = "/">
+        	
+        	
+        <result-types>
+        	<result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult"></result-type>
+        </result-types>
+        
+        <!-- la property name = "*" indica que las acciones seran leidas hacia los nombres de los resultados -->
+        <action name="*LinkRegistro" method = "{1}" class="struts.acciones.LoginAction">
+        	<!-- name property y contenido del result deben de tener el mismo nombre del tile definido en el xml -->
+        	<result name="login" type="tiles">login</result>           	
+        	<result name="perfil" type="tiles">perfil</result>        	    
+        </action>
+        
+        <action name="*LinkTorneos" method = "{1}" class = "struts.acciones.TorneosAction">
+        	<result name="vistaRegistrarTorneo" type="tiles">vistaRegistrarTorneo</result>
+        	<result name="vistaEdicionTorneo" type="tiles">vistaEdicionTorneo</result>
+        	<result name="registrarTorneo" type="tiles">registrarTorneo</result>
+        </action>
+        
+        <action name="*LinkEquipos" method = "{1}" class = "struts.acciones.EquiposAction">
+        	<result name = "vistaRegistrarEquipo" type = "tiles">vistaRegistrarEquipo</result>
+        </action>  
+        
+        <action name="*LinkPartidos" method = "{1}" class = "struts.acciones.PartidosAction">
+        	<result name = "vistaRegistrarPartido" type = "tiles">vistaRegistrarPartido</result>
+        </action>     
+                
+    </package>
+     
+
+    <!-- Add packages here -->
+
+</struts>
