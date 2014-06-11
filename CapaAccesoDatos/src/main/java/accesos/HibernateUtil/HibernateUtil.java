@@ -1,4 +1,4 @@
-package com.HibernateUtil;
+package accesos.HibernateUtil;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;

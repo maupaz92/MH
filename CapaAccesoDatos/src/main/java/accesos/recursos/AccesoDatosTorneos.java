@@ -1,6 +1,5 @@
 package accesos.recursos;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -8,12 +7,10 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import accesos.HibernateUtil.HibernateUtil;
 import accesos.dao.TorneosDAO;
 import accesos.excepciones.RecursoRepetidoException;
 import accesos.excepciones.TorneoRepetidoException;
-
-import com.HibernateUtil.HibernateUtil;
-
 import modelos.recursos.TorneoModelo;
 
 public class AccesoDatosTorneos extends AccesoDatos implements TorneosDAO{

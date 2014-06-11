@@ -4,10 +4,10 @@ package accesos.recursos;
 
 import org.hibernate.Session;
 
+import accesos.HibernateUtil.HibernateUtil;
 import accesos.excepciones.RecursoRepetidoException;
 
 
-import com.HibernateUtil.HibernateUtil;
 
 public abstract class AccesoDatos {
 
