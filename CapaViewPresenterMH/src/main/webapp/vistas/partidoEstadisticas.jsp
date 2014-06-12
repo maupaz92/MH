@@ -12,6 +12,7 @@
 	<div id = "contenedorTorneos" class = "leftFloat">
 		<h3>Torneos</h3>
 		<div id="torneos" style="width: 80%; height: 400px; margin: 10px;"></div>
+		<s:actionerror />
 		<script>	
 			$(function () {						
 				$.ajax({
@@ -73,9 +74,8 @@
 	<div id = "contenedorPartido" class = "rightFloat">
 		<div id = "detallesPartido" class = "">
 			<s:form>
-				<h3>Partido</h3>				
-				<s:text name="tituloTorneoConfigurado"></s:text>
-				<s:textfield name = "identificadorTorneoSeleccionado"></s:textfield>
+				<h3>Partido</h3>								
+				<s:textfield name = "identificadorTorneoConfigurado"></s:textfield>
 				Equipos: <s:select name = "equipo1" label = "Equipo" theme="simple" list="listaEquipos"></s:select>
 				<s:select name = "equipo2" label = "Equipo" theme="simple" list="listaEquipos"></s:select><br>
 				Marcador: <s:textfield type = "number" name="marcador1" label = "Marcador" theme="simple" pattern="[0-9]+" min = "0" max = "99"/>

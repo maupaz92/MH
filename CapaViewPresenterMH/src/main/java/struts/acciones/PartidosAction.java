@@ -21,14 +21,12 @@ public class PartidosAction extends ActionSupport{
 	private String identificadorTorneoSeleccionado;	
 	private String nombreTorneoSeleccionado;
 	private String identificadorTorneoConfigurado;
-	private String nombreTorneoConfigurado;
-	private String tituloTorneoConfigurado;
+	private String nombreTorneoConfigurado;	
 	private final Logger LOG = Logger.getLogger(PartidosAction.class);
 	
 	
 	public PartidosAction(){
 		listaEquipos = new ArrayList<String>();
-		this.setTituloTorneoConfigurado("");
 		
 	}
 
@@ -48,18 +46,18 @@ public class PartidosAction extends ActionSupport{
 	 * @return
 	 */
 	public String cargarEquipos(){
-		if(!this.getNombreTorneoSeleccionado().isEmpty()){			
+		if(!this.getNombreTorneoSeleccionado().isEmpty()){
+			LOG.info(this.getIdentificadorTorneoSeleccionado());
 			this.setNombreTorneoConfigurado(this.getNombreTorneoConfigurado());
-			this.setIdentificadorTorneoConfigurado(this.getIdentificadorTorneoSeleccionado());
-			this.setTituloTorneoConfigurado(this.getNombreTorneoConfigurado());
-			this.
+			this.setIdentificadorTorneoConfigurado(this.getIdentificadorTorneoSeleccionado());	
 			listaEquipos.add("mauricio");
 			listaEquipos.add("joven");
 			this.setNombreTorneoSeleccionado("");
 			this.setIdentificadorTorneoSeleccionado("");
 			
-		}else
-			LOG.info("No se cargan equipos porque no hay seleccion de torneos");
+		}else{
+			this.addActionError(this.getText("error.partido.seleccionDeTorneo"));
+		}			
 		return "vistaRegistrarPartido";
 	}
 	
@@ -107,12 +105,4 @@ public class PartidosAction extends ActionSupport{
 		this.nombreTorneoConfigurado = nombreTorneoConfigurado;
 	}
 
-	public String getTituloTorneoConfigurado() {
-		return tituloTorneoConfigurado;
-	}
-
-	public void setTituloTorneoConfigurado(String tituloTorneoConfigurado) {
-		this.tituloTorneoConfigurado = tituloTorneoConfigurado;
-	}
-	
 }
