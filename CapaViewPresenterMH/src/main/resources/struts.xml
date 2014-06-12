@@ -37,6 +37,7 @@
         
         <action name="*LinkPartidos" method = "{1}" class = "struts.acciones.PartidosAction">
         	<result name = "vistaRegistrarPartido" type = "tiles">vistaRegistrarPartido</result>
+        	<result name = "cargarEquipos" type = "tiles">"cargarEquipos"</result>
         </action>     
                 
     </package>

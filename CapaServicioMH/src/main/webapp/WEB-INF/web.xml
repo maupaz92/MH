@@ -9,7 +9,7 @@
         <servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
         <init-param>
             <param-name>javax.ws.rs.Application</param-name>
-            <param-value>servicio.accesos.RegistroAccesos</param-value>
+            <param-value>servicio.accesos.RegistroRESTServices</param-value>
         </init-param>
     </servlet>
 

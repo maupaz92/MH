@@ -42,36 +42,49 @@
 								{ field: 'sede', caption: 'Nombre', size: '30%', hidden: true},
 								{ field: 'copa', caption: 'Tipo', size: '30%', hidden: true}
 							],
-							records: torneos,
-						});						
+							records: torneos,			
+						});																
 						w2ui.torneos.on('select', function(event){
-							event.onComplete = function(){									
+							event.onComplete = function(){
+								var filaSeleccionado = w2ui.torneos.getSelection();							
+								var torneoSeleccionado = w2ui.torneos.get(filaSeleccionado);								
+								document.getElementById("nombreTorneoSeleccionado").value = torneoSeleccionado.nombre;
+								document.getElementById("identificadorTorneoSeleccionado").value = torneoSeleccionado.nombre;
 							};
 						});
 						w2ui.torneos.on('unselect', function(event){
-							event.onComplete = function(){																						
+							event.onComplete = function(){
+								document.getElementById("identificadorTorneoSeleccionado").value = "";
+								document.getElementById("nombreTorneoSeleccionado").value = "";
 							};
 						});
 					}				
 				});						
-			});
+			});			
+			
 		</script>
-		<input type="button" value = "Cargar Equipos">
+		<s:form action="cargarEquiposLinkPartidos">
+			<s:textfield id = "identificadorTorneoSeleccionado" name = "identificadorTorneoSeleccionado"></s:textfield>
+			<s:textfield id = "nombreTorneoSeleccionado" name = "nombreTorneoSeleccionado"></s:textfield>
+			<s:submit value = "Cargar Equipos"/>
+		</s:form>
 	</div>
 	
 	<div id = "contenedorPartido" class = "rightFloat">
 		<div id = "detallesPartido" class = "">
 			<s:form>
-				<h3>Partido</h3>
-				Equipos: <s:select name = "equipo1" label = "Equipo" theme="simple" list="{'selecciones','clubes'}"></s:select>
-				<s:select name = "equipo2" label = "Equipo" theme="simple" list="{'selecciones','clubes'}"></s:select><br>
+				<h3>Partido</h3>				
+				<s:text name="tituloTorneoConfigurado"></s:text>
+				<s:textfield name = "identificadorTorneoSeleccionado"></s:textfield>
+				Equipos: <s:select name = "equipo1" label = "Equipo" theme="simple" list="listaEquipos"></s:select>
+				<s:select name = "equipo2" label = "Equipo" theme="simple" list="listaEquipos"></s:select><br>
 				Marcador: <s:textfield type = "number" name="marcador1" label = "Marcador" theme="simple" pattern="[0-9]+" min = "0" max = "99"/>
 				<s:textfield type = "number" name="marcador2" pattern="[0-9]+" theme="simple" min = "0" max = "99"/>
 				<br>
 				Día:<s:textfield type = "number" name="day"  key="label.day" theme="simple" pattern="[0-9]+" min = "1" max = "31"/>
 				Mes:<s:textfield type = "number" name="month" key="label.month" theme="simple" pattern="[0-9]+" min = "1" max = "12"/>
 				Año:<s:textfield type = "number" name="year" key="label.year" theme="simple" pattern="[0-9]+" min = "1950" max = "2999"/>
-				<br><input type = "button" onclick="" value="Cargar Jugadores">
+				<br><input type = "button" onclick="algo();" value="Cargar Jugadores">
 				<s:submit value="registrar" align = "center" theme = "simple" />
 			</s:form>
 		</div>
