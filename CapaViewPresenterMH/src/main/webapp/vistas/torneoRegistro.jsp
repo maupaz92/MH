@@ -13,20 +13,20 @@
 		<script>	
 		$(function () {						
 			$.ajax({
-				url: 'http://localhost:8080/CapaServicioMH/torneos',
+				url: 'http://localhost:8080/CapaServicioMH/torneos/lista',
 				dataType: 'json',
 				success: function(response){
-					
+					//se define el arreglo de torneos
 					var torneos = [];
-					
-					$.each(response, function(key, value){
-						var total = value.length;
-						for(var conteo = 0; conteo < total; conteo++){
-							torneos.push({
-								recid: conteo,
-								nombre: value[conteo].nombre, 								
-							});							
-						}						
+					//inicio de los recid para la lista de torneos
+					var conteo = 1;					
+					//por cada elementos en la respuesta
+					$.each(response, function(key, value){						
+						torneos.push({
+							recid: conteo,
+							nombre: value.nombre,					
+						});
+						conteo++;
 					});					
 					
 					$('#torneosEdicion').w2grid({ 

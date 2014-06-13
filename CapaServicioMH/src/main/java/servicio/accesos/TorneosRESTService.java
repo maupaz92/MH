@@ -1,5 +1,10 @@
 package servicio.accesos;
 
+
+
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -63,6 +68,31 @@ public class TorneosRESTService {
 		
 		return lista;*/
 		return this.getGestor().getListaTorneosRegistrados();
+	}
+	
+	
+	@GET
+	@Path("/lista")
+	@Produces({"application/json", "application/xml"})
+	public List<TorneoModelo> getTorneosRegistradosPrueba()
+	{
+		TorneoModelo t1 = new TorneoModelo();
+		t1.setNombre("Brasil 2014");		
+		t1.setTipoSelecciones(true);
+		t1.setSede("Brasil");
+		t1.setCopa(true);
+		
+		TorneoModelo t2 = new TorneoModelo();		
+		t2.setNombre("Russia 2018");
+		t2.setTipoSelecciones(true);
+		t2.setSede("Russia");
+		t2.setCopa(false);
+		
+		List<TorneoModelo> lista = new ArrayList<TorneoModelo>();
+		lista.add(t1);
+		lista.add(t2);
+		return lista;
+		
 	}
 	
 	
