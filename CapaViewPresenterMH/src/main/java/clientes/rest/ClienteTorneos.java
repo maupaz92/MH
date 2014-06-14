@@ -32,7 +32,7 @@ public class ClienteTorneos {
 	 */
 	public boolean enviarRegistroNuevoTorneo(TorneoModelo torneo)
 	{
-		boolean envioExitoso = true;
+		boolean envioExitoso = true;		
 		//se define la url del servicio que se requiere
 		WebTarget urlObjetivo = cliente.target(URI+rootResourceURI);
 		//se ejecuta el request con el metodo "post", y se almacena en un objeto "Response"

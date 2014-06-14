@@ -9,7 +9,10 @@
          Esta clase contiene los metadatos necesarios para mapear a la base de 
          datos los objetos Torneo.
       </meta>
-      <id name="nombre" type="string" column="Nombre_Torneo"></id>
+      <id name="id" type="int" column="Id_Torneo" >
+      	<generator class="identity"></generator>
+      </id>
+      <property name="nombre" type="string" column="Nombre_Torneo"></property>
       <property name="tipoSelecciones" column="Tipo_Torneo" type="boolean"/>
       <property name="sede" column="Sede_Torneo" type="string"/>
       <property name="copa" column="Copa" type="boolean"/>

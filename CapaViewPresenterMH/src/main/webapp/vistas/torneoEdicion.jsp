@@ -26,19 +26,17 @@
 				success: function(response){
 					
 					var torneos = [];
-					
-					$.each(response, function(key, value){
-						var total = value.length;
-						for(var conteo = 0; conteo < total; conteo++){
-							torneos.push({
-								recid: conteo,
-								nombre: value[conteo].nombre, 
-								tipoSelecciones: value[conteo].tipoSelecciones,
-								sede: value[conteo].sede,
-								copa: value[conteo].copa,
-								
-							});							
-						}						
+					var conteo = 1;
+					$.each(response, function(key, value){												
+						torneos.push({
+							recid: conteo,
+							nombre: value.nombre,
+							id: value.id,
+							tipoSelecciones: value.tipoSelecciones,
+							sede: value.sede,
+							copa: value.copa,							
+						});							
+						conteo++;
 					});					
 					
 					$('#torneosEdicion').w2grid({ 
@@ -48,6 +46,7 @@
 						columns: 
 						[				
 							{ field: 'nombre', caption: 'Nombre', size: '30%'},
+							{ field: 'id', caption: 'Id', size: '30%', hidden: true},
 							{ field: 'tipoSelecciones', caption: 'Nombre', size: '30%', hidden: true},
 							{ field: 'sede', caption: 'Nombre', size: '30%', hidden: true},
 							{ field: 'copa', caption: 'Tipo', size: '30%', hidden: true}
@@ -75,7 +74,8 @@
 							}else{
 								document.getElementById("esCopaTorneo").value = "no";
 							}
-								
+							
+							document.getElementById("idTorneo").value = elemento.id;
 								
 						};
 					});
@@ -85,6 +85,7 @@
 							document.getElementById("torneo.sede").value = "";
 							document.getElementById("tipoSelecciones").value = "";
 							document.getElementById("esCopaTorneo").value = "";
+							document.getElementById("idTorneo").value = "";
 						};
 					});
 				}				
@@ -99,6 +100,7 @@
 				<s:textfield id = "torneo.sede" name = "torneo.sede" label = "sede del torneo"/>
 				<s:select id = "tipoSelecciones" name = "tipoSelecciones"  label = "tipo selecciones" list="{'si','no'}"></s:select>
 				<s:select id = "esCopaTorneo" name = "esCopaTorneo"  label = "es de Copa?" list="{'si','no'}"></s:select>
+				<s:textfield id = "idTorneo" name = "idTorneo" type = "hidden"></s:textfield>
 				<s:submit align = "center"></s:submit>
 			</s:form>
 		</div>

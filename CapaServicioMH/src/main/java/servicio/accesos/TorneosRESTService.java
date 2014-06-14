@@ -86,7 +86,7 @@ public class TorneosRESTService {
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
 	public void registrarNuevoTorneo(TorneoModelo torneo)
-	{				
+	{						
 		boolean registroExitoso = this.getGestor().registrarNuevoTorneo(torneo);
 		//si el registro no se puede llevar 
 		if(!registroExitoso){
@@ -99,6 +99,7 @@ public class TorneosRESTService {
 	@Consumes(MediaType.APPLICATION_XML)	
 	public void modificarTorneo(TorneoModelo torneo)
 	{
+		log.info(torneo.toString()+" id: "+Integer.toString(torneo.getId()));
 		boolean modificacionExitosa = this.getGestor().modificarTorneo(torneo);
 		if(!modificacionExitosa){
 			throw new WebApplicationException(Response.Status.CONFLICT);

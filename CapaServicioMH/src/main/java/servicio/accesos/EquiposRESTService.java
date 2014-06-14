@@ -1,10 +1,10 @@
 package servicio.accesos;
 
+import java.util.List;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-
-import modelos.recursos.ConjuntoDeEquiposModelo;
 import modelos.recursos.EquipoModelo;
 
 /**
@@ -18,7 +18,7 @@ public class EquiposRESTService {
 
 	@GET
 	@Produces({"application/json", "application/xml"})
-	public ConjuntoDeEquiposModelo getEquiposPorTipo(){
+	public List<EquipoModelo> getEquiposPorTipo(){
 		
 		EquipoModelo equipo1 = new EquipoModelo();
 		equipo1.setNombre("L.D.A");
@@ -35,12 +35,8 @@ public class EquiposRESTService {
 		equipo3.setPais("Costa Rica");
 		equipo3.setTipo(true);
 		
-		ConjuntoDeEquiposModelo equipos = new ConjuntoDeEquiposModelo();
-		equipos.agregarEquipo(equipo1);
-		equipos.agregarEquipo(equipo2);
-		equipos.agregarEquipo(equipo3);
 		
-		return equipos;
+		return null;
 	}
 	
 }

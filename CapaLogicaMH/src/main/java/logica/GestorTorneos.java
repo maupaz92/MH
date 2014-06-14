@@ -49,8 +49,35 @@ public class GestorTorneos {
 		return respuesta;
 	}
 	
+	/**
+	 * metodo que actualiza los datos de un torneo existente. Entra como parametro
+	 * el torneo que se desea modificar con sus datos actualizados.
+	 * @param torneo
+	 * @return
+	 * True en caso de que el torneo ingresado exista previamente en la BD y ademas
+	 * que su nombre no sea igual a otro ya registrado. False en cualquiera de los casos contrarios
+	 */
 	public boolean modificarTorneo(TorneoModelo torneo)
-	{
+	{		
+		//torneo original, previo a cambios
+		TorneoModelo torneoOriginal = (TorneoModelo) this.getLectorTorneos().getTorneoPorId(torneo.getId());
+		//torneo prueba para verificar si el nombre ya existe
+		TorneoModelo torneoPrueba = (TorneoModelo) this.getLectorTorneos().getTorneoPorNombre(torneo.getNombre());
+		
+		//no se ppuede obtener el torneo original por el id no existe
+		if(torneoOriginal == null){
+			return false;
+			//tirar excepcion de que no existe
+		}	
+		//si el torneo modificado cambia a un nombre de otro torneo ocupado
+		if(torneoPrueba != null && torneo.getId() != torneoPrueba.getId()){
+			//tirar excepcion de que torneo con ese nombre ya existe
+			return false;						
+		}
+		//se reemplazan los datos del torneo actualizado por los viejos
+		torneoOriginal.reemplazarDatos(torneo);
+		//se efectua el cambio
+		this.getActualizadorObjetosBD().actualizarRecurso(torneoOriginal);				
 		return true;
 	}
 	

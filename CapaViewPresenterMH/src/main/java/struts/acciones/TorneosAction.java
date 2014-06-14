@@ -14,6 +14,7 @@ public class TorneosAction extends ActionSupport{
 	private TorneoModelo torneo;
 	private String esCopaTorneo;
 	private String tipoSelecciones;
+	private int idTorneo;
 	private ClienteTorneos clienteTorneos;
 	private final Logger log = Logger.getLogger(TorneosAction.class);
 	
@@ -51,6 +52,7 @@ public class TorneosAction extends ActionSupport{
 	public String actualizarTorneo(){
 		//se define los datos ingresados en el formulario
 		this.setDatosTorneo();
+		this.getTorneo().setId(this.getIdTorneo());
 		clienteTorneos = new ClienteTorneos();
 		clienteTorneos.enviarModificacionTorneo(getTorneo());
 		this.setTorneo(null);
@@ -106,6 +108,14 @@ public class TorneosAction extends ActionSupport{
 
 	public void setTipoSelecciones(String tipoSelecciones) {
 		this.tipoSelecciones = tipoSelecciones;
+	}
+
+	public int getIdTorneo() {
+		return idTorneo;
+	}
+
+	public void setIdTorneo(int idTorneo) {
+		this.idTorneo = idTorneo;
 	}
 	
 	

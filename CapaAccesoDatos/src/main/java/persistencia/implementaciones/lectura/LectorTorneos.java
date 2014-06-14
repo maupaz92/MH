@@ -24,23 +24,32 @@ public class LectorTorneos implements LectorTorneosDAO{
 	
 	public Object getTorneoPorNombre(String nombre) {				
         Session session = HibernateFactory.getSessionFactory().openSession();       
-        session.beginTransaction();
-        Object torneoResultado = session.get(TorneoModelo.class, nombre);       
-        session.getTransaction().commit();     			
-		return torneoResultado;
+        Query query = session.createQuery("from TorneoModelo where nombre = :nombreTorneo");	
+        query.setParameter("nombreTorneo", nombre);
+		@SuppressWarnings("unchecked")
+		List<Object> list = query.list();//se obtiene la lista del query
+		Object objeto = null;
+		//se verifica que la lista no este nula si el torneo no existe
+		if(list.size() != 0)
+			objeto = list.get(0);
+		return objeto;
 	}
 
 	public Object getTorneoPorId(int id) {
-		return null;
+		Session session = HibernateFactory.getSessionFactory().openSession();       
+        session.beginTransaction();
+        Object torneoResultado = session.get(TorneoModelo.class, id);       
+        session.getTransaction().commit();     			
+		return torneoResultado;
 	}
 
 	public List<Object> getTorneosRegistrados() {
 		//se obtiene la sesion
 		Session session = HibernateFactory.getSessionFactory().openSession();
 		//se define el query
-		Query query = session.createQuery("from TorneoModelo");	
+		Query query = session.createQuery("from TorneoModelo");			
 		@SuppressWarnings("unchecked")
-		List<Object> list = query.list();//se obtiene la lista del query
+		List<Object> list = query.list();//se obtiene la lista del query		
 		return list;
 	}
 
