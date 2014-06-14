@@ -13,7 +13,7 @@
 		<script>	
 		$(function () {						
 			$.ajax({
-				url: 'http://localhost:8080/CapaServicioMH/torneos/lista',
+				url: 'http://localhost:8080/CapaServicioMH/torneos',
 				dataType: 'json',
 				success: function(response){
 					//se define el arreglo de torneos

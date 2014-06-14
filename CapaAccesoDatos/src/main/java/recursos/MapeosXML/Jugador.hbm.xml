@@ -16,5 +16,4 @@
         <property name="peso" type="double"><column name="Peso_Jugador" /></property>
         <property name="fechaNacimiento" type="string"><column name="Fecha_Nacimiento" /></property>
     </class>
-     
 </hibernate-mapping>

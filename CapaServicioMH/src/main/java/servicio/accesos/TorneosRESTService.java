@@ -1,20 +1,21 @@
 package servicio.accesos;
 
 
-
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import logica.GestorTorneos;
-import modelos.recursos.ConjuntoDeTorneosModelo;
 import modelos.recursos.TorneoModelo;
 
 import org.jboss.resteasy.logging.Logger;
@@ -41,68 +42,56 @@ public class TorneosRESTService {
 	}		
 	
 	/**
-	 * metodo que retorna los torneos registrados en el sistema a traves
-	 * del metodo HTTP GET.
-	 * Envia el recurso por medio de representaciones en xml o json.
+	 * metodo encargado de recibir las solicitudes de cuando
+	 * se quiere obtener los torneos segun el tipo de selecciones mediante el URI
+	 * "/torneos/tipos?deTipoSelecciones=true", si no se especifica el tipo
+	 * por defecto se envian los tipo torneo
+	 * @param esDeSelecciones
 	 * @return
+	 * Una lista con los torneos segun el tipo en el parametro.
+	 */
+	@GET
+	@Path("/tipos")
+	@Produces({"application/json", "application/xml"})
+	public List<TorneoModelo> getTorneosPorTipo(
+			@DefaultValue("true") 
+			@QueryParam("deTipoSelecciones") Boolean esDeSelecciones)
+	{	
+		this.log.info(new Boolean(esDeSelecciones).toString());
+		return this.getGestor().getTorneosPorTipo(esDeSelecciones);		
+	}
+	
+	
+	
+	/**
+	 * metodo que recibe las solicitudes para el URI
+	 * "/torneos"
+	 * @return
+	 * La lista completa de torneos que han sido registrados en el sistema
 	 */
 	@GET	
 	@Produces({"application/json", "application/xml"})
-	public ConjuntoDeTorneosModelo getTorneosRegistrados()
+	public List<TorneoModelo> getTorneosRegistrados()
 	{
-		/*TorneoModelo t1 = new TorneoModelo();
-		t1.setNombre("Brasil 2014");		
-		t1.setTipoSelecciones(true);
-		t1.setSede("Brasil");
-		t1.setCopa(true);
-		
-		TorneoModelo t2 = new TorneoModelo();		
-		t2.setNombre("Russia 2018");
-		t2.setTipoSelecciones(true);
-		t2.setSede("Russia");
-		t2.setCopa(false);
-		
-		ConjuntoDeTorneosModelo lista = new ConjuntoDeTorneosModelo();
-		lista.agregarTorneo(t1);
-		lista.agregarTorneo(t2);
-		
-		return lista;*/
-		return this.getGestor().getListaTorneosRegistrados();
-	}
+		return this.getGestor().getTorneosRegistrados();		
+	}	
 	
 	
-	@GET
-	@Path("/lista")
-	@Produces({"application/json", "application/xml"})
-	public List<TorneoModelo> getTorneosRegistradosPrueba()
-	{
-		TorneoModelo t1 = new TorneoModelo();
-		t1.setNombre("Brasil 2014");		
-		t1.setTipoSelecciones(true);
-		t1.setSede("Brasil");
-		t1.setCopa(true);
-		
-		TorneoModelo t2 = new TorneoModelo();		
-		t2.setNombre("Russia 2018");
-		t2.setTipoSelecciones(true);
-		t2.setSede("Russia");
-		t2.setCopa(false);
-		
-		List<TorneoModelo> lista = new ArrayList<TorneoModelo>();
-		lista.add(t1);
-		lista.add(t2);
-		return lista;
-		
-	}
-	
-	
+	/**
+	 * metodo que se encarga de registrar un nuevo torneo en el sistema.
+	 * Si el torneo ya existe en el sistema retorna un respuesta 409
+	 * igual a conflicto, debido a que hay registros repetidos.
+	 * @param torneo
+	 */
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
 	public void registrarNuevoTorneo(TorneoModelo torneo)
 	{				
-		this.getGestor().registrarNuevoTorneo(torneo);
-		log.info("ingresado torneo: "+torneo.getNombre());
-		//throw new WebApplicationException(Response.Status.NOT_FOUND);
+		boolean registroExitoso = this.getGestor().registrarNuevoTorneo(torneo);
+		//si el registro no se puede llevar 
+		if(!registroExitoso){
+			throw new WebApplicationException(Response.Status.CONFLICT);
+		}	
 	}
 	
 	
@@ -110,7 +99,10 @@ public class TorneosRESTService {
 	@Consumes(MediaType.APPLICATION_XML)	
 	public void modificarTorneo(TorneoModelo torneo)
 	{
-		this.getGestor().modificarTorneo(torneo);
+		boolean modificacionExitosa = this.getGestor().modificarTorneo(torneo);
+		if(!modificacionExitosa){
+			throw new WebApplicationException(Response.Status.CONFLICT);
+		}
 	}	
 	
 	

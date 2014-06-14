@@ -13,6 +13,6 @@
       <property name="tipoSelecciones" column="Tipo_Torneo" type="boolean"/>
       <property name="sede" column="Sede_Torneo" type="string"/>
       <property name="copa" column="Copa" type="boolean"/>
-   </class> 
+   </class>
     
 </hibernate-mapping>

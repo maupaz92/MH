@@ -32,13 +32,17 @@ public class ClienteTorneos {
 	 */
 	public boolean enviarRegistroNuevoTorneo(TorneoModelo torneo)
 	{
+		boolean envioExitoso = true;
 		//se define la url del servicio que se requiere
 		WebTarget urlObjetivo = cliente.target(URI+rootResourceURI);
 		//se ejecuta el request con el metodo "post", y se almacena en un objeto "Response"
 		Response respuesta = urlObjetivo.request().post(Entity.xml(torneo));
-		this.getLog().info("respuesta del servicio "+respuesta.getStatus());
+		//si la respuesta es distinta de la exitosa, se asume que hay un torneo repetido
+		if(respuesta.getStatus() != 204){
+			envioExitoso = false;
+		}	
 		respuesta.close();
-		return true;
+		return envioExitoso;
 	}
 	
 	public boolean enviarModificacionTorneo(TorneoModelo torneo){
