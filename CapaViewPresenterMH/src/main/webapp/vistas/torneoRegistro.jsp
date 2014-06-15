@@ -19,7 +19,7 @@
 					//se define el arreglo de torneos
 					var torneos = [];
 					//inicio de los recid para la lista de torneos
-					var conteo = 1;					
+					var conteo = 1;			
 					//por cada elementos en la respuesta
 					$.each(response, function(key, value){						
 						torneos.push({

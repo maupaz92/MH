@@ -33,6 +33,7 @@
         
         <action name="*LinkEquipos" method = "{1}" class = "struts.acciones.EquiposAction">
         	<result name = "vistaRegistrarEquipo" type = "tiles">vistaRegistrarEquipo</result>
+        	<result name = "registrarEquipo" type = "tiles">registrarEquipo</result>
         </action>  
         
         <action name="*LinkPartidos" method = "{1}" class = "struts.acciones.PartidosAction">

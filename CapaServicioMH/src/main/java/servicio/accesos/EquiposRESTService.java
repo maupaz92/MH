@@ -3,9 +3,14 @@ package servicio.accesos;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import org.jboss.resteasy.logging.Logger;
 
 import modelos.recursos.EquipoModelo;
 import modelos.recursos.PaisModelo;
@@ -19,6 +24,9 @@ import modelos.recursos.PaisModelo;
 @Path("/equipos")
 public class EquiposRESTService {
 
+	
+	private final Logger log = Logger.getLogger(EquiposRESTService.class);
+	
 	@GET
 	@Produces({"application/json", "application/xml"})
 	public List<EquipoModelo> getEquiposPorTipo(){
@@ -52,5 +60,12 @@ public class EquiposRESTService {
 		
 		return lista;
 	}
+	
+	@POST
+	@Consumes(MediaType.APPLICATION_XML)
+	public void registrarNuevoEquipo(EquipoModelo equipo){
+		log.info(equipo.toString());
+	}
+	
 	
 }

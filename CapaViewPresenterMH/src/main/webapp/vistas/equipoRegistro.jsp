@@ -13,20 +13,19 @@
 		<script>	
 		$(function () {						
 			$.ajax({
-				url: 'http://localhost:8080/CapaServicioMH/torneos',
+				url: 'http://localhost:8080/CapaServicioMH/equipos',
 				dataType: 'json',
 				success: function(response){
 					
 					var torneos = [];
-					
-					$.each(response, function(key, value){
-						var total = value.length;
-						for(var conteo = 0; conteo < total; conteo++){
-							torneos.push({
-								recid: conteo,
-								nombre: value[conteo].nombre, 								
-							});							
-						}						
+					var conteo = 1;
+					$.each(response, function(key, value){												
+						torneos.push({
+							recid: conteo,
+							nombre: value.nombre, 
+							pais: value.pais.nombre,
+						});							
+						conteo++;					
 					});					
 					
 					$('#equipos').w2grid({ 
@@ -34,7 +33,8 @@
 						multiSelect: false,
 						columns: 
 						[				
-							{ field: 'nombre', caption: 'Nombre', size: '30%'}							
+							{ field: 'nombre', caption: 'Nombre', size: '30%'},
+							{ field: 'pais', caption: 'Pais', size: '30%'},
 						],
 						records: torneos,										
 					});										
@@ -44,9 +44,10 @@
 		</script>	
 		<div>
 			<h2>Nuevo Equipo</h2>		
-			<s:form action = "">
-				<s:textfield name = "equipo.nombre" label = "Nombre"/>			
-				<s:textfield name = "equipo.pais" label = "País"/>				
+			<s:form action = "registrarEquipoLinkEquipos">
+				<s:textfield name = "equipo.nombre" label = "Nombre"/>
+				<s:select name = "esClub" label = "es Club?" list="{'si','no'}"></s:select>							
+				<s:select name = "paisDeEquipo" label="Pais" list="listaPaises" listKey="id_Pais" listValue="nombre"></s:select>		
 				<s:submit align = "center"></s:submit>
 			</s:form>
 		</div>

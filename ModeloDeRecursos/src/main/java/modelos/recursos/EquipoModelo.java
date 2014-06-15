@@ -19,13 +19,20 @@ public class EquipoModelo implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -2875335459259908578L;
-	private int id_Equipo;	
+	private Integer id_Equipo;	
 	private String nombre;
 	private PaisModelo pais;
 	private Boolean tipoClub;
 	
 	public EquipoModelo(){}
 
+	
+	@Override
+	public String toString() {	
+		return "equipo: "+nombre+" id: "+id_Equipo+" es de clubes: "+tipoClub+" "+pais.toString();
+	}
+	
+	
 	//----------getters & setters
 	
 	@XmlAttribute

@@ -11,10 +11,18 @@ public class PaisModelo implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -1097810009845723069L;
-	private int id_Pais;
+	private Integer id_Pais;
 	private String nombre;
 	
 	public PaisModelo(){}
+	
+	
+	@Override
+	public String toString() {	
+		return "pais: "+nombre+" id: "+id_Pais;
+	}
+	
+	//getters & setters
 	
 	@XmlAttribute
 	public int getId_Pais() {
