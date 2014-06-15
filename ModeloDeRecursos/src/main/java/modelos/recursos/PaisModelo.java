@@ -3,6 +3,10 @@ package modelos.recursos;
 import java.io.Serializable;
 
 public class PaisModelo implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1097810009845723069L;
 	private int id_Pais;
 	private String nombre;
 	

@@ -15,6 +15,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement 
 public class EquipoModelo implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2875335459259908578L;
 	private int id_Equipo;	
 	private String nombre;
 	private PaisModelo pais;
