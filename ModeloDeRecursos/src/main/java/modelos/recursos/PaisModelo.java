@@ -2,6 +2,10 @@ package modelos.recursos;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class PaisModelo implements Serializable{
 	/**
 	 * 
@@ -12,6 +16,7 @@ public class PaisModelo implements Serializable{
 	
 	public PaisModelo(){}
 	
+	@XmlAttribute
 	public int getId_Pais() {
 		return id_Pais;
 	}
@@ -20,6 +25,7 @@ public class PaisModelo implements Serializable{
 		this.id_Pais = id_Pais;
 	}
 
+	@XmlAttribute
 	public String getNombre() {
 		return nombre;
 	}

@@ -19,7 +19,9 @@
 	    <property name="hibernate.show_sql">true</property>	    
 	    <property name="hbm2ddl.auto">update</property>
 	    <mapping resource="recursos/MapeosXML/Torneo.hbm.xml" />
+	    <mapping resource="recursos/MapeosXML/Pais.hbm.xml" />
 	    <mapping resource="recursos/MapeosXML/Equipo.hbm.xml" />	    
 	    <mapping resource="recursos/MapeosXML/Jugador.hbm.xml" />
+	    
 	</session-factory>
 </hibernate-configuration>

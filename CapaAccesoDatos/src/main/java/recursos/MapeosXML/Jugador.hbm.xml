@@ -6,18 +6,18 @@
     <class name="JugadorModelo" table="Jugador" >
         <id name="pasaporte" type="int">
             <column name="Pasaporte_XFIFA" />   
-            <generator class= "increment" />         
+            <generator class= "assigned" />         
         </id>
-        <property name="nombre" type="string"><column name="Nombre_Jugador"/></property>
-        <property name="posicion" type="string"><column name="Posicion_Jugador" /></property>
-        <property name="estado" type="boolean"><column name="Estado_Jugador" /></property>
-        <property name="altura" type="double"><column name="Altura_Jugador" /></property>
-        <property name="peso" type="double"><column name="Peso_Jugador" /></property>
-        <property name="fechaNacimiento" type="Date"><column name="Fecha_Nacimiento" /></property>
+        <property name="nombre" type="string"><column name="Nombre_Jugador" not-null="true"/></property>
+        <property name="posicion" type="string"><column name="Posicion_Jugador" not-null="true" /></property>
+        <property name="estado" type="boolean"><column name="Estado_Jugador" not-null="true" /></property>
+        <property name="altura" type="double"><column name="Altura_Jugador" not-null="true" /></property>
+        <property name="peso" type="double"><column name="Peso_Jugador" not-null="true" /></property>
+        <property name="fechaNacimiento" type="date"><column name="Fecha_Nacimiento" not-null="true" /></property>
         <many-to-one name="equipoActual" class="modelos.recursos.EquipoModelo" 
    	  column="Equipo_Actual" cascade="all" not-null="true"/>
    	   <many-to-one name="pais" class="modelos.recursos.PaisModelo" 
    	  column="Id_Pais" cascade="all" not-null="true"/>
-   	 
+   	    
     </class>
 </hibernate-mapping>

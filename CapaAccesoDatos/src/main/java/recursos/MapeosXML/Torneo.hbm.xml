@@ -4,7 +4,7 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
  
 <hibernate-mapping package="modelos.recursos">
- <class name="TorneoModelo" table="TORNEOS">
+ <class name="TorneoModelo" table="Torneo">
       <meta attribute="class-description">
          Esta clase contiene los metadatos necesarios para mapear a la base de 
          datos los objetos Torneo.
@@ -12,10 +12,11 @@
       <id name="id" type="int" column="Id_Torneo" >
       	<generator class="identity"></generator>
       </id>
-      <property name="nombre" type="string" column="Nombre_Torneo"></property>
-      <property name="tipoSelecciones" column="Tipo_Torneo" type="boolean"/>
-      <property name="sede" column="Sede_Torneo" type="string"/>
-      <property name="copa" column="Copa" type="boolean"/>
+      <property name="nombre" type="string" column="Nombre_Torneo" unique="true"></property>
+      <property name="tipoSelecciones" column="Tipo_Torneo" type="boolean" not-null="true"/>
+      <property name="sede" column="Sede_Torneo" type="string" not-null="true"/>
+      <property name="copa" column="Es_De_Copa" type="boolean" not-null="true"/>
+      
    </class>
     
 </hibernate-mapping>

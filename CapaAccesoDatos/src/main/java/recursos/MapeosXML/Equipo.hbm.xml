@@ -3,20 +3,19 @@
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
  
-<hibernate-mapping package="com.MH.XMLMapeos">
- <class name="Equipo" table="Equipo">
+<hibernate-mapping package="modelos.recursos">
+ 	<class name="EquipoModelo" table="Equipo">
       <meta attribute="class-description">
          Esta clase contiene los metadatos necesarios para mapear a la base de 
          datos los objetos Equipo.
       </meta>
       <id name="id_Equipo" type="int" column="Id_Equipo">
-         <generator class="native"/>
+         <generator class="identity"/>
       </id>
-      <property name="nombre" column="Nombre_Equipo" type="string"/>
-      <property name="tipo" column="Tipo_Equipo" type="boolean"/>
+      <property name="nombre" column="Nombre_Equipo" type="string" not-null="true"/>
+      <property name="tipoClub" column="Tipo_Equipo" type="boolean" not-null="true"/>
    	  <many-to-one name="pais" class="modelos.recursos.PaisModelo" 
    	  column="Id_Pais" cascade="all" not-null="true"/>
-   
    </class>
     
 </hibernate-mapping>

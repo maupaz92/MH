@@ -108,7 +108,7 @@ public class JugadorModelo implements Serializable{
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
-	
+	@XmlElement
 	public PaisModelo getPais() {
 		return pais;
 	}

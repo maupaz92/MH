@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author maupaz92
  *
  */
-@XmlRootElement 
+@XmlRootElement
 public class EquipoModelo implements Serializable{
 	
 	/**
@@ -22,13 +22,13 @@ public class EquipoModelo implements Serializable{
 	private int id_Equipo;	
 	private String nombre;
 	private PaisModelo pais;
-	private Boolean tipo;
+	private Boolean tipoClub;
 	
 	public EquipoModelo(){}
 
 	//----------getters & setters
 	
-	@XmlElement
+	@XmlAttribute
 	public int getId_Equipo() {
 		return id_Equipo;
 	}
@@ -57,12 +57,12 @@ public class EquipoModelo implements Serializable{
 	}
 
 	@XmlElement
-	public Boolean isTipo() {
-		return tipo;
+	public Boolean isTipoClub() {
+		return tipoClub;
 	}
 
-	public void setTipo(Boolean tipo) {
-		this.tipo = tipo;
+	public void setTipoClub(Boolean tipoClub) {
+		this.tipoClub = tipoClub;
 	}
 	
 	

@@ -4,7 +4,7 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
  
 <hibernate-mapping package="modelos.recursos">
- <class name="PaisModelo" table="PAISES">
+ <class name="PaisModelo" table="Pais">
       <meta attribute="class-description">
          Esta clase contiene los metadatos necesarios para mapear a la base de 
          datos la clase PaisModelo.
@@ -12,7 +12,7 @@
       <id name="id_Pais" type="int" column="Id_Pais" >
       	<generator class="identity"></generator>
       </id>
-      <property name="nombre" type="string" column="Nombre_Pais"></property>      
+      <property name="nombre" type="string" column="Nombre_Pais" unique="true" not-null="true"></property>      
    </class>
-    
+        
 </hibernate-mapping>
