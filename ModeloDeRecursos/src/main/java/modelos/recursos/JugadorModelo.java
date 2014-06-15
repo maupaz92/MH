@@ -2,6 +2,9 @@ package modelos.recursos;
 
 
 
+import java.io.Serializable;
+import java.sql.Date;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -13,19 +16,23 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  */
 @XmlRootElement
-public class JugadorModelo {
+public class JugadorModelo implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5095105324317248308L;
 	private int pasaporte;
 	private String nombre;
 	private Boolean estado;
-	private int equipoActual;
+	private EquipoModelo equipoActual;
 	private String posicion;
 	private Double altura;
 	private Double peso;
-	private String fechaNacimiento;
+	private Date fechaNacimiento;
+	private PaisModelo pais;
 	
 	
-
 	public JugadorModelo(){}
 
 	
@@ -58,11 +65,11 @@ public class JugadorModelo {
 	}
 
 	@XmlElement
-	public int getEquipoActual() {
+	public EquipoModelo getEquipoActual() {
 		return equipoActual;
 	}
 
-	public void setEquipoActual(int equipoActual) {
+	public void setEquipoActual(EquipoModelo equipoActual) {
 		this.equipoActual = equipoActual;
 	}
 
@@ -94,13 +101,23 @@ public class JugadorModelo {
 	}
 
 	@XmlElement
-	public String getFechaNacimiento() {
+	public Date getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
-	public void setFechaNacimiento(String fechaNacimiento) {
+	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
+	
+	public PaisModelo getPais() {
+		return pais;
+	}
+
+
+	public void setPais(PaisModelo pais) {
+		this.pais = pais;
+	}
+
 }
 
 	

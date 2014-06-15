@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+<hibernate-mapping package="com.MH.Modelo">
+ <class name="AdministradorPerfilModelo" table="AdministradorPerfil">
+      <meta attribute="class-description">
+         Esta clase contiene los metadatos necesarios para mapear a la base de 
+         datos los objetos Administrador.
+      </meta>
+      
+      <id name="id_Administrador" type="int">
+      	<column name="Id_Administrador" />
+      	<generator class="foreign">
+      		<param name="property">administrador</param>
+      	</generator>
+      </id>
+      <one-to-one name="administrador" class="modelos.recursos" 
+      cascade="save-update" constrained="true"></one-to-one>     
+      <property name="nombre_Administrador" column="Nombre" type="string"/>
+      <property name="apellido_Administrador" column="Apellido" type="string"/>
+      <property name="nombreUsuario" column="Username" type="string"/>
+      <property name="email_Administrador" column="Email" type="string"/>
+      <property name="password_Administrador" column="Password" type="string"/>
+      <property name="fecha_Inscripcion" column="FechaInscripcion" type="timestamp"/>
+      <property name="fecha_Nacimiento" column="FechaNacimiento" type="timestamp"/>
+   </class>
+    
+</hibernate-mapping>

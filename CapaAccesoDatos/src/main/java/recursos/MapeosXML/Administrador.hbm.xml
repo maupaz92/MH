@@ -10,15 +10,10 @@
          datos los objetos Administrador.
       </meta>
       <id name="id_Administrador" type="int" column="ID_Administrador">
-         <generator class="native"/>
+         <generator class="identity"/>
       </id>
-      <property name="nombre_Administrador" column="Nombre" type="string"/>
-      <property name="apellido_Administrador" column="Apellido" type="string"/>
       <property name="nombreUsuario" column="Username" type="string"/>
-      <property name="email_Administrador" column="Email" type="string"/>
-      <property name="password_Administrador" column="Password" type="string"/>
-      <property name="fecha_Inscripcion" column="FechaInscripcion" type="timestamp"/>
-      <property name="fecha_Nacimiento" column="FechaNacimiento" type="timestamp"/>
+      <property name="password_Administrador" column="Password" type="string"/>    
    </class>
     
 </hibernate-mapping>

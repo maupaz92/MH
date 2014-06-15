@@ -11,9 +11,13 @@
         <property name="nombre" type="string"><column name="Nombre_Jugador"/></property>
         <property name="posicion" type="string"><column name="Posicion_Jugador" /></property>
         <property name="estado" type="boolean"><column name="Estado_Jugador" /></property>
-        <property name="equipoActual" type="int"><column name="Equipo_Actual" /></property>
         <property name="altura" type="double"><column name="Altura_Jugador" /></property>
         <property name="peso" type="double"><column name="Peso_Jugador" /></property>
-        <property name="fechaNacimiento" type="string"><column name="Fecha_Nacimiento" /></property>
+        <property name="fechaNacimiento" type="Date"><column name="Fecha_Nacimiento" /></property>
+        <many-to-one name="equipoActual" class="modelos.recursos.EquipoModelo" 
+   	  column="Equipo_Actual" cascade="all" not-null="true"/>
+   	   <many-to-one name="pais" class="modelos.recursos.PaisModelo" 
+   	  column="Id_Pais" cascade="all" not-null="true"/>
+   	 
     </class>
 </hibernate-mapping>
