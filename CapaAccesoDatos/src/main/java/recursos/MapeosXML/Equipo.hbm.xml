@@ -9,12 +9,14 @@
          Esta clase contiene los metadatos necesarios para mapear a la base de 
          datos los objetos Equipo.
       </meta>
-      <id name="Pasaporte_XFIFA" type="int" column="Pasaporte_XFIFA">
+      <id name="id_Equipo" type="int" column="Id_Equipo">
          <generator class="native"/>
       </id>
-      <property name="firstName" column="first_name" type="string"/>
-      <property name="lastName" column="last_name" type="string"/>
-      <property name="salary" column="salary" type="int"/>
+      <property name="nombre" column="Nombre_Equipo" type="string"/>
+      <property name="tipo" column="Tipo_Equipo" type="boolean"/>
+   	  <many-to-one name="pais" class="modelos.recursos.PaisModelo" 
+   	  column="Id_Pais" cascade="all" not-null="true"/>
+   
    </class>
     
 </hibernate-mapping>

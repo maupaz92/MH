@@ -1,5 +1,7 @@
 package modelos.recursos;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -11,17 +13,27 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  */
 @XmlRootElement 
-public class EquipoModelo {
+public class EquipoModelo implements Serializable{
 	
-	
+	private int id_Equipo;	
 	private String nombre;
-	private String pais;
+	private PaisModelo pais;
 	private Boolean tipo;
 	
 	public EquipoModelo(){}
 
-	
 	//----------getters & setters
+	
+	@XmlElement
+	public int getId_Equipo() {
+		return id_Equipo;
+	}
+
+
+	public void setId_Equipo(int id_Equipo) {
+		this.id_Equipo = id_Equipo;
+	}	
+
 	@XmlAttribute
 	public String getNombre() {
 		return nombre;
@@ -32,11 +44,11 @@ public class EquipoModelo {
 	}
 	
 	@XmlElement
-	public String getPais() {
+	public PaisModelo getPais() {
 		return pais;
 	}
 
-	public void setPais(String pais) {
+	public void setPais(PaisModelo pais) {
 		this.pais = pais;
 	}
 
