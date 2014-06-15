@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.jboss.resteasy.logging.Logger;
 
+import logica.GestorEquipos;
 import modelos.recursos.EquipoModelo;
 import modelos.recursos.PaisModelo;
 
@@ -24,8 +25,14 @@ import modelos.recursos.PaisModelo;
 @Path("/equipos")
 public class EquiposRESTService {
 
-	
+	private GestorEquipos gestor;
 	private final Logger log = Logger.getLogger(EquiposRESTService.class);
+	
+	
+	public EquiposRESTService(){
+		gestor = new GestorEquipos();
+	}
+	
 	
 	@GET
 	@Produces({"application/json", "application/xml"})
@@ -65,7 +72,13 @@ public class EquiposRESTService {
 	@Consumes(MediaType.APPLICATION_XML)
 	public void registrarNuevoEquipo(EquipoModelo equipo){
 		log.info(equipo.toString());
+		this.getGestor().registrarNuevoEquipo(equipo);
 	}
+
+	private GestorEquipos getGestor() {
+		return gestor;
+	}
+
 	
 	
 }

@@ -14,7 +14,10 @@ public class PaisModelo implements Serializable{
 	private Integer id_Pais;
 	private String nombre;
 	
-	public PaisModelo(){}
+	public PaisModelo(){
+		id_Pais = -1;
+		nombre = "";
+	}
 	
 	
 	@Override

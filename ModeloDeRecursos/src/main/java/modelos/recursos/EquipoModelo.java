@@ -24,7 +24,11 @@ public class EquipoModelo implements Serializable{
 	private PaisModelo pais;
 	private Boolean tipoClub;
 	
-	public EquipoModelo(){}
+	public EquipoModelo(){
+		id_Equipo = -1;
+		nombre = "";
+		tipoClub = false;
+	}
 
 	
 	@Override
