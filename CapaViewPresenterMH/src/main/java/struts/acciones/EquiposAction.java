@@ -8,6 +8,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import modelos.recursos.EquipoModelo;
 import modelos.recursos.PaisModelo;
 
+
 public class EquiposAction extends ActionSupport{
 
 
@@ -60,7 +61,7 @@ public class EquiposAction extends ActionSupport{
 		
 		LOG.info(this.getEquipo().toString());	
 		
-		//ConsultasEquipos cliente;
+	
 		
 		return "vistaRegistrarEquipo";
 	}
