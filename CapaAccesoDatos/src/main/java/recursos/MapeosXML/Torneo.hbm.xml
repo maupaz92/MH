@@ -17,6 +17,6 @@
       <property name="sede" column="Sede_Torneo" type="string" not-null="true"/>
       <property name="copa" column="Es_De_Copa" type="boolean" not-null="true"/>
       
-   </class>
+   </class> 
     
 </hibernate-mapping>

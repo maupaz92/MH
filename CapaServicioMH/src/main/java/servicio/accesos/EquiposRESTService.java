@@ -8,7 +8,9 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.jboss.resteasy.logging.Logger;
 
@@ -68,6 +70,18 @@ public class EquiposRESTService {
 		return lista;
 	}
 	
+	@GET
+	@Path("/paises")
+	@Produces({"application/json", "application/xml"})
+	public Response getPaises(){
+		//se obtiene la lista de paises validos
+		List<PaisModelo> paises = this.getGestor().getPaisesValidos();
+		//se construye un "wrapper" generico para enviar la lista
+		GenericEntity<List<PaisModelo>> paisesWrap = new GenericEntity<List<PaisModelo>>(paises){};
+		//se retorna la respuesta
+		return Response.ok(paisesWrap).build();
+	}
+	
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
 	public void registrarNuevoEquipo(EquipoModelo equipo){
@@ -75,7 +89,8 @@ public class EquiposRESTService {
 		this.getGestor().registrarNuevoEquipo(equipo);
 	}
 
-	private GestorEquipos getGestor() {
+	//getters & setters
+	private GestorEquipos getGestor() {				
 		return gestor;
 	}
 

@@ -18,4 +18,4 @@
    	  column="Id_Pais" cascade="all" not-null="true"/>
    </class>
     
-</hibernate-mapping>
+</hibernate-mapping> 

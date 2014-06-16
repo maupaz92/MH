@@ -25,4 +25,11 @@ public interface LectorEquiposDAO {
 	 * Se retorna la lista de todos los equipos registrados en el sistema
 	 */
 	public List<Object> getEquiposRegistrados();
+	
+	/**
+	 * 
+	 * @return
+	 * Se retorna la lista de paises donde puede existir un equipo.
+	 */
+	public List<Object> getPaisesDeOrigen();
 }

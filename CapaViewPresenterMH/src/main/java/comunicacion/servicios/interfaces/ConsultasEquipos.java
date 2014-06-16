@@ -3,6 +3,7 @@ package comunicacion.servicios.interfaces;
 import java.util.List;
 
 import modelos.recursos.EquipoModelo;
+import modelos.recursos.PaisModelo;
 
 /**
  * interface que provee los metodos necesarios para establecer
@@ -37,5 +38,12 @@ public interface ConsultasEquipos {
 	 * True si la actualizacion se efectuo, false en caso contrario.
 	 */
 	public boolean enviarActualizacionDeEquipo(EquipoModelo equipoModificado);
+	
+	/**
+	 * 
+	 * @return
+	 * se retorna la lista de paises en lo que se puede registrar un equipo
+	 */
+	public List<PaisModelo> getPaises();
 	
 }

@@ -6,9 +6,13 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.GenericEntity;
+import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 
+import sun.net.www.content.text.Generic;
 import modelos.recursos.EquipoModelo;
+import modelos.recursos.PaisModelo;
 import comunicacion.servicios.interfaces.ConsultasEquipos;
 
 public class ClienteRESTEquipos implements ConsultasEquipos{
@@ -16,6 +20,7 @@ public class ClienteRESTEquipos implements ConsultasEquipos{
 	private final String rootResourceURI = "/equipos";
 	private Client cliente;
 	private final String URI = "http://localhost:8080/CapaServicioMH";
+	private final String paisesResource = "/paises";
 	
 	
 	public ClienteRESTEquipos(){
@@ -46,6 +51,15 @@ public class ClienteRESTEquipos implements ConsultasEquipos{
 		return false;
 	}
 
+	public List<PaisModelo> getPaises() {
+				
+		String url = getURI()+getRootResourceURI()+getPaisesResource();
+		//se construye un "wrapper" generico para enviar la lista
+		GenericType<List<PaisModelo>> paisesWrap = new GenericType<List<PaisModelo>>(){};
+		List<PaisModelo> lista = this.getCliente().target(url).request().get(paisesWrap);		
+		return lista;
+	}
+	
 	//getters y setters
 	private String getRootResourceURI() {
 		return rootResourceURI;
@@ -58,6 +72,11 @@ public class ClienteRESTEquipos implements ConsultasEquipos{
 	private String getURI() {
 		return URI;
 	}
+
+	private String getPaisesResource() {
+		return paisesResource;
+	}
+
 	
 
 }
