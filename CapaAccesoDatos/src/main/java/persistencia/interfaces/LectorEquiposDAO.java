@@ -19,7 +19,20 @@ public interface LectorEquiposDAO {
 	 * Se retorna un objeto con los datos del equipo segun 
 	 * el identificador provisto en el parametro
 	 */
-	public Object getEquipoPorId(int idEquipo);
+	public Object getEquipo(int idEquipo);
+	
+	/**
+	 * 
+	 * @param nombre
+	 * Nombre del equipo que se desea buscar
+	 * @param idPais
+	 * identificador del pais donde se desea buscar el equipo
+	 * @return
+	 * Un objeto con los datos del equipo identificado por el nombre
+	 * para un pais especifico.
+	 */
+	public Object getEquipo(String nombre, int idPais);
+	
 	
 	/**
 	 * 

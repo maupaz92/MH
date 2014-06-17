@@ -43,14 +43,7 @@ public class EquiposAction extends ActionSupport{
 	 * El nombre del "tile" que se debe desplegar
 	 */
 	public String vistaRegistrarEquipo(){
-		//se obtiene la lista de paises
-		List<PaisModelo> lista = this.getCliente().getPaises();
-		if(lista == null){
-			//si se obtiene nulo, se despliega el mensaje de error del cliente
-			this.addActionError(this.getCliente().getMensajeError());
-		}else{
-			setListaPaises(lista);
-		}			
+		this.cargarListaDePaises();
 		return "vistaRegistrarEquipo";
 	}
 	
@@ -64,8 +57,6 @@ public class EquiposAction extends ActionSupport{
 	 */
 	public String registrarEquipo(){
 		
-		//se inicia el valor por defecto
-		this.getEquipo().setTipoClub(false);
 		//se valida si es de clubes o seleccion
 		if(this.getEsClub().equalsIgnoreCase("si"))			
 			this.getEquipo().setTipoClub(true);				
@@ -84,14 +75,42 @@ public class EquiposAction extends ActionSupport{
 		boolean envioRegistro = this.getCliente().enviarRegistroDeEquipo(this.getEquipo());
 		//si el registro es fallido
 		if(!envioRegistro){
+			//se despliega el mensaje de error
 			this.addActionError(this.getCliente().getMensajeError());
+			//
+			if(this.getCliente().existeErrorDeConflicto()){}
+		}else{
+			//se limpia el campo para que no aparezca de nuevo el nombre
+			this.getEquipo().setNombre("");			
 		}
-		//se limpia el campo para que no aparezca de nuevo el nombre
-		this.getEquipo().setNombre("");		
+		this.cargarListaDePaises();
 		return "vistaRegistrarEquipo";
 	}
 	
+	
+	private void cargarListaDePaises(){
+		//se obtiene la lista de paises
+		List<PaisModelo> lista = this.getCliente().getPaises();
+		if(lista == null){
+			//si se obtiene nulo, se despliega el mensaje de error del cliente
+			this.addActionError(this.getCliente().getMensajeError());
+		}else{
+			setListaPaises(lista);
+		}
+	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//getters & setters
 	public List<PaisModelo> getListaPaises() {
 		return listaPaises;

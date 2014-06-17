@@ -8,8 +8,11 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
 import org.jboss.resteasy.logging.Logger;
+
 import modelos.recursos.EquipoModelo;
 import modelos.recursos.PaisModelo;
 import comunicacion.servicios.interfaces.ConsultasEquipos;
@@ -17,7 +20,8 @@ import comunicacion.servicios.interfaces.ConsultasEquipos;
 public class ClienteRESTEquipos implements ConsultasEquipos{
 
 	private final String rootResourceURI = "/equipos";
-	private final String errorServicioNoDisponible = "El servicio no se encuentra disponible";
+	private final String ERROR_SERVICIO_NO_DISPONIBLE = "El servicio no se encuentra disponible";
+	private final String ERROR_EQUIPO_REPETIDO = "El equipo para dicho pais ya ha sido registrado";
 	private final String URI = "http://localhost:8080/CapaServicioMH";
 	private final String paisesResource = "/paises";
 	
@@ -40,11 +44,11 @@ public class ClienteRESTEquipos implements ConsultasEquipos{
 		Response respuesta = urlObjetivo.request().post(Entity.xml(equipo));
 		//si la respuesta es 404(servidor caido)
 		if(respuesta.getStatus() == Response.Status.NOT_FOUND.getStatusCode()){
-			this.setMensajeErrorCliente(errorServicioNoDisponible);
+			this.setMensajeErrorCliente(ERROR_SERVICIO_NO_DISPONIBLE);
 			envioExitoso = false;
 		}else if(respuesta.getStatus() == Response.Status.CONFLICT.getStatusCode()){
-			this.setExisteConflicto(true);
-			//
+			this.setMensajeErrorCliente(ERROR_EQUIPO_REPETIDO);
+			envioExitoso = false;
 		}
 		respuesta.close();
 		return envioExitoso;		
@@ -73,21 +77,12 @@ public class ClienteRESTEquipos implements ConsultasEquipos{
 			//codigo cuando el servicio no esta disponible
 			int codigoServicioNoEncontrado = Response.Status.NOT_FOUND.getStatusCode();
 			if(codigoWeb == codigoServicioNoEncontrado){
-				this.setMensajeErrorCliente(errorServicioNoDisponible);
+				this.setMensajeErrorCliente(ERROR_SERVICIO_NO_DISPONIBLE);
 				log.info("Codigo retornado de la respuesta: "+Integer.toString(codigoWeb));		
 			}						
 		}
 		return lista;
-	}
-	
-	public String getMensajeError() {	
-		return mensajeErrorCliente;
-	}
-	
-	public boolean existeErrorDeConflicto() {
-		return existeConflicto;
-	}
-	
+	}		
 	
 	public List<EquipoModelo> getEquiposRegistrados() {
 		//se define la url completa
@@ -97,16 +92,16 @@ public class ClienteRESTEquipos implements ConsultasEquipos{
 		List<EquipoModelo> lista = null;
 		//se procede a obtener la lista del servicio
 		try{
-			lista = this.getCliente().target(url).request().get(equiposWrap);
+			lista = this.getCliente().target(url).request().accept(MediaType.APPLICATION_XML).get(equiposWrap);
 		}catch(WebApplicationException excepcion){
 			//codigo de la respuesta
 			int codigoWeb = excepcion.getResponse().getStatus();
 			//codigo cuando el servicio no esta disponible
 			int codigoServicioNoEncontrado = Response.Status.NOT_FOUND.getStatusCode();
 			if(codigoWeb == codigoServicioNoEncontrado){
-				this.setMensajeErrorCliente(errorServicioNoDisponible);
+				this.setMensajeErrorCliente(ERROR_SERVICIO_NO_DISPONIBLE);
 				log.info("Codigo retornado de la respuesta: "+Integer.toString(codigoWeb));		
-			}						
+			}
 		}
 		return lista;
 	}
@@ -140,14 +135,14 @@ public class ClienteRESTEquipos implements ConsultasEquipos{
 	private void setExisteConflicto(boolean existeConflicto) {
 		this.existeConflicto = existeConflicto;
 	}
-		
 	
-	public static void main(String[] args){
-		ClienteRESTEquipos cliente = new ClienteRESTEquipos();
-		List<EquipoModelo> lista = cliente.getEquiposRegistrados();
-		for (EquipoModelo equipoModelo : lista) {
-			System.out.println(equipoModelo.toString());
-		}
+	public String getMensajeError() {	
+		return mensajeErrorCliente;
 	}
+	
+	public boolean existeErrorDeConflicto() {
+		return existeConflicto; 
+	}
+	
 
 }

@@ -41,4 +41,14 @@ public class HibernateFactory {
         if(sessionFactory == null) sessionFactory = buildSessionFactory();
         return sessionFactory;
     }
+    
+    public static void main(String[] args){
+    	SessionFactory session = HibernateFactory.getSessionFactory();
+    	session.close();
+    }
+    
+    
+    
+    
+    
 }

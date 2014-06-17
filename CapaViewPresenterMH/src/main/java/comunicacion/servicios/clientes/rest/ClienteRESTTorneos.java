@@ -1,6 +1,7 @@
 package comunicacion.servicios.clientes.rest;
 
 import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
@@ -14,7 +15,9 @@ public class ClienteRESTTorneos implements ConsultasTorneos{
 
 	
 	private final String rootResourceURI = "/torneos";
-	private final String URI = "http://localhost:8080/CapaServicioMH";private Client cliente;
+	private final String URI = "http://localhost:8080/CapaServicioMH";
+	
+	private Client cliente;
 	private final String errorServicioNoDisponible = "El servicio no se encuentra disponible";
 	private final String errorTorneoExistente = "Error: ya existe un torneo registrado con dicho nombre";
 	private final Logger log = Logger.getLogger(ClienteRESTTorneos.class);
@@ -23,6 +26,7 @@ public class ClienteRESTTorneos implements ConsultasTorneos{
 	private boolean existeConflicto;
 		
 	public ClienteRESTTorneos(){
+		cliente = ClientBuilder.newClient();
 		this.setExisteConflicto(false);
 	}
 	

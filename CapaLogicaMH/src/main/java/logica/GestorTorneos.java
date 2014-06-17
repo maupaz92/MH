@@ -3,7 +3,7 @@ package logica;
 import java.util.ArrayList;
 import java.util.List;
 
-import persistencia.implementaciones.actualizaciones.ActualizadorTorneos;
+import persistencia.implementaciones.actualizaciones.Actualizador;
 import persistencia.implementaciones.escritura.Registrador;
 import persistencia.implementaciones.lectura.LectorTorneos;
 import persistencia.interfaces.ActualizadorDAO;
@@ -28,7 +28,8 @@ public class GestorTorneos {
 	{
 		lectorTorneos = new LectorTorneos();
 		registradorObjetosBD = new Registrador();
-		actualizadorObjetosBD = new ActualizadorTorneos();
+		actualizadorObjetosBD = new Actualizador();
+		mensajeError = "";
 	}
 	
 	/**
@@ -146,7 +147,7 @@ public class GestorTorneos {
 		return mensajeError;
 	}
 
-	public void setMensajeError(String mensajeError) {
+	private void setMensajeError(String mensajeError) {
 		this.mensajeError = mensajeError;
 	}
 	

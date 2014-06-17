@@ -18,11 +18,13 @@ public class GestorEquipos {
 	private RegistradorDAO registradorObjetosBD;
 	private ActualizadorDAO actualizadorObjetosBD;
 	private LectorEquiposDAO lectorDatosEquipos;
+	private String mensajeError;
 	
 	public GestorEquipos(){
 		registradorObjetosBD = new Registrador();
 		actualizadorObjetosBD = new Actualizador();
 		lectorDatosEquipos = new LectorEquipos();
+		mensajeError = "";
 	}
 	
 	/**
@@ -36,10 +38,18 @@ public class GestorEquipos {
 	 * registros del sistema, false en caso contrario
 	 */
 	public boolean registrarNuevoEquipo(EquipoModelo equipo){
-		
-		this.getRegistradorObjetosBD().guardarNuevoRecurso(equipo);
-		
-		return true;
+		boolean registroExitoso = false;
+		//se intenta obtener un equipo con los mismos datos que el que ingresa
+		EquipoModelo equipoPrueba = (EquipoModelo) this.getLectorDatosEquipos().
+				getEquipo(equipo.getNombre(), equipo.getPais().getId_Pais());
+		//si el equipo obtenido de prueba no es nulo
+		if(equipoPrueba != null)
+			this.setMensajeError("Error: Equipo repetido para dicho pais");
+		else{
+			this.getRegistradorObjetosBD().guardarNuevoRecurso(equipo);
+			registroExitoso = true;
+		}				
+		return registroExitoso;
 	}
 	
 	/**
@@ -70,8 +80,8 @@ public class GestorEquipos {
 		//se itera sobre la lista generica para construir los objetos
 		for (Object equipoInicial : listaInicial) {
 			EquipoModelo equipo = (EquipoModelo) equipoInicial;
-			//se agrega el equipo, se debe crear una nueva instancia(copia total) del equipo porque no se mapea a JSON con el 
-			//objeto retornado de hibernate
+			//se agrega el equipo, se debe crear una nueva instancia(copia total) del 
+			//equipo porque no se mapea a JSON con el objeto retornado de hibernate
 			listaFinal.add(new EquipoModelo(equipo));
 		}
 		return listaFinal;
@@ -92,14 +102,14 @@ public class GestorEquipos {
 		return lectorDatosEquipos;
 	}
 	
-	
-	public static void main(String[] args){
-		GestorEquipos gestor = new GestorEquipos();
-		List<EquipoModelo> lista = gestor.getListaEquiposRegistrados();
-		for (EquipoModelo equipoModelo : lista) {
-			System.out.println(equipoModelo.getPais().getNombre());
-		}
+	public String getMensajeError() {
+		return mensajeError;
 	}
 
+	private void setMensajeError(String mensajeError) {
+		this.mensajeError = mensajeError;
+	}
+	
+	
 
 }
