@@ -1,8 +1,13 @@
 package struts.acciones;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import modelos.recursos.EquipoModelo;
 import modelos.recursos.JugadorModelo;
 import modelos.recursos.PaisModelo;
 
@@ -45,7 +50,36 @@ public class JugadoresAction extends ActionSupport{
 		return "vistaRegistrarJugador";
 	}
 	
-	public String registrarJugador(){
+	public String registrarJugador() throws ParseException{
+		//se valida si el jugador esta activo o inactivo
+		if(this.getActivo().equalsIgnoreCase("si"))
+			this.getJugador().setEstado(true);	
+		
+		//se crea una representacion de pais
+		PaisModelo paisSeleccionado = new PaisModelo();
+		//se obtiene el id del pais seleccionado en el dropdown
+		int idPais = Integer.parseInt(this.pais);
+		paisSeleccionado.setId_Pais(idPais);
+		//se define el objeto pais al objeto Jugador
+		this.getJugador().setPais(paisSeleccionado);
+		
+		//Se obtiene la fecha de nacimiento del textbox correspondiente. 
+		DateFormat formateador;
+		Date fechaNacimientoJugador;
+		formateador = new SimpleDateFormat("dd-MM-yyyy");
+		fechaNacimientoJugador = formateador.parse(this.fechaNacimiento);
+		//Se define al objeto jugador la fecha de nacimiento.
+		this.jugador.setFechaNacimiento(fechaNacimientoJugador);
+		
+		//Se crea una representacion de equipo
+		EquipoModelo equipoJugador = new EquipoModelo();
+		//Se obtiene el id del equipo seleccionado en el dropdown
+		int idEquipo = Integer.parseInt(equipo);
+		equipoJugador.setId_Equipo(idEquipo);
+		//Se define el objeto equipo al objeto Jugador
+		this.getJugador().setEquipoActual(equipoJugador);
+		
+		
 		log.info(jugador.toString());
 		return "vistaRegistrarJugador";
 	}
