@@ -49,6 +49,7 @@ public class ClienteRESTEquipos implements ConsultasEquipos{
 			envioExitoso = false;
 		}else if(respuesta.getStatus() == Response.Status.CONFLICT.getStatusCode()){
 			this.setMensajeErrorCliente(ERROR_EQUIPO_REPETIDO);
+			this.setExisteConflicto(true);
 			envioExitoso = false;
 		}
 		respuesta.close();
@@ -126,6 +127,14 @@ public class ClienteRESTEquipos implements ConsultasEquipos{
 		return lista;
 	}
 	
+	public String getMensajeError() {	
+		return mensajeErrorCliente;
+	}
+	
+	public boolean existeErrorDeConflicto() {
+		return existeConflicto; 
+	}
+	
 	
 	//getters y setters
 	private String getRootResourceURI() {
@@ -138,45 +147,23 @@ public class ClienteRESTEquipos implements ConsultasEquipos{
 	
 	private void setMensajeErrorCliente(String mensajeErrorCliente) {
 		this.mensajeErrorCliente = mensajeErrorCliente;
-	}
-
-	public boolean getExisteConflicto() {
-		return existeConflicto;
-	}
+	}	
 
 	private void setExisteConflicto(boolean existeConflicto) {
 		this.existeConflicto = existeConflicto;
-	}
-	
-	public String getMensajeError() {	
-		return mensajeErrorCliente;
-	}
-	
-	public boolean existeErrorDeConflicto() {
-		return existeConflicto; 
-	}
+	}		
 
 	private String getServiceURI() {
 		return ServiceURI;
 	}
 
-	public String getPaisesURI() {
+	private String getPaisesURI() {
 		return paisesURI;
 	}
 
-	public String getEquiposTipoURI() {
+	private String getEquiposTipoURI() {
 		return equiposTipoURI;
 	}
-
-	
-	public static void main(String[] args){
-		ClienteRESTEquipos c = new ClienteRESTEquipos();
-		List<EquipoModelo> lista = c.getEquipoPorTipo(false);
-		for (EquipoModelo equipoModelo : lista) {
-			System.out.println(equipoModelo.toString());
-		}
-	}
-	
 	
 
 }

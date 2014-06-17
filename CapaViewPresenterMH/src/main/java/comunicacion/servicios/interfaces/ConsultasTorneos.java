@@ -43,4 +43,6 @@ public interface ConsultasTorneos {
 	 */
 	public boolean existeErrorDeConflicto();
 	
+
+	
 }

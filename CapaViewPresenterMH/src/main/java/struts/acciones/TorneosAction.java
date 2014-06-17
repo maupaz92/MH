@@ -54,10 +54,14 @@ public class TorneosAction extends ActionSupport{
 		this.setDatosTorneo();
 		//se pasa al cliente 
 		boolean envioRegistro = this.getClienteTorneos().enviarRegistroNuevoTorneo(getTorneo());
+		//si no se pudo efectuar el envio
 		if(!envioRegistro){
+			//se despliega el error
 			this.addActionError(this.getClienteTorneos().getMensajeError());
+		//si ademas hay un error de conflicto, no se limpian los datos del formulario
+		}if(!this.getClienteTorneos().existeErrorDeConflicto()){			
+			this.getTorneo().limpiarDatos();
 		}
-		this.getTorneo().limpiarDatos();
 		return "vistaRegistrarTorneo";
 	}
 	
@@ -74,9 +78,14 @@ public class TorneosAction extends ActionSupport{
 		//se define el id del torneo segun la escogencia del torneo
 		this.getTorneo().setId(this.getIdTorneo());	
 		//se envia la actualizacion al servicio
-		boolean envioActualizacion = this.getClienteTorneos().enviarActualizacionDeTorneo(getTorneo());		
+		boolean envioActualizacion = this.getClienteTorneos().enviarActualizacionDeTorneo(getTorneo());
+		//si no se efectua la actualizacion
 		if(!envioActualizacion){
+			//se despliega el error
 			this.addActionError(this.getClienteTorneos().getMensajeError());
+		//si ademas hay un error de conflicto, no se limpian los datos del formulario
+		}if(!this.getClienteTorneos().existeErrorDeConflicto()){			
+			this.getTorneo().limpiarDatos();
 		}
 		this.getTorneo().limpiarDatos();
 		return "vistaEdicionTorneo";

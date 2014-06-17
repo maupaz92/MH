@@ -77,8 +77,6 @@ public class EquiposAction extends ActionSupport{
 		if(!envioRegistro){
 			//se despliega el mensaje de error
 			this.addActionError(this.getCliente().getMensajeError());
-			//
-			if(this.getCliente().existeErrorDeConflicto()){}
 		}else{
 			//se limpia el campo para que no aparezca de nuevo el nombre
 			this.getEquipo().setNombre("");			
@@ -87,7 +85,9 @@ public class EquiposAction extends ActionSupport{
 		return "vistaRegistrarEquipo";
 	}
 	
-	
+	/**
+	 * metodo que carga los paises en la lista temporal
+	 */
 	private void cargarListaDePaises(){
 		//se obtiene la lista de paises
 		List<PaisModelo> lista = this.getCliente().getPaises();

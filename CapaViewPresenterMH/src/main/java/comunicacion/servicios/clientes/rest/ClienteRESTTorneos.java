@@ -42,6 +42,8 @@ public class ClienteRESTTorneos implements ConsultasTorneos{
 			this.setMensajeErrorCliente(errorServicioNoDisponible);
 			envioExitoso = false;
 		}else if(respuesta.getStatus() == Response.Status.CONFLICT.getStatusCode()){
+			envioExitoso = false;
+			this.setExisteConflicto(true);
 			this.setMensajeErrorCliente(errorTorneoExistente);
 		}	
 		respuesta.close();
@@ -60,6 +62,7 @@ public class ClienteRESTTorneos implements ConsultasTorneos{
 			log.info("Codigo retornado de la respuesta: "+Integer.toString(respuesta.getStatus()));
 		}else if(respuesta.getStatus() == Response.Status.CONFLICT.getStatusCode()){		
 			this.setMensajeErrorCliente(errorTorneoExistente);
+			actualizacionExitosa = false;
 		}
 		respuesta.close();		
 		return actualizacionExitosa;
@@ -70,17 +73,16 @@ public class ClienteRESTTorneos implements ConsultasTorneos{
 	}
 	
 	public boolean existeErrorDeConflicto() {	
-		return false;
+		return existeConflicto;
 	}
+	
+	
+	
 	
 	//getters & setters
 	private void setMensajeErrorCliente(String mensajeErrorCliente) {
 		this.mensajeErrorCliente = mensajeErrorCliente;
-	}
-
-	public boolean getExisteConflicto() {
-		return existeConflicto;
-	}
+	}	
 
 	private void setExisteConflicto(boolean existeConflicto) {
 		this.existeConflicto = existeConflicto;
