@@ -3,6 +3,7 @@ package struts.acciones;
 import java.util.ArrayList;
 import java.util.List;
 
+import modelos.recursos.EquipoModelo;
 import modelos.recursos.JugadorModelo;
 import modelos.recursos.PaisModelo;
 
@@ -25,14 +26,17 @@ public class JugadoresAction extends ActionSupport{
 	private String equipo;
 	private String activo;
 	private List<PaisModelo> listaPaises;
+	private List<EquipoModelo> listaEquipos;
 	
 	public JugadoresAction(){
 		//se inicia el cliente de equipos
 		setClienteEquipos(new ClienteRESTEquipos());
-		//se instancia la lista para los paises
+		//se instancia la lista para los paises y equipos
 		setListaPaises(new ArrayList<PaisModelo>());
+		setListaEquipos(new ArrayList<EquipoModelo>());
 		//se agrega un objeto vacio para evitar los objetos NULL
 		this.getListaPaises().add(new PaisModelo());
+		this.getListaEquipos().add(new EquipoModelo());
 	}
 	
 	/**
@@ -42,16 +46,23 @@ public class JugadoresAction extends ActionSupport{
 	public String vistaRegistrarJugador(){
 		//log.info(jugador.toString());
 		this.cargarListaDePaises();
+		this.cargarListaDeEquipos();
 		return "vistaRegistrarJugador";
 	}
 	
 	public String registrarJugador(){
 		log.info(jugador.toString());
+		log.info(equipo+pais+fechaNacimiento+activo);
+		this.cargarListaDePaises();
+		this.cargarListaDeEquipos();
 		return "vistaRegistrarJugador";
 	}
 	
 	
 	
+	/**
+	 * 
+	 */
 	private void cargarListaDePaises(){
 		//se obtiene la lista de paises
 		List<PaisModelo> lista = this.getClienteEquipos().getPaises();
@@ -62,7 +73,19 @@ public class JugadoresAction extends ActionSupport{
 			setListaPaises(lista);
 		}
 	}
-	
+	/**
+	 * 
+	 */
+	private void cargarListaDeEquipos(){
+		//se obtiene la lista de paises
+		List<EquipoModelo> lista = this.getClienteEquipos().getEquipoPorTipo(true);
+		if(lista == null){
+			//si se obtiene nulo, se despliega el mensaje de error del cliente
+			this.addActionError(this.getClienteEquipos().getMensajeError());
+		}else{
+			this.setListaEquipos(lista);
+		}
+	}
 	
 	
 	//getters & setters
@@ -120,6 +143,15 @@ public class JugadoresAction extends ActionSupport{
 	private void setClienteEquipos(ConsultasEquipos clienteEquipos) {
 		this.clienteEquipos = clienteEquipos;
 	}
-	
+
+	public List<EquipoModelo> getListaEquipos() {
+		return listaEquipos;
+	}
+
+	public void setListaEquipos(List<EquipoModelo> listaEquipos) {
+		this.listaEquipos = listaEquipos;
+	}
+
+
 	
 }
