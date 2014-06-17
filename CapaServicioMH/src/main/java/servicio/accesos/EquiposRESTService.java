@@ -8,6 +8,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
@@ -92,6 +93,24 @@ public class EquiposRESTService {
 			throw new WebApplicationException(this.getGestor().getMensajeError(), Response.Status.CONFLICT);
 		}
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	@GET
+	@Path("/tipos")
+	@Produces({"application/json", "application/xml"})
+	public Response getEquiposPorTipo(
+			@QueryParam("tipoClub") boolean deTipoClubes){
+		//se obtiene la lista de paises validos
+		List<EquipoModelo> equipos = this.getGestor().getEquiposPorTipo(deTipoClubes);
+		//se construye un "wrapper" generico para enviar la lista
+		GenericEntity<List<EquipoModelo>> equiposWrap = new GenericEntity<List<EquipoModelo>>(equipos){};
+		//se retorna la respuesta
+		return Response.ok(equiposWrap).build();		
+	}
+	
 	
 
 	//getters & setters

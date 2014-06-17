@@ -46,6 +46,12 @@
 		<put-attribute name="body" value="/vistas/equipoRegistro.jsp" />	
 	</definition>
 	
+	<definition name="vistaRegistrarJugador" extends="baseLayout">
+		<put-attribute name="title" value="Jugadores" />
+		<put-attribute name="menu" value="/plantillas/menuLayout.jsp" />
+		<put-attribute name="body" value="/vistas/jugadorRegistro.jsp" />	
+	</definition>
+	
 	
 		
 

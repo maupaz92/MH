@@ -20,7 +20,7 @@
 		
 		<li>Jugadores			
 			<ul>
-				<li><a href="<s:url action=""/>">Registar Jugador</a></li>
+				<li><a href="<s:url action="vistaRegistrarJugadorLinkJugadores"/>">Registar Jugador</a></li>
 				<li>Editar Jugador</li>
 			</ul>
 		</li>

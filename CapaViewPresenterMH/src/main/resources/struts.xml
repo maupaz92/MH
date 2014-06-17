@@ -39,7 +39,12 @@
         <action name="*LinkPartidos" method = "{1}" class = "struts.acciones.PartidosAction">
         	<result name = "vistaRegistrarPartido" type = "tiles">vistaRegistrarPartido</result>
         	<result name = "cargarEquipos" type = "tiles">"cargarEquipos"</result>
-        </action>     
+        </action>  
+        
+        <action name="*LinkJugadores" method = "{1}" class = "struts.acciones.JugadoresAction">
+        	<result name = "vistaRegistrarJugador" type = "tiles">vistaRegistrarJugador</result>
+        	<result name = "registrarJugador" type = "tiles">registrarJugador</result>        	
+        </action>
                 
     </package>
      

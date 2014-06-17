@@ -43,9 +43,19 @@ public interface LectorEquiposDAO {
 	
 	/**
 	 * 
+	 * @param deTipoClubes
+	 * Parametro que indica si los equipos de retorno seran clubes o selecciones
+	 * @return
+	 * Lista de objetos que contienen la informacion de equipos, se retornan
+	 * segun el tipo de equipo, especificado por el parametro
+	 */
+	public List<Object> getEquiposPorTipo(boolean deTipoClubes);
+	
+	/**
+	 * 
 	 * @return
 	 * Se retorna la lista de objetos que contienen informacion de 
 	 * los paises donde puede existir un equipo.
-	 */
+	 */ 
 	public List<Object> getPaisesDeOrigen();
 }

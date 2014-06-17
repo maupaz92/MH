@@ -24,9 +24,9 @@ public class LectorEquipos implements LectorEquiposDAO{
 		//se obtiene la sesion
 		Session session = HibernateFactory.getSessionFactory().openSession();		
 		//se define el query
-		Query query = session.createQuery("from EquipoModelo e where e.nombre = ? and e.pais.id_Pais = ?");
-		query.setParameter(0, nombre);
-		query.setParameter(1, idPais);
+		Query query = session.createQuery("from EquipoModelo e where e.nombre = :nombreE and e.pais.id_Pais = :idP");
+		query.setParameter("nombreE", nombre);
+		query.setParameter("idP", idPais);
 		@SuppressWarnings("unchecked")
 		List<Object> lista = query.list();//se obtiene la lista del query
 		Object equipo = null;
@@ -57,6 +57,18 @@ public class LectorEquipos implements LectorEquiposDAO{
 		@SuppressWarnings("unchecked")
 		List<Object> list = query.list();//se obtiene la lista del query		
 		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Object> getEquiposPorTipo(boolean deTipoClubes) {
+		List<Object> lista = null;
+		//se obtiene la sesion
+		Session session = HibernateFactory.getSessionFactory().openSession();		
+		//se define el query
+		Query query = session.createQuery("from EquipoModelo where tipoClub = :tipo");
+		query.setParameter("tipo", deTipoClubes);
+		lista = query.list();//se obtiene la lista del query		
+		return lista;
 	}
 
 }

@@ -19,7 +19,7 @@ public class EquiposAction extends ActionSupport{
 	private static final long serialVersionUID = 1L;
 	private final Logger log = Logger.getLogger(EquiposAction.class);
 	
-	private List<PaisModelo> listaPaises;	
+	private List<PaisModelo> listaPaises;
 	private String esClub;
 	private String paisDeEquipo;
 	

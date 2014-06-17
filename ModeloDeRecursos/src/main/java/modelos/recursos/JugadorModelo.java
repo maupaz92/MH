@@ -3,7 +3,7 @@ package modelos.recursos;
 
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -24,17 +24,36 @@ public class JugadorModelo implements Serializable{
 	private static final long serialVersionUID = -5095105324317248308L;
 	private int pasaporte;
 	private String nombre;
-	private Boolean estado;
-	private EquipoModelo equipoActual;
+	private Boolean estado;	
 	private String posicion;
-	private Double altura;
-	private Double peso;
+	private Integer altura;
+	private Integer peso;
 	private Date fechaNacimiento;
+	private EquipoModelo equipoActual;
 	private PaisModelo pais;
 	
 	
-	public JugadorModelo(){}
+	
+	public JugadorModelo(){
+		pasaporte = -1;
+		nombre = "";
+		estado = true;
+		posicion = "";
+		altura = -1;
+		peso = -1;
+		fechaNacimiento = new Date(1);
+		equipoActual = new EquipoModelo();
+		pais = new PaisModelo();		
+	}
 
+	@Override
+	public String toString() {
+		return "Jugador: "+nombre+" pasaporte: "+pasaporte+" es activo: "+estado+" posicion: "+posicion+
+				" altura: "+altura+" peso: "+peso+" fechaNacimiento: "+fechaNacimiento+" "+equipoActual.toString()+
+				" pais "+pais.toString();
+	}
+	
+	
 	
 	//----------getters & setters
 	@XmlAttribute
@@ -83,20 +102,20 @@ public class JugadorModelo implements Serializable{
 	}
 
 	@XmlElement
-	public Double getAltura() {
+	public Integer getAltura() {
 		return altura;
 	}
 
-	public void setAltura(Double altura) {
+	public void setAltura(Integer altura) {
 		this.altura = altura;
 	}
 
 	@XmlElement
-	public Double getPeso() {
+	public Integer getPeso() {
 		return peso;
 	}
 
-	public void setPeso(Double peso) {
+	public void setPeso(Integer peso) {
 		this.peso = peso;
 	}
 
@@ -112,7 +131,6 @@ public class JugadorModelo implements Serializable{
 	public PaisModelo getPais() {
 		return pais;
 	}
-
 
 	public void setPais(PaisModelo pais) {
 		this.pais = pais;

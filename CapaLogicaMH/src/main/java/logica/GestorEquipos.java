@@ -3,10 +3,9 @@ package logica;
 import java.util.ArrayList;
 import java.util.List;
 
-import persistencia.implementaciones.actualizaciones.Actualizador;
+
 import persistencia.implementaciones.escritura.Registrador;
 import persistencia.implementaciones.lectura.LectorEquipos;
-import persistencia.interfaces.ActualizadorDAO;
 import persistencia.interfaces.LectorEquiposDAO;
 import persistencia.interfaces.RegistradorDAO;
 import modelos.recursos.EquipoModelo;
@@ -15,14 +14,12 @@ import modelos.recursos.PaisModelo;
 public class GestorEquipos {
 	
 	
-	private RegistradorDAO registradorObjetosBD;
-	private ActualizadorDAO actualizadorObjetosBD;
+	private RegistradorDAO registradorObjetosBD;	
 	private LectorEquiposDAO lectorDatosEquipos;
 	private String mensajeError;
 	
 	public GestorEquipos(){
 		registradorObjetosBD = new Registrador();
-		actualizadorObjetosBD = new Actualizador();
 		lectorDatosEquipos = new LectorEquipos();
 		mensajeError = "";
 	}
@@ -88,13 +85,33 @@ public class GestorEquipos {
 	}
 	
 	
+	/**
+	 * 
+	 * @param deTipoClub
+	 * Especifica si los equipo que se deben de retornar son de tipo club o no, en caso
+	 * de que no, seran de tipo seleccion
+	 * @return
+	 * Lista de objetos tipo {@link EquipoModelo} de tipo segun especificado por el 
+	 * parametro
+	 */
+	public List<EquipoModelo> getEquiposPorTipo(boolean deTipoClub){
+		//se obtiene la lista generica
+		List<Object> listaInicial = this.getLectorDatosEquipos().getEquiposPorTipo(deTipoClub);
+		List<EquipoModelo> listaFinal = new ArrayList<EquipoModelo>();
+		//se itera sobre la lista generica para construir los objetos
+		for (Object equipoInicial : listaInicial) {
+			EquipoModelo equipo = (EquipoModelo) equipoInicial;
+			//se agrega el equipo, se debe crear una nueva instancia(copia total) del 
+			//equipo porque no se mapea a JSON con el objeto retornado de hibernate
+			listaFinal.add(new EquipoModelo(equipo));
+		}
+		return listaFinal;
+	}
+	
+	
 	//getters & setters
 	private RegistradorDAO getRegistradorObjetosBD() {
 		return registradorObjetosBD;
-	}
-
-	private ActualizadorDAO getActualizadorObjetosBD() {
-		return actualizadorObjetosBD;
 	}
 
 
