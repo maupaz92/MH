@@ -13,6 +13,8 @@ import modelos.recursos.PaisModelo;
  */
 public interface ConsultasEquipos {
 
+	
+	
 	/**
 	 * Metodo que debe enviar una solicitud al web service para
 	 * registrar un nuevo equipo en el sistema. 
@@ -30,6 +32,16 @@ public interface ConsultasEquipos {
 	 * en el parametro.
 	 */
 	public List<EquipoModelo> getEquipoPorTipo(boolean deTipoClubes);
+	
+	/**
+	 * metodo que solicita al web service el conjunto de equipos
+	 * registrados en el sistema
+	 * @return
+	 * Lista de equipos tipo {@link EquipoModelo} registrados
+	 */
+	public List<EquipoModelo> getEquiposRegistrados();
+	
+	
 	/**
 	 * metodo que debe enviar una solicitud al web service para actualizar
 	 * un equipo que ha sido modificado
@@ -45,5 +57,25 @@ public interface ConsultasEquipos {
 	 * se retorna la lista de paises en lo que se puede registrar un equipo
 	 */
 	public List<PaisModelo> getPaises();
+	
+	/**
+	 * Se define para obtener mensajes personalizados de error
+	 * segun los diversos errores que pueden surgir con la comunicacion
+	 * entre el cliente y el web service
+	 * @return
+	 * Mensaje personalizado de error.
+	 */
+	public String getMensajeError();
+	
+	
+	/**
+	 * 
+	 * @return
+	 * True si un recurso que ha sido enviado para registro o actualizacion
+	 * presenta conflictos en el servicio, es decir que no puede efectuarse la accion porque
+	 * no cumple las reglas segun el tipo de accion. False en caso de que no existan problemas.
+	 */
+	public boolean existeErrorDeConflicto();
+	
 	
 }

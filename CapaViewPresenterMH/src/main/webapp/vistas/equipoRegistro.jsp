@@ -43,11 +43,13 @@
 		});
 		</script>	
 		<div>
-			<h2>Nuevo Equipo</h2>		
+			<h2>Nuevo Equipo</h2>
+			<s:actionerror />
 			<s:form action = "registrarEquipoLinkEquipos">
 				<s:textfield name = "equipo.nombre" label = "Nombre"/>
 				<s:select name = "esClub" label = "es Club?" list="{'si','no'}"></s:select>							
-				<s:select name = "paisDeEquipo" label="Pais" list="listaPaises" listKey="id_Pais" listValue="nombre"></s:select>		
+				<s:select name = "paisDeEquipo" label="Pais" list="listaPaises" 
+					listKey="id_Pais" listValue="nombre"></s:select>		
 				<s:submit align = "center"></s:submit>
 			</s:form>
 		</div>

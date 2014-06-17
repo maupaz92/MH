@@ -2,15 +2,14 @@ package comunicacion.servicios.clientes.rest;
 
 import java.util.List;
 
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
-
-import sun.net.www.content.text.Generic;
+import org.jboss.resteasy.logging.Logger;
 import modelos.recursos.EquipoModelo;
 import modelos.recursos.PaisModelo;
 import comunicacion.servicios.interfaces.ConsultasEquipos;
@@ -18,12 +17,18 @@ import comunicacion.servicios.interfaces.ConsultasEquipos;
 public class ClienteRESTEquipos implements ConsultasEquipos{
 
 	private final String rootResourceURI = "/equipos";
-	private Client cliente;
+	private final String errorServicioNoDisponible = "El servicio no se encuentra disponible";
 	private final String URI = "http://localhost:8080/CapaServicioMH";
 	private final String paisesResource = "/paises";
 	
+	private Client cliente;		
+	private final Logger log = Logger.getLogger(ConsultasEquipos.class);
+	private String mensajeErrorCliente = "Error";	
+	private boolean existeConflicto;
+	
 	
 	public ClienteRESTEquipos(){
+		this.setExisteConflicto(false);
 		cliente = ClientBuilder.newClient();
 	}
 	
@@ -33,32 +38,79 @@ public class ClienteRESTEquipos implements ConsultasEquipos{
 		WebTarget urlObjetivo = this.getCliente().target(this.getURI()+this.getRootResourceURI());
 		//se ejecuta el request con el metodo "post", y se almacena en un objeto "Response"
 		Response respuesta = urlObjetivo.request().post(Entity.xml(equipo));
-		//si la respuesta es distinta de la exitosa, se asume que hay un torneo repetido
-		if(respuesta.getStatus() != 204){
+		//si la respuesta es 404(servidor caido)
+		if(respuesta.getStatus() == Response.Status.NOT_FOUND.getStatusCode()){
+			this.setMensajeErrorCliente(errorServicioNoDisponible);
 			envioExitoso = false;
-		}	
+		}else if(respuesta.getStatus() == Response.Status.CONFLICT.getStatusCode()){
+			this.setExisteConflicto(true);
+			//
+		}
 		respuesta.close();
 		return envioExitoso;		
 	}
 
 	public List<EquipoModelo> getEquipoPorTipo(boolean deTipoClubes) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public boolean enviarActualizacionDeEquipo(EquipoModelo equipoModificado) {
-		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
 	public List<PaisModelo> getPaises() {
-				
+		//se define la url completa
 		String url = getURI()+getRootResourceURI()+getPaisesResource();
-		//se construye un "wrapper" generico para enviar la lista
+		//se construye un "wrapper" generico para recibir la lista
 		GenericType<List<PaisModelo>> paisesWrap = new GenericType<List<PaisModelo>>(){};
-		List<PaisModelo> lista = this.getCliente().target(url).request().get(paisesWrap);		
+		List<PaisModelo> lista = null;
+		//se procede a obtener la lista del servicio
+		try{
+			lista = this.getCliente().target(url).request().get(paisesWrap);
+		}catch(WebApplicationException excepcion){
+			//codigo de la respuesta
+			int codigoWeb = excepcion.getResponse().getStatus();
+			//codigo cuando el servicio no esta disponible
+			int codigoServicioNoEncontrado = Response.Status.NOT_FOUND.getStatusCode();
+			if(codigoWeb == codigoServicioNoEncontrado){
+				this.setMensajeErrorCliente(errorServicioNoDisponible);
+				log.info("Codigo retornado de la respuesta: "+Integer.toString(codigoWeb));		
+			}						
+		}
 		return lista;
 	}
+	
+	public String getMensajeError() {	
+		return mensajeErrorCliente;
+	}
+	
+	public boolean existeErrorDeConflicto() {
+		return existeConflicto;
+	}
+	
+	
+	public List<EquipoModelo> getEquiposRegistrados() {
+		//se define la url completa
+		String url = getURI()+getRootResourceURI();
+		//se construye un "wrapper" generico para recibir la lista
+		GenericType<List<EquipoModelo>> equiposWrap = new GenericType<List<EquipoModelo>>(){};
+		List<EquipoModelo> lista = null;
+		//se procede a obtener la lista del servicio
+		try{
+			lista = this.getCliente().target(url).request().get(equiposWrap);
+		}catch(WebApplicationException excepcion){
+			//codigo de la respuesta
+			int codigoWeb = excepcion.getResponse().getStatus();
+			//codigo cuando el servicio no esta disponible
+			int codigoServicioNoEncontrado = Response.Status.NOT_FOUND.getStatusCode();
+			if(codigoWeb == codigoServicioNoEncontrado){
+				this.setMensajeErrorCliente(errorServicioNoDisponible);
+				log.info("Codigo retornado de la respuesta: "+Integer.toString(codigoWeb));		
+			}						
+		}
+		return lista;
+	}
+	
 	
 	//getters y setters
 	private String getRootResourceURI() {
@@ -75,8 +127,27 @@ public class ClienteRESTEquipos implements ConsultasEquipos{
 
 	private String getPaisesResource() {
 		return paisesResource;
+	}	
+
+	private void setMensajeErrorCliente(String mensajeErrorCliente) {
+		this.mensajeErrorCliente = mensajeErrorCliente;
 	}
 
+	public boolean getExisteConflicto() {
+		return existeConflicto;
+	}
+
+	private void setExisteConflicto(boolean existeConflicto) {
+		this.existeConflicto = existeConflicto;
+	}
+		
 	
+	public static void main(String[] args){
+		ClienteRESTEquipos cliente = new ClienteRESTEquipos();
+		List<EquipoModelo> lista = cliente.getEquiposRegistrados();
+		for (EquipoModelo equipoModelo : lista) {
+			System.out.println(equipoModelo.toString());
+		}
+	}
 
 }

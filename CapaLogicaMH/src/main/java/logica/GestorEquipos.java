@@ -25,7 +25,16 @@ public class GestorEquipos {
 		lectorDatosEquipos = new LectorEquipos();
 	}
 	
-	
+	/**
+	 * metodo que gestiona el ingreso de un nuevo equipo al sistema.
+	 * Valida que el nombre del equipo para el pais escogido no haya sido
+	 * registrado previamente en el sistema.
+	 * @param equipo
+	 * Objeto tipo {@link EquipoModelo} que se desea registrar 
+	 * @return
+	 * True en caso de que el equipo no exista y se haya podido guardar en los 
+	 * registros del sistema, false en caso contrario
+	 */
 	public boolean registrarNuevoEquipo(EquipoModelo equipo){
 		
 		this.getRegistradorObjetosBD().guardarNuevoRecurso(equipo);
@@ -36,7 +45,8 @@ public class GestorEquipos {
 	/**
 	 * 
 	 * @return
-	 * Se retorna la lista de objetos tipo PaisModelo validos
+	 * Se retorna la lista de objetos tipo {@link PaisModelo} donde un equipo
+	 * puede ser registrado
 	 */
 	public List<PaisModelo> getPaisesValidos(){
 		List<Object> paises = this.getLectorDatosEquipos().getPaisesDeOrigen();
@@ -47,7 +57,26 @@ public class GestorEquipos {
 		}
 		return listaFinal;
 	}
-
+	
+	/**
+	 * 
+	 * @return
+	 * Lista de objetos tipo {@link EquipoModelo} registrados en el sistema.
+	 */
+	public List<EquipoModelo> getListaEquiposRegistrados(){
+		//se obtiene la lista generica
+		List<Object> listaInicial = this.getLectorDatosEquipos().getEquiposRegistrados();
+		List<EquipoModelo> listaFinal = new ArrayList<EquipoModelo>();
+		//se itera sobre la lista generica para construir los objetos
+		for (Object equipoInicial : listaInicial) {
+			EquipoModelo equipo = (EquipoModelo) equipoInicial;
+			//se agrega el equipo, se debe crear una nueva instancia(copia total) del equipo porque no se mapea a JSON con el 
+			//objeto retornado de hibernate
+			listaFinal.add(new EquipoModelo(equipo));
+		}
+		return listaFinal;
+	}
+	
 	
 	//getters & setters
 	private RegistradorDAO getRegistradorObjetosBD() {
@@ -61,6 +90,15 @@ public class GestorEquipos {
 
 	private LectorEquiposDAO getLectorDatosEquipos() {
 		return lectorDatosEquipos;
+	}
+	
+	
+	public static void main(String[] args){
+		GestorEquipos gestor = new GestorEquipos();
+		List<EquipoModelo> lista = gestor.getListaEquiposRegistrados();
+		for (EquipoModelo equipoModelo : lista) {
+			System.out.println(equipoModelo.getPais().getNombre());
+		}
 	}
 
 

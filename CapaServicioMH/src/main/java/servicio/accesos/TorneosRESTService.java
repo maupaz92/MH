@@ -90,7 +90,7 @@ public class TorneosRESTService {
 		boolean registroExitoso = this.getGestor().registrarNuevoTorneo(torneo);
 		//si el registro no se puede llevar 
 		if(!registroExitoso){
-			throw new WebApplicationException(Response.Status.CONFLICT);
+			throw new WebApplicationException(this.getGestor().getMensajeError(), Response.Status.CONFLICT);
 		}	
 	}
 	
@@ -102,7 +102,7 @@ public class TorneosRESTService {
 		log.info(torneo.toString()+" id: "+Integer.toString(torneo.getId()));
 		boolean modificacionExitosa = this.getGestor().modificarTorneo(torneo);
 		if(!modificacionExitosa){
-			throw new WebApplicationException(Response.Status.CONFLICT);
+			throw new WebApplicationException(this.getGestor().getMensajeError(), Response.Status.CONFLICT);
 		}
 	}	
 	

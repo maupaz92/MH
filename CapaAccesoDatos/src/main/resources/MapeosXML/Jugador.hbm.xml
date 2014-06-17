@@ -17,7 +17,7 @@
         <many-to-one name="equipoActual" class="modelos.recursos.EquipoModelo" 
    	  column="Equipo_Actual" cascade="all" not-null="true"/>
    	   <many-to-one name="pais" class="modelos.recursos.PaisModelo" 
-   	  column="Id_Pais" cascade="all" not-null="true"/>
+   	  column="Id_Pais" cascade="none" not-null="true"/>
    	    
     </class>
 </hibernate-mapping>

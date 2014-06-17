@@ -1,22 +1,22 @@
 package modelos.recursos;
 
-import java.io.Serializable;
-
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class PaisModelo implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -1097810009845723069L;
+public class PaisModelo{
+	
 	private Integer id_Pais;
 	private String nombre;
 	
 	public PaisModelo(){
 		id_Pais = -1;
 		nombre = "";
+	}
+	
+	public PaisModelo(PaisModelo pais){
+		id_Pais = pais.getId_Pais(); 
+		nombre = pais.getNombre();
 	}
 	
 	

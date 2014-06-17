@@ -3,59 +3,82 @@ package struts.acciones;
 import modelos.recursos.TorneoModelo;
 
 import org.jboss.resteasy.logging.Logger;
-
-import clientes.rest.ClienteTorneos;
-
 import com.opensymphony.xwork2.ActionSupport;
+
+import comunicacion.servicios.clientes.rest.ClienteRESTTorneos;
+import comunicacion.servicios.interfaces.ConsultasTorneos;
 
 public class TorneosAction extends ActionSupport{
 	
 	private static final long serialVersionUID = 1L;
+	private final Logger log = Logger.getLogger(TorneosAction.class);
+	
 	private TorneoModelo torneo;
+	private ConsultasTorneos clienteTorneos;
+	
 	private String esCopaTorneo;
 	private String tipoSelecciones;
 	private int idTorneo;
-	private ClienteTorneos clienteTorneos;
-	private final Logger log = Logger.getLogger(TorneosAction.class);
+	
+	
+	
+	
+	public TorneosAction(){
+		clienteTorneos = new ClienteRESTTorneos();
+	}
 	
 	/*
 	 * llamada tile
 	 */
-	public String vistaRegistrarTorneo()
-	{
+	public String vistaRegistrarTorneo(){
 		return "vistaRegistrarTorneo";
 	}
 	
 	/*
 	 * llamada tile
 	 */
-	public String vistaEdicionTorneo()
-	{
+	public String vistaEdicionTorneo(){
 		return "vistaEdicionTorneo";
 	}
 
 	
 	/**
-	 * 
+	 * Metodo que obtiene lo datos del formulario de registro de torneo y
+	 * lo convierte en un objeto {@link TorneoModelo}. Delega el envio del registro
+	 * al cliente del servicio.
 	 * @return
+	 * Nombre de la vista que se presenta despues de la insercion. Se retorna a la vista de insercion.
 	 */
 	public String registrarTorneo(){
 		//se define los datos ingresados en el formulario
 		this.setDatosTorneo();
-		clienteTorneos = new ClienteTorneos();
-		clienteTorneos.enviarRegistroNuevoTorneo(getTorneo());
-		this.setTorneo(null);
+		//se pasa al cliente 
+		boolean envioRegistro = this.getClienteTorneos().enviarRegistroNuevoTorneo(getTorneo());
+		if(!envioRegistro){
+			this.addActionError(this.getClienteTorneos().getMensajeError());
+		}
+		this.getTorneo().limpiarDatos();
 		return "vistaRegistrarTorneo";
 	}
 	
-	
+	/**
+	 * Metodo que obtiene lo datos del formulario de edicion de torneo y
+	 * lo convierte en un objeto {@link TorneoModelo}. Delega el envio de la 
+	 * actualizacion al cliente del servicio
+	 * @return
+	 * Nombre de la vista que se presenta despues de la edicion. Se retorna a la vista de edicion
+	 */
 	public String actualizarTorneo(){
 		//se define los datos ingresados en el formulario
 		this.setDatosTorneo();
-		this.getTorneo().setId(this.getIdTorneo());
-		clienteTorneos = new ClienteTorneos();
-		clienteTorneos.enviarModificacionTorneo(getTorneo());
-		this.setTorneo(null);
+		//se define el id del torneo segun la escogencia del torneo
+		this.getTorneo().setId(this.getIdTorneo());	
+		//se envia la actualizacion al servicio
+		boolean envioActualizacion = this.getClienteTorneos().enviarActualizacionDeTorneo(getTorneo());		
+		if(!envioActualizacion){
+			this.addActionError(this.getClienteTorneos().getMensajeError());
+		}
+		this.getTorneo().limpiarDatos();
 		return "vistaEdicionTorneo";
 	}
 	
@@ -116,6 +139,11 @@ public class TorneosAction extends ActionSupport{
 
 	public void setIdTorneo(int idTorneo) {
 		this.idTorneo = idTorneo;
+	}
+
+
+	private ConsultasTorneos getClienteTorneos() {
+		return clienteTorneos;
 	}
 	
 	

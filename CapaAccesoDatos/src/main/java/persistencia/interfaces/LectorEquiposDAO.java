@@ -13,11 +13,13 @@ public interface LectorEquiposDAO {
 
 	/**
 	 * 
-	 * @param idTorneo
+	 * @param idEquipo
+	 * Identificador del equipo.
 	 * @return
-	 * Se retorna un equipo segun el identificador provisto en el parametro
+	 * Se retorna un objeto con los datos del equipo segun 
+	 * el identificador provisto en el parametro
 	 */
-	public Object getEquipoPorId(int idTorneo);
+	public Object getEquipoPorId(int idEquipo);
 	
 	/**
 	 * 
@@ -29,7 +31,8 @@ public interface LectorEquiposDAO {
 	/**
 	 * 
 	 * @return
-	 * Se retorna la lista de paises donde puede existir un equipo.
+	 * Se retorna la lista de objetos que contienen informacion de 
+	 * los paises donde puede existir un equipo.
 	 */
 	public List<Object> getPaisesDeOrigen();
 }

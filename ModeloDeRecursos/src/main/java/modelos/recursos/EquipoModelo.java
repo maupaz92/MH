@@ -1,7 +1,5 @@
 package modelos.recursos;
 
-import java.io.Serializable;
-
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -13,12 +11,8 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  */
 @XmlRootElement
-public class EquipoModelo implements Serializable{
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2875335459259908578L;
+public class EquipoModelo{
+		
 	private Integer id_Equipo;	
 	private String nombre;
 	private PaisModelo pais;
@@ -28,6 +22,14 @@ public class EquipoModelo implements Serializable{
 		id_Equipo = -1;
 		nombre = "";
 		tipoClub = false;
+		pais = new PaisModelo();
+	}
+	
+	public EquipoModelo(EquipoModelo equipo){
+		id_Equipo = equipo.getId_Equipo();
+		nombre = equipo.getNombre();
+		pais = new PaisModelo(equipo.getPais());
+		tipoClub = equipo.isTipoClub();
 	}
 
 	

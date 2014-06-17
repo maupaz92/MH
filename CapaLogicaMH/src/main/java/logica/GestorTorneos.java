@@ -21,6 +21,8 @@ public class GestorTorneos {
 	private LectorTorneosDAO lectorTorneos;
 	private RegistradorDAO registradorObjetosBD;
 	private ActualizadorDAO actualizadorObjetosBD;
+	private String mensajeError;
+	
 	
 	public GestorTorneos()
 	{
@@ -36,8 +38,7 @@ public class GestorTorneos {
 	 * @return: true si el torneo pudo ser registrado, false en caso contrario
 	 */
 	public boolean registrarNuevoTorneo(TorneoModelo torneo){
-		boolean respuesta = false;
-		
+		boolean respuesta = false;		
 		//se obtiene un objeto tipo torneo para verificar si ya existe
 		TorneoModelo torneoPrueba = (TorneoModelo) this.getLectorTorneos().getTorneoPorNombre(torneo.getNombre());
 		//si el torneo no existe
@@ -45,7 +46,9 @@ public class GestorTorneos {
 			//se registra el ingreso
 			this.getRegistradorObjetosBD().guardarNuevoRecurso(torneo);			
 			respuesta = true;
-		}		
+		}else{
+			this.setMensajeError("Error: Torneo con el mismo nombre ya existe");
+		}			
 		return respuesta;
 	}
 	
@@ -71,7 +74,7 @@ public class GestorTorneos {
 		}	
 		//si el torneo modificado cambia a un nombre de otro torneo ocupado
 		if(torneoPrueba != null && torneo.getId() != torneoPrueba.getId()){
-			//tirar excepcion de que torneo con ese nombre ya existe
+			this.setMensajeError("Error: Torneo con el mismo nombre ya existe");
 			return false;						
 		}
 		//se reemplazan los datos del torneo actualizado por los viejos
@@ -123,6 +126,9 @@ public class GestorTorneos {
 		return listaTorneos;
 	}	
 
+	
+	//getters & setters
+	
 	private LectorTorneosDAO getLectorTorneos() {
 		return lectorTorneos;
 	}
@@ -134,6 +140,14 @@ public class GestorTorneos {
 
 	private ActualizadorDAO getActualizadorObjetosBD() {
 		return actualizadorObjetosBD;
+	}
+
+	public String getMensajeError() {
+		return mensajeError;
+	}
+
+	public void setMensajeError(String mensajeError) {
+		this.mensajeError = mensajeError;
 	}
 	
 	

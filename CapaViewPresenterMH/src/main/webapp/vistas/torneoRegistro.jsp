@@ -43,7 +43,8 @@
 		});
 		</script>	
 		<div>
-			<h2>Nuevo Torneo</h2>		
+			<h2>Nuevo Torneo</h2>
+			<s:actionerror />
 			<s:form action = "registrarTorneoLinkTorneos">
 				<s:textfield name = "torneo.nombre" label = "Nombre del torneo"/>			
 				<s:textfield name = "torneo.sede" label = "sede del torneo"/>

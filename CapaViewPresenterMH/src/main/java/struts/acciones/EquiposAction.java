@@ -17,16 +17,23 @@ public class EquiposAction extends ActionSupport{
 
 
 	private static final long serialVersionUID = 1L;
-
-	private List<PaisModelo> listaPaises;
-	private EquipoModelo equipo;
+	private final Logger log = Logger.getLogger(EquiposAction.class);
+	
+	private List<PaisModelo> listaPaises;	
 	private String esClub;
 	private String paisDeEquipo;
-	private final Logger log = Logger.getLogger(EquiposAction.class);
+	
+	private EquipoModelo equipo;
+	private ConsultasEquipos cliente;
+	
 	
 	
 	public EquiposAction(){
+		cliente = new ClienteRESTEquipos();
 		setListaPaises(new ArrayList<PaisModelo>());
+		//se agrega un objeto vacio para evitar los objetos NULL
+		this.getListaPaises().add(new PaisModelo());
+		log.info("creado un nuevo actionEquipos");
 	}
 	
 	/**
@@ -36,15 +43,14 @@ public class EquiposAction extends ActionSupport{
 	 * El nombre del "tile" que se debe desplegar
 	 */
 	public String vistaRegistrarEquipo(){
-		
-		PaisModelo CR = new PaisModelo();
-		CR.setId_Pais(1);
-		CR.setNombre("Costa Rica");
-		PaisModelo brasil = new PaisModelo();
-		brasil.setId_Pais(2);
-		brasil.setNombre("Brasil");
-		this.getListaPaises().add(brasil);
-		this.getListaPaises().add(CR);
+		//se obtiene la lista de paises
+		List<PaisModelo> lista = this.getCliente().getPaises();
+		if(lista == null){
+			//si se obtiene nulo, se despliega el mensaje de error del cliente
+			this.addActionError(this.getCliente().getMensajeError());
+		}else{
+			setListaPaises(lista);
+		}			
 		return "vistaRegistrarEquipo";
 	}
 	
@@ -62,18 +68,26 @@ public class EquiposAction extends ActionSupport{
 		this.getEquipo().setTipoClub(false);
 		//se valida si es de clubes o seleccion
 		if(this.getEsClub().equalsIgnoreCase("si"))			
-			this.getEquipo().setTipoClub(true);
-				
+			this.getEquipo().setTipoClub(true);				
 		//se crea una representacion de pais
 		PaisModelo paisSeleccionado = new PaisModelo();
-		//se obtiene el id del pais seleccionado
+		//se obtiene el id del pais seleccionado en el dropdown
 		int idPais = Integer.parseInt(this.getPaisDeEquipo());
-		paisSeleccionado.setId_Pais(idPais);		
-		this.getEquipo().setPais(paisSeleccionado);		
+		//se le define el id al objeto pais
+		paisSeleccionado.setId_Pais(idPais);
+		//se define el objeto pais al objeto equipo
+		this.getEquipo().setPais(paisSeleccionado);
 		log.info(this.getEquipo().toString());
-		//se crea el cliente y se delega el trabajo
-		ConsultasEquipos consulta = new ClienteRESTEquipos();
-		consulta.enviarRegistroDeEquipo(this.getEquipo());
+		
+		
+		//se envia el registro
+		boolean envioRegistro = this.getCliente().enviarRegistroDeEquipo(this.getEquipo());
+		//si el registro es fallido
+		if(!envioRegistro){
+			this.addActionError(this.getCliente().getMensajeError());
+		}
+		//se limpia el campo para que no aparezca de nuevo el nombre
+		this.getEquipo().setNombre("");		
 		return "vistaRegistrarEquipo";
 	}
 	
@@ -110,4 +124,10 @@ public class EquiposAction extends ActionSupport{
 	public void setPaisDeEquipo(String paisDeEquipo) {
 		this.paisDeEquipo = paisDeEquipo;
 	}
+
+	private ConsultasEquipos getCliente() {
+		return cliente;
+	}
+
+	
 }

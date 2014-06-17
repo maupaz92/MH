@@ -19,7 +19,13 @@ public class TorneoModelo {
 	private String sede;
 	private Boolean copa;
 	
-	public TorneoModelo(){}
+	public TorneoModelo(){
+		this.id = -1;
+		this.nombre = "";
+		this.tipoSelecciones = true;
+		this.sede = "";
+		this.copa = true;
+	}
 		
 	
 	//----------getters & setters
@@ -60,16 +66,6 @@ public class TorneoModelo {
 		this.copa = copa;
 	}
 
-	
-	public String toString()
-	{
-		return nombre+" sede en: "+sede+" tipo selecciones: "+tipoSelecciones+" es de copa: "+copa ;
-	}
-	
-	
-	
-	
-	
 	@XmlElement
 	public Boolean getTipoSelecciones() {
 		return tipoSelecciones;
@@ -78,6 +74,12 @@ public class TorneoModelo {
 	public void setTipoSelecciones(Boolean tipoSelecciones) {
 		this.tipoSelecciones = tipoSelecciones;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return nombre+" sede en: "+sede+" tipo selecciones: "+tipoSelecciones+" es de copa: "+copa ;
+	}	
 
 	/**
 	 * metodo que reemplaza los datos actuales del torneo por
@@ -89,6 +91,22 @@ public class TorneoModelo {
 		this.sede = torneo.sede;
 		this.copa = torneo.copa;
 		this.tipoSelecciones = torneo.tipoSelecciones;				
+	}
+	
+	/**
+	 * metodo que inicializa los datos del torneo como recien creado, predeterminadamente
+	 * nombre = ""
+	 * id = -1
+	 * copa = true
+	 * sede = ""
+	 * copa = true
+	 */
+	public void limpiarDatos(){
+		this.setNombre("");
+		this.setId(-1);
+		this.setCopa(true);
+		this.setSede("");
+		this.setCopa(true);
 	}
 	
 	
