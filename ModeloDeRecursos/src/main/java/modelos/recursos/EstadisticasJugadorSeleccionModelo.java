@@ -13,11 +13,13 @@ public class EstadisticasJugadorSeleccionModelo {
 	 * Se hace referencia al jugador al que pertenece el objeto EstadisticaJugadorSelecciónModelo.
 	 * Actúa como una FK a nivel de base de datos. 
 	 *  */
+	private JugadorModelo jugador;
+	private TorneoModelo torneo;
 	private String pasaporte_XFIFA;
 	private Float nota_XFIFA;
 	private int juegos_Totales;
 	private int goles_Anotados;
-	private int juegos_Ganados;
+	private int juegos_Ganados;	
 	private int juegos_Perdidos;
 	private int juegos_Empatados;
 	private int minutos_Jugados;
@@ -29,18 +31,30 @@ public class EstadisticasJugadorSeleccionModelo {
 	private int penales_Cometidos;
 	private int penales_Detenidos;
 	private int remates_Salvados;
-	private int ano;
-	private String torneo;
+	private int ano;	
 	
 	public EstadisticasJugadorSeleccionModelo(){}
 	
 	//----------getters & setters
 	
-	public String getJugador() {
+
+	public JugadorModelo getJugador() {
+		return jugador;
+	}
+	public void setJugador(JugadorModelo jugador) {
+		this.jugador = jugador;
+	}
+	public TorneoModelo getTorneo() {
+		return torneo;
+	}
+	public void setTorneo(TorneoModelo torneo) {
+		this.torneo = torneo;
+	}
+	public String getPasaporte_XFIFA() {
 		return pasaporte_XFIFA;
 	}
-	public void setJugador(String pasaporte) {
-		this.pasaporte_XFIFA = pasaporte;
+	public void setPasaporte_XFIFA(String pasaporte_XFIFA) {
+		this.pasaporte_XFIFA = pasaporte_XFIFA;
 	}
 	public Float getNota_XFIFA() {
 		return nota_XFIFA;
@@ -138,12 +152,6 @@ public class EstadisticasJugadorSeleccionModelo {
 	public void setAno(int ano) {
 		this.ano = ano;
 	}
-	public String getTorneo() {
-		return torneo;
-	}
-	public void setTorneo(String torneo) {
-		this.torneo = torneo;
-	}	
 	
 	
 }

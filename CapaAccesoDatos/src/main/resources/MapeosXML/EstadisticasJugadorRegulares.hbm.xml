@@ -13,9 +13,23 @@
         <key-property name="customerId" length="10"/>
         <key-property name="orderNumber"/>
     </composite-id>
-      <property name="firstName" column="first_name" type="string"/>
-      <property name="lastName" column="last_name" type="string"/>
-      <property name="salary" column="salary" type="int"/>
+    
+      <property name="nota_XFIFA" column="Nota_XFIFA" type="float"/>
+      <property name="juegos_Totales" column="Juegos_Totales" type="int"/>
+      <property name="juegos_Ganados" column="Juegos_Ganados" type="int"/>
+      <property name="juegos_Perdidos" column="Juegos_Perdidos" type="int"/>
+      <property name="juegos_Empatados" column="Juegos_Empatados" type="int"/>
+      <property name="goles_Anotados" column="Goles_Anotados" type="int"/>
+      <property name="minutos_Jugados" column="Minutos_Jugados" type="int"/>
+      <property name="balones_Recuperados" column="Balones_Recuperados" type="int"/>
+      <property name="asistencias" column="Asistencias" type="int"/>
+      <property name="tiros_Marco" column="Tiros_Marco" type="int"/>
+      <property name="tarjetas_Amarillas" column="Tarjetas_Amarillas" type="int"/>
+      <property name="tarjetas_Rojas" column="Tarjetas_Rojas" type="int"/>
+      <property name="penales_Cometidos" column="Penales_Cometidos" type="int"/>
+      <property name="penales_Detenidos" column="Penales_Detenidos" type="int"/>
+      <property name="remates_Salvados" column="Remates_Salvados" type="int"/>
+      <property name="ano" column="Ano" type="int"/>
    </class>
     
 </hibernate-mapping>
