@@ -4,19 +4,19 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
  
 <hibernate-mapping package="modelos.recursos">
- <class name="EstadisticaJugadorRegularesModelo" table="Estadisticas_Regulares">
+ <class name="EstadisticasJugadorRegularesModelo" table="Estadisticas_Regulares">
       <meta attribute="class-description">
          Esta clase contiene los metadatos necesarios para mapear a la base de 
          datos los objetos de Estadisticas Regulares asociados a un Jugador.
       </meta>
       
-      <composite-id name="id" class="EstadisticaJugadorRegularesModelo">
-        <key-many-to-one name="pasaporte" class="JugadorModelo" column="Pasaporte_XFIFA"/>
-        <key-property name="id_Equipo" column="Equipo" type="int"/>
+      <composite-id>
+        <key-many-to-one name="jugador" class="JugadorModelo" column="Pasaporte_XFIFA"/>
+        <key-property name="club" column="Equipo" type="int"/>
         <key-property name="ano" column="Ano" type="int"/>
     </composite-id>
     
-      <property name="nota_XFIFA" column="Nota_XFIFA" type="float"/>
+      <property name="nota_XFIFA" column="Nota_XFIFA" type="double"/>
       <property name="juegos_Totales" column="Juegos_Totales" type="int"/>
       <property name="juegos_Ganados" column="Juegos_Ganados" type="int"/>
       <property name="juegos_Perdidos" column="Juegos_Perdidos" type="int"/>

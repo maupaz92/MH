@@ -1,5 +1,7 @@
 package modelos.recursos;
 
+import java.io.Serializable;
+
 /**
  * Clase que modela una entidad Estadisticas
  *  de Jugador en Selección por año y torneo. 
@@ -7,16 +9,22 @@ package modelos.recursos;
  *
  */
 
-public class EstadisticasJugadorSeleccionModelo {
+public class EstadisticasJugadorSeleccionModelo implements Serializable{
+	
+	/**
+	 * 
+	 */
 	
 	/**
 	 * Se hace referencia al jugador al que pertenece el objeto EstadisticaJugadorSelecciónModelo.
 	 * Actúa como una FK a nivel de base de datos. 
 	 *  */
+	
+	private static final long serialVersionUID = 8289733517215125165L;
 	private JugadorModelo jugador;
-	private TorneoModelo torneo;
-	private String pasaporte_XFIFA;
-	private Float nota_XFIFA;
+	private int torneo;
+	
+	private double nota_XFIFA;
 	private int juegos_Totales;
 	private int goles_Anotados;
 	private int juegos_Ganados;	
@@ -44,22 +52,17 @@ public class EstadisticasJugadorSeleccionModelo {
 	public void setJugador(JugadorModelo jugador) {
 		this.jugador = jugador;
 	}
-	public TorneoModelo getTorneo() {
+	public int getTorneo() {
 		return torneo;
 	}
-	public void setTorneo(TorneoModelo torneo) {
+	public void setTorneo(int torneo) {
 		this.torneo = torneo;
 	}
-	public String getPasaporte_XFIFA() {
-		return pasaporte_XFIFA;
-	}
-	public void setPasaporte_XFIFA(String pasaporte_XFIFA) {
-		this.pasaporte_XFIFA = pasaporte_XFIFA;
-	}
-	public Float getNota_XFIFA() {
+	
+	public double getNota_XFIFA() {
 		return nota_XFIFA;
 	}
-	public void setNota_XFIFA(Float nota_XFIFA) {
+	public void setNota_XFIFA(double nota_XFIFA) {
 		this.nota_XFIFA = nota_XFIFA;
 	}
 	public int getJuegos_Totales() {
@@ -116,18 +119,23 @@ public class EstadisticasJugadorSeleccionModelo {
 	public void setTiros_Marco(int tiros_Marco) {
 		this.tiros_Marco = tiros_Marco;
 	}
+	
 	public int getTarjetas_amarillas() {
 		return tarjetas_amarillas;
 	}
+
 	public void setTarjetas_amarillas(int tarjetas_amarillas) {
 		this.tarjetas_amarillas = tarjetas_amarillas;
 	}
+
 	public int getTarjetas_rojas() {
 		return tarjetas_rojas;
 	}
+
 	public void setTarjetas_rojas(int tarjetas_rojas) {
 		this.tarjetas_rojas = tarjetas_rojas;
 	}
+
 	public int getPenales_Cometidos() {
 		return penales_Cometidos;
 	}

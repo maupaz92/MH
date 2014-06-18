@@ -22,6 +22,8 @@
 	    <mapping resource="MapeosXML/Pais.hbm.xml" />
 	    <mapping resource="MapeosXML/Equipo.hbm.xml" />	    
 	    <mapping resource="MapeosXML/Jugador.hbm.xml" />
-		<mapping resource="MapeosXML/Partido.hbm.xml" />	    
+		<mapping resource="MapeosXML/Partido.hbm.xml" />
+		<mapping resource="MapeosXML/EstadisticasJugadorRegulares.hbm.xml" />
+		<mapping resource="MapeosXML/EstadisticasJugadorSeleccion.hbm.xml" />		    
 	</session-factory>
 </hibernate-configuration>

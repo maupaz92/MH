@@ -1,15 +1,21 @@
 package modelos.recursos;
 
-public class EstadisticasJugadorRegularesModelo {
+import java.io.Serializable;
 
+public class EstadisticasJugadorRegularesModelo implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3327167163094981650L;
 	/**
 	 * Se hace referencia al jugador al que pertenece el objeto EstadisticaJugadorRegularesModelo.
 	 * Actúa como una FK a nivel de base de datos. 
 	 *  */
-	private String pasaporte_XFIFA;
+	
 	private JugadorModelo jugador;	
-	private EquipoModelo club;
-	private Float nota_XFIFA;
+	private int club;
+	private double nota_XFIFA;
 	private int juegos_Totales;
 	private int goles_Anotados;
 	private int juegos_Ganados;
@@ -35,28 +41,23 @@ public class EstadisticasJugadorRegularesModelo {
 	
 	
 	
-	public String getPasaporte_XFIFA() {
-			return pasaporte_XFIFA;
-		}
-	public void setPasaporte_XFIFA(String pasaporte_XFIFA) {
-			this.pasaporte_XFIFA = pasaporte_XFIFA;
-		}
+	
 	public JugadorModelo getJugador() {
 			return jugador;
 		}
 	public void setJugador(JugadorModelo jugador) {
 			this.jugador = jugador;
 		}
-	public EquipoModelo getClub() {
+	public int getClub() {
 			return club;
 		}
-	public void setClub(EquipoModelo club) {
+	public void setClub(int club) {
 			this.club = club;
 		}
-	public Float getNota_XFIFA() {
+	public double getNota_XFIFA() {
 		return nota_XFIFA;
 	}
-	public void setNota_XFIFA(Float nota_XFIFA) {
+	public void setNota_XFIFA(double nota_XFIFA) {
 		this.nota_XFIFA = nota_XFIFA;
 	}
 	public int getJuegos_Totales() {
@@ -113,18 +114,29 @@ public class EstadisticasJugadorRegularesModelo {
 	public void setTiros_Marco(int tiros_Marco) {
 		this.tiros_Marco = tiros_Marco;
 	}
-	public int getTarjetas_amarillas() {
+	
+	public int getTarjetas_Amarillas() {
 		return tarjetas_Amarillas;
 	}
-	public void setTarjetas_amarillas(int tarjetas_amarillas) {
-		this.tarjetas_Amarillas = tarjetas_amarillas;
+
+
+
+	public void setTarjetas_Amarillas(int tarjetas_Amarillas) {
+		this.tarjetas_Amarillas = tarjetas_Amarillas;
 	}
-	public int getTarjetas_rojas() {
+
+
+
+	public int getTarjetas_Rojas() {
 		return tarjetas_Rojas;
 	}
-	public void setTarjetas_rojas(int tarjetas_rojas) {
-		this.tarjetas_Rojas = tarjetas_rojas;
+
+
+
+	public void setTarjetas_Rojas(int tarjetas_Rojas) {
+		this.tarjetas_Rojas = tarjetas_Rojas;
 	}
+
 	public int getPenales_Cometidos() {
 		return penales_Cometidos;
 	}

@@ -4,18 +4,18 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
  
 <hibernate-mapping package="modelos.recursos">
- <class name="EstadisticaJugadorRegularesModelo" table="Estadisticas_Regulares">
+ <class name="EstadisticasJugadorSeleccionModelo" table="Estadisticas_Seleccion">
       <meta attribute="class-description">
          Esta clase contiene los metadatos necesarios para mapear a la base de 
          datos los objetos de Estadisticas de Seleccion asociados a un Jugador.
       </meta>
-      <composite-id name="id" class="EstadisticaJugadorRegularesModelo">
-        <key-many-to-one name="pasaporte" class="JugadorModelo" column="Pasaporte_XFIFA"/>
-        <key-property name="id_Torneo" column="Torneo" type="int"/>
+      <composite-id>
+        <key-many-to-one name="jugador" class="JugadorModelo" column="Pasaporte_XFIFA"/>
+        <key-property name="torneo" column="Torneo" type="int"/>
         <key-property name="ano" column="Ano" type="int"/>
     </composite-id>
     
-     <property name="nota_XFIFA" column="Nota_XFIFA" type="float"/>
+     <property name="nota_XFIFA" column="Nota_XFIFA" type="double"/>
       <property name="juegos_Totales" column="Juegos_Totales" type="int"/>
       <property name="juegos_Ganados" column="Juegos_Ganados" type="int"/>
       <property name="juegos_Perdidos" column="Juegos_Perdidos" type="int"/>
@@ -25,12 +25,12 @@
       <property name="balones_Recuperados" column="Balones_Recuperados" type="int"/>
       <property name="asistencias" column="Asistencias" type="int"/>
       <property name="tiros_Marco" column="Tiros_Marco" type="int"/>
-      <property name="tarjetas_Amarillas" column="Tarjetas_Amarillas" type="int"/>
-      <property name="tarjetas_Rojas" column="Tarjetas_Rojas" type="int"/>
+      <property name="tarjetas_amarillas" column="Tarjetas_Amarillas" type="int"/>
+      <property name="tarjetas_rojas" column="Tarjetas_Rojas" type="int"/>
       <property name="penales_Cometidos" column="Penales_Cometidos" type="int"/>
       <property name="penales_Detenidos" column="Penales_Detenidos" type="int"/>
       <property name="remates_Salvados" column="Remates_Salvados" type="int"/>
-      <property name="ano" column="Ano" type="int"/>
+      
    </class>
     
 </hibernate-mapping>

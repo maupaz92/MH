@@ -22,7 +22,7 @@ public class JugadorModelo implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -5095105324317248308L;
-	private int pasaporte;
+	private int Pasaporte;
 	private String nombre;
 	private Boolean estado;	
 	private String posicion;
@@ -35,7 +35,7 @@ public class JugadorModelo implements Serializable{
 	
 	
 	public JugadorModelo(){
-		pasaporte = -1;
+		Pasaporte = -1;
 		nombre = "";
 		estado = true;
 		posicion = "";
@@ -47,7 +47,7 @@ public class JugadorModelo implements Serializable{
 	}
 	
 	public JugadorModelo(JugadorModelo jugador){
-		pasaporte = jugador.getPasaporte();
+		Pasaporte = jugador.getPasaporte();
 		nombre = jugador.getNombre();
 		estado = jugador.getEstado();
 		posicion = jugador.getPosicion();
@@ -60,7 +60,7 @@ public class JugadorModelo implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Jugador: "+nombre+" pasaporte: "+pasaporte+" es activo: "+estado+" posicion: "+posicion+
+		return "Jugador: "+nombre+" pasaporte: "+Pasaporte+" es activo: "+estado+" posicion: "+posicion+
 				" altura: "+altura+" peso: "+peso+" fechaNacimiento: "+fechaNacimiento+" "+equipoActual.toString()+
 				" pais "+pais.toString();
 	}
@@ -70,11 +70,11 @@ public class JugadorModelo implements Serializable{
 	//----------getters & setters
 	@XmlAttribute
 	public int getPasaporte() {
-		return pasaporte;
+		return Pasaporte;
 	}
 
 	public void setPasaporte(int pasaporte) {
-		this.pasaporte = pasaporte;
+		this.Pasaporte = pasaporte;
 	}
 
 	@XmlElement
