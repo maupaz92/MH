@@ -27,6 +27,8 @@ public interface ConsultasEquipos {
 	 * metodo que solicita al web service un conjunto de equipos
 	 * segun el tipo de equipo, ya sea de seleccion o club.
 	 * @param deTipoClubes
+	 * True si se desean equipos tipo club, false en caso de que
+	 * se requieran selecciones
 	 * @return
 	 * Lista de equipos tipo {@link EquipoModelo} segun el tipo especificado
 	 * en el parametro.

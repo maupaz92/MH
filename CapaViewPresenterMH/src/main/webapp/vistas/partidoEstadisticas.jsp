@@ -19,18 +19,16 @@
 					url: 'http://localhost:8080/CapaServicioMH/torneos',
 					dataType: 'json',
 					success: function(response){
-						var torneos = [];						
-						$.each(response, function(key, value){
-							var total = value.length;
-							for(var conteo = 0; conteo < total; conteo++){
-								torneos.push({
-									recid: conteo,
-									nombre: value[conteo].nombre, 
-									tipo: value[conteo].tipo,
-									sede: value[conteo].sede,
-									copa: value[conteo].copa,
-								});
-							}
+						var torneos = [];
+						var conteo = 1;
+						$.each(response, function(key, value){														
+							torneos.push({
+								recid: conteo,
+								id: value.id,
+								nombre: value.nombre, 
+								tipo: value.tipoSelecciones,															
+							});
+							conteo++;							
 						});											
 						$('#torneos').w2grid({ 
 							name: 'torneos',
@@ -39,9 +37,8 @@
 							columns: 
 							[				
 								{ field: 'nombre', caption: 'Nombre', size: '30%'},
-								{ field: 'tipo', caption: 'Nombre', size: '30%', hidden: true},
-								{ field: 'sede', caption: 'Nombre', size: '30%', hidden: true},
-								{ field: 'copa', caption: 'Tipo', size: '30%', hidden: true}
+								{ field: 'id', caption: 'id', size: '30%', hidden: true},
+								{ field: 'tipo', caption: 'tipo', size: '30%', hidden: true}								
 							],
 							records: torneos,			
 						});																
@@ -50,22 +47,51 @@
 								var filaSeleccionado = w2ui.torneos.getSelection();							
 								var torneoSeleccionado = w2ui.torneos.get(filaSeleccionado);								
 								document.getElementById("nombreTorneoSeleccionado").value = torneoSeleccionado.nombre;
-								document.getElementById("identificadorTorneoSeleccionado").value = torneoSeleccionado.nombre;
+								document.getElementById("idTorneoSeleccionado").value = torneoSeleccionado.id;
+								document.getElementById("tipoTorneoSeleccionado").value = torneoSeleccionado.tipo;
 							};
 						});
 						w2ui.torneos.on('unselect', function(event){
 							event.onComplete = function(){
-								document.getElementById("identificadorTorneoSeleccionado").value = "";
+								document.getElementById("tipoTorneoSeleccionado").value = "";
 								document.getElementById("nombreTorneoSeleccionado").value = "";
+								document.getElementById("idTorneoSeleccionado").value = "";
 							};
 						});
 					}				
-				});						
-			});			
+				});								
+			});
+			
+			function algo(){
+				var idEquipo1 = document.getElementById("equipo1").value;
+				var idEquipo2 = document.getElementById("equipo2").value;
+								
+				$.ajax({
+					url: 'http://localhost:8080/CapaServicioMH/torneos',
+					dataType: 'json',
+					success: function(response){
+						var torneos = [];
+						var conteo = 1;
+						$.each(response, function(key, value){														
+							torneos.push({
+								recid: conteo,
+								id: value.id,
+								nombre: value.nombre, 
+								tipo: value.tipoSelecciones,															
+							});
+							conteo++;							
+						});																																											
+					}
+				});
+				
+				w2ui['estadisticas1'].add({ recid: 2, pasaporte: 'passport', nombre: 'jandro', minutos: 0, golesAnotados: 0, tirosMarco: 0, asistencias: 0, recuperacionesBalon: 0,
+					tarjetasAmarillas: 0, tarjetasRojas: 0, penalesDetenidos: 0, penalesCometidos: 0, rematesSalvados: 0});
+			}
 			
 		</script>
 		<s:form action="cargarEquiposLinkPartidos">
-			<s:textfield id = "identificadorTorneoSeleccionado" name = "identificadorTorneoSeleccionado"></s:textfield>
+			<s:textfield id = "idTorneoSeleccionado" name = "idTorneoSeleccionado"></s:textfield>
+			<s:textfield id = "tipoTorneoSeleccionado" name = "tipoTorneoSeleccionado"></s:textfield>
 			<s:textfield id = "nombreTorneoSeleccionado" name = "nombreTorneoSeleccionado"></s:textfield>
 			<s:submit value = "Cargar Equipos"/>
 		</s:form>
@@ -74,16 +100,17 @@
 	<div id = "contenedorPartido" class = "rightFloat">
 		<div id = "detallesPartido" class = "">
 			<s:form>
-				<h3>Partido</h3>								
-				<s:textfield name = "identificadorTorneoConfigurado"></s:textfield>
-				Equipos: <s:select name = "equipo1" label = "Equipo" theme="simple" list="listaEquipos"></s:select>
-				<s:select name = "equipo2" label = "Equipo" theme="simple" list="listaEquipos"></s:select><br>
-				Marcador: <s:textfield type = "number" name="marcador1" label = "Marcador" theme="simple" pattern="[0-9]+" min = "0" max = "99"/>
+				<h3>Partido</h3>
+				<s:property value = "nombreTorneoConfigurado" /> <br>					
+				<s:textfield name = "idTorneoConfigurado"></s:textfield>
+				
+				Equipos: <s:select id = "equipo1" name = "equipo1" theme="simple" list="listaEquipos" listKey="id_Equipo" listValue="nombre"></s:select>
+				<s:select id = "equipo2" name = "equipo2" theme="simple" list="listaEquipos" listKey="id_Equipo" listValue="nombre"></s:select><br>
+				
+				Marcador: <s:textfield type = "number" name="marcador1" theme="simple" pattern="[0-9]+" min = "0" max = "99"/>
 				<s:textfield type = "number" name="marcador2" pattern="[0-9]+" theme="simple" min = "0" max = "99"/>
 				<br>
-				Día:<s:textfield type = "number" name="day"  key="label.day" theme="simple" pattern="[0-9]+" min = "1" max = "31"/>
-				Mes:<s:textfield type = "number" name="month" key="label.month" theme="simple" pattern="[0-9]+" min = "1" max = "12"/>
-				Año:<s:textfield type = "number" name="year" key="label.year" theme="simple" pattern="[0-9]+" min = "1950" max = "2999"/>
+				Fecha (dd-mm-aaaa)": <s:textfield  name="fecha" theme="simple"/>
 				<br><input type = "button" onclick="algo();" value="Cargar Jugadores">
 				<s:submit value="registrar" align = "center" theme = "simple" />
 			</s:form>

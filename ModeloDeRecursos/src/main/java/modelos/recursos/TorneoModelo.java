@@ -97,7 +97,7 @@ public class TorneoModelo {
 	 * metodo que inicializa los datos del torneo como recien creado, predeterminadamente
 	 * nombre = ""
 	 * id = -1
-	 * copa = true
+	 * tipo = true
 	 * sede = ""
 	 * copa = true
 	 */

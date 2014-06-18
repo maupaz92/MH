@@ -3,6 +3,7 @@ package persistencia.implementaciones.lectura;
 import java.util.List;
 
 
+
 import modelos.recursos.JugadorModelo;
 
 import org.hibernate.Query;
@@ -29,6 +30,16 @@ public class LectorJugadores implements LectorJugadoresDAO{
 		@SuppressWarnings("unchecked")
 		List<Object> list = query.list();//se obtiene la lista del query		
 		return list;
+	}
+
+	public List<Object> getJugadoresPorClub(int idEquipo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<Object> getJugadoresPorSeleccion(int idPais) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

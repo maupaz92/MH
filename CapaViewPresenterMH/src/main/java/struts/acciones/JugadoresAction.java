@@ -67,6 +67,7 @@ public class JugadoresAction extends ActionSupport{
 	public String registrarJugador(){
 		//se cargan los datos del jugador
 		this.cargarDatosJugador();
+		this.getLog().info(this.getJugador().toString());
 		boolean envioRegistro = this.getClienteJugadores().enviarRegistroJugador(this.getJugador());
 		if(envioRegistro)
 			this.limpiarCampos();	
