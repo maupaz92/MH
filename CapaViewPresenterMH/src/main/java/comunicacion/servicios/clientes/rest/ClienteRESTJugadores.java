@@ -30,6 +30,7 @@ public class ClienteRESTJugadores implements ConsultasJugadores{
 	
 	
 	public boolean enviarRegistroJugador(JugadorModelo jugador) {
+		this.getLog().info(jugador.toString());
 		boolean envioExitoso = true;		
 		//se define la url del servicio que se requiere
 		WebTarget urlObjetivo = this.getCliente().target(SERVICE_URI+ROOT_RESOURCE_URI);
