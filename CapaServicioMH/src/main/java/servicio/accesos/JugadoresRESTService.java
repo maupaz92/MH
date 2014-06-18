@@ -7,6 +7,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
@@ -62,6 +63,39 @@ public class JugadoresRESTService {
 		//se construye un "wrapper" generico para enviar la lista
 		GenericEntity<List<JugadorModelo>> jugadoresWrap = new GenericEntity<List<JugadorModelo>>(jugadores){};
 		return Response.ok(jugadoresWrap).build();				
+	}
+	
+	/**
+	 * 
+	 * @param idClub
+	 * @return
+	 */
+	@Path("/club")
+	@GET
+	@Produces({"application/json", "application/xml"})
+	public Response getJugadoresPorClub(
+			@QueryParam("idClub") int idClub){
+			
+		//se obtiene la lista de equipos en el sistema
+		List<JugadorModelo> jugadores = this.getGestorJugadores().getIdentificacionJugadoresPorClub(idClub);
+		//se construye un "wrapper" generico para enviar la lista
+		GenericEntity<List<JugadorModelo>> jugadoresWrap = new GenericEntity<List<JugadorModelo>>(jugadores){};
+		return Response.ok(jugadoresWrap).build();						
+	}
+	
+	
+	@Path("/seleccion")
+	@GET
+	@Produces({"application/json", "application/xml"})
+	public Response getJugadoresPorSeleccion(
+			@QueryParam("idSeleccion") int idSeleccion){
+			
+		//se obtiene la lista de equipos en el sistema
+		List<JugadorModelo> jugadores = this.getGestorJugadores().
+				getIdentificacionJugadoresPorSeleccion(idSeleccion);
+		//se construye un "wrapper" generico para enviar la lista
+		GenericEntity<List<JugadorModelo>> jugadoresWrap = new GenericEntity<List<JugadorModelo>>(jugadores){};
+		return Response.ok(jugadoresWrap).build();						
 	}
 	
 	//getters & setters

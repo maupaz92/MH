@@ -64,6 +64,47 @@ public class GestorJugadores {
 		
 	}
 	
+	/**
+	 * 
+	 * @param idClub
+	 * Id del equipo tipo club del que se quieren obtener los jugadores
+	 * @return
+	 * Lista de obtejos {@link JugadorModelo} unicamente con los datos
+	 * de nombre y pasaporte
+	 */
+	public List<JugadorModelo> getIdentificacionJugadoresPorClub(int idClub){
+		
+		List<Object> listaParcial = this.getLectorJugadores().getJugadoresPorClub(idClub);
+		List<JugadorModelo> listaFinal = new ArrayList<JugadorModelo>();
+		for (Object object : listaParcial) {
+			JugadorModelo jugador = new JugadorModelo((JugadorModelo)object);
+			jugador.limpiarIdentificacion();
+			listaFinal.add(jugador);
+		}
+		return listaFinal;
+	}
+	
+	/**
+	 * 
+	 * @param idClub
+	 * Id del equipo tipo seleccion del que se quieren obtener los jugadores
+	 * @return
+	 * Lista de obtejos {@link JugadorModelo} unicamente con los datos
+	 * de nombre y pasaporte
+	 */
+	public List<JugadorModelo> getIdentificacionJugadoresPorSeleccion(int idSeleccion){
+		
+		List<Object> listaParcial = this.getLectorJugadores().getJugadoresPorSeleccion(idSeleccion);
+		List<JugadorModelo> listaFinal = new ArrayList<JugadorModelo>();
+		for (Object object : listaParcial) {
+			JugadorModelo jugador = new JugadorModelo((JugadorModelo)object);
+			jugador.limpiarIdentificacion();
+			listaFinal.add(jugador);
+		}
+		return listaFinal;
+	}
+	
+	
 	//getters & settters
 
 	private RegistradorDAO getRegistradorObjetosBD() {

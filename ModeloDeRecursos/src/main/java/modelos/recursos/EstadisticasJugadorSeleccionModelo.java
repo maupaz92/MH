@@ -14,14 +14,15 @@ public class EstadisticasJugadorSeleccionModelo {
 	 * Actúa como una FK a nivel de base de datos. 
 	 *  */
 	private JugadorModelo jugador;
-	private TorneoModelo torneo;
-	private String pasaporte_XFIFA;
+	private TorneoModelo torneo;	
+	
 	private Float nota_XFIFA;
 	private int juegos_Totales;
-	private int goles_Anotados;
 	private int juegos_Ganados;	
 	private int juegos_Perdidos;
 	private int juegos_Empatados;
+	
+	private int goles_Anotados;	
 	private int minutos_Jugados;
 	private int balones_Recuperados;	
 	private int asistencias;
@@ -31,7 +32,7 @@ public class EstadisticasJugadorSeleccionModelo {
 	private int penales_Cometidos;
 	private int penales_Detenidos;
 	private int remates_Salvados;
-	private int ano;	
+	private int ano;
 	
 	public EstadisticasJugadorSeleccionModelo(){}
 	
@@ -49,13 +50,7 @@ public class EstadisticasJugadorSeleccionModelo {
 	}
 	public void setTorneo(TorneoModelo torneo) {
 		this.torneo = torneo;
-	}
-	public String getPasaporte_XFIFA() {
-		return pasaporte_XFIFA;
-	}
-	public void setPasaporte_XFIFA(String pasaporte_XFIFA) {
-		this.pasaporte_XFIFA = pasaporte_XFIFA;
-	}
+	}	
 	public Float getNota_XFIFA() {
 		return nota_XFIFA;
 	}
