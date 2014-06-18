@@ -16,7 +16,9 @@ import org.jboss.resteasy.logging.Logger;
 import com.opensymphony.xwork2.ActionSupport;
 
 import comunicacion.servicios.clientes.rest.ClienteRESTEquipos;
+import comunicacion.servicios.clientes.rest.ClienteRESTJugadores;
 import comunicacion.servicios.interfaces.ConsultasEquipos;
+import comunicacion.servicios.interfaces.ConsultasJugadores;
 
 public class JugadoresAction extends ActionSupport{
 	
@@ -24,6 +26,7 @@ public class JugadoresAction extends ActionSupport{
 	private final Logger log = Logger.getLogger(JugadoresAction.class);
 	private JugadorModelo jugador;
 	private ConsultasEquipos clienteEquipos;
+	private ConsultasJugadores clienteJugadores;
 	
 	private String fechaNacimiento;
 	private String pais;
@@ -35,6 +38,7 @@ public class JugadoresAction extends ActionSupport{
 	public JugadoresAction(){
 		//se inicia el cliente de equipos
 		setClienteEquipos(new ClienteRESTEquipos());
+		setClienteJugadores(new ClienteRESTJugadores());
 		//se instancia la lista para los paises y equipos
 		setListaPaises(new ArrayList<PaisModelo>());
 		setListaEquipos(new ArrayList<EquipoModelo>());
@@ -46,6 +50,8 @@ public class JugadoresAction extends ActionSupport{
 	/**
 	 * 
 	 * @return
+	 * Nombre de la vista que se debe mostrar, retorna
+	 * el nombre del formulario para agregar torneo
 	 */
 	public String vistaRegistrarJugador(){
 		//log.info(jugador.toString());
@@ -54,11 +60,35 @@ public class JugadoresAction extends ActionSupport{
 		return "vistaRegistrarJugador";
 	}
 	
-	public String registrarJugador() throws ParseException{
-		//se valida si el jugador esta activo o inactivo
-		if(this.getActivo().equalsIgnoreCase("si"))
-			this.getJugador().setEstado(true);	
+	/**
+	 * 
+	 * @return
+	 */
+	public String registrarJugador(){
+		//se cargan los datos del jugador
+		this.cargarDatosJugador();
+		boolean envioRegistro = this.getClienteJugadores().enviarRegistroJugador(this.getJugador());
+		if(envioRegistro)
+			this.limpiarCampos();	
+		//si el registro es fallido
+		if(!envioRegistro){
+			//se despliega el mensaje de error
+			this.addActionError(this.getClienteJugadores().getMensajeError());			
+		}
 		
+		this.cargarListaDePaises();
+		this.cargarListaDeEquipos();
+		return "vistaRegistrarJugador";
+	}
+	
+	/**
+	 * metodo que obtiene los datos del formulario y los carga
+	 * en el objeto jugador.
+	 */
+	private void cargarDatosJugador(){
+		//se valida si el jugador es inactivo, por default es activo
+		if(this.getActivo().equalsIgnoreCase("no"))
+			this.getJugador().setEstado(false);			
 		//se crea una representacion de pais
 		PaisModelo paisSeleccionado = new PaisModelo();
 		//se obtiene el id del pais seleccionado en el dropdown
@@ -69,32 +99,29 @@ public class JugadoresAction extends ActionSupport{
 		
 		//Se obtiene la fecha de nacimiento del textbox correspondiente. 
 		DateFormat formateador;
-		Date fechaNacimientoJugador;
+		Date fechaNacimientoJugador = null;
 		formateador = new SimpleDateFormat("dd-MM-yyyy");
-		fechaNacimientoJugador = formateador.parse(this.fechaNacimiento);
+		try {
+			fechaNacimientoJugador = formateador.parse(this.fechaNacimiento);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		//Se define al objeto jugador la fecha de nacimiento.
 		this.jugador.setFechaNacimiento(fechaNacimientoJugador);
-		
 		//Se crea una representacion de equipo
 		EquipoModelo equipoJugador = new EquipoModelo();
 		//Se obtiene el id del equipo seleccionado en el dropdown
 		int idEquipo = Integer.parseInt(equipo);
 		equipoJugador.setId_Equipo(idEquipo);
 		//Se define el objeto equipo al objeto Jugador
-		this.getJugador().setEquipoActual(equipoJugador);
-		
-		
-		log.info(jugador.toString());
-		log.info(equipo+pais+fechaNacimiento+activo);
-		this.cargarListaDePaises();
-		this.cargarListaDeEquipos();
-		return "vistaRegistrarJugador";
+		this.getJugador().setEquipoActual(equipoJugador);		
 	}
 	
 	
 	
 	/**
-	 * 
+	 * metodo que carga en la lista temporal de la lista
+	 * de paises validos del sistema
 	 */
 	private void cargarListaDePaises(){
 		//se obtiene la lista de paises
@@ -107,7 +134,8 @@ public class JugadoresAction extends ActionSupport{
 		}
 	}
 	/**
-	 * 
+	 * metodo que carga en la lista temporal de equipos
+	 * los equipos tipo club registrados en el sistema
 	 */
 	private void cargarListaDeEquipos(){
 		//se obtiene la lista de paises
@@ -118,6 +146,15 @@ public class JugadoresAction extends ActionSupport{
 		}else{
 			this.setListaEquipos(lista);
 		}
+	}
+	
+	/**
+	 * metodo que limpia los campos del formulario luego 
+	 * de una insercion o edicion exitosa
+	 */
+	private void limpiarCampos(){
+		this.setJugador(null);
+		this.setFechaNacimiento("");
 	}
 	
 	
@@ -183,6 +220,19 @@ public class JugadoresAction extends ActionSupport{
 
 	public void setListaEquipos(List<EquipoModelo> listaEquipos) {
 		this.listaEquipos = listaEquipos;
+	}
+
+	private ConsultasJugadores getClienteJugadores() {
+		return clienteJugadores;
+	}
+
+	private void setClienteJugadores(ConsultasJugadores clienteJugadores) {
+		this.clienteJugadores = clienteJugadores;
+	}
+
+	@SuppressWarnings("unused")
+	private Logger getLog() {
+		return log;
 	}
 
 

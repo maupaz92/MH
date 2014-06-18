@@ -13,7 +13,8 @@ public class RegistroRESTServices  extends Application {
 	
 	public RegistroRESTServices(){
 		singletons.add(new TorneosRESTService());
-		singletons.add(new EquiposRESTService());    
+		singletons.add(new EquiposRESTService());
+		singletons.add(new JugadoresRESTService());
 	}
 	
 	@Override

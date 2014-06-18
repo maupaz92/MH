@@ -13,7 +13,9 @@
         <property name="estado" type="boolean"><column name="Estado_Jugador" not-null="true" /></property>
         <property name="altura" type="int"><column name="Altura_Jugador" not-null="true" /></property>
         <property name="peso" type="int"><column name="Peso_Jugador" not-null="true" /></property>
-        <property name="fechaNacimiento" type="date"><column name="Fecha_Nacimiento" not-null="true" /></property>
+        <property name="fechaNacimiento" type="java.util.Date">
+        	<column name="Fecha_Nacimiento" not-null="true" />
+        </property>
         <many-to-one name="equipoActual" class="modelos.recursos.EquipoModelo" 
    	  column="Equipo_Actual" cascade="none" not-null="true"/>
    	   <many-to-one name="pais" class="modelos.recursos.PaisModelo" 

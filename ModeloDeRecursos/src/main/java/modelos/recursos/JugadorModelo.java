@@ -45,6 +45,18 @@ public class JugadorModelo implements Serializable{
 		equipoActual = new EquipoModelo();
 		pais = new PaisModelo();		
 	}
+	
+	public JugadorModelo(JugadorModelo jugador){
+		pasaporte = jugador.getPasaporte();
+		nombre = jugador.getNombre();
+		estado = jugador.getEstado();
+		posicion = jugador.getPosicion();
+		altura = jugador.getAltura();
+		peso = jugador.getPeso();
+		fechaNacimiento = jugador.getFechaNacimiento();
+		equipoActual = new EquipoModelo(jugador.getEquipoActual());
+		pais = new PaisModelo(jugador.getPais());
+	}
 
 	@Override
 	public String toString() {

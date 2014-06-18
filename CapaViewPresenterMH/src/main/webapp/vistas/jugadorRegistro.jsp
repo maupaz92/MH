@@ -13,7 +13,7 @@
 		<script>	
 		$(function () {						
 			$.ajax({
-				url: 'http://localhost:8080/CapaServicioMH/torneos',
+				url: 'http://localhost:8080/CapaServicioMH/jugadores',
 				dataType: 'json',
 				success: function(response){
 					//se define el arreglo de torneos
@@ -24,6 +24,7 @@
 					$.each(response, function(key, value){						
 						torneos.push({
 							recid: conteo,
+							pasaporte: value.pasaporte,
 							nombre: value.nombre,					
 						});
 						conteo++;
@@ -34,7 +35,8 @@
 						multiSelect: false,
 						columns: 
 						[				
-							{ field: 'nombre', caption: 'Nombre', size: '30%'}							
+							{ field: 'pasaporte', caption: 'Pasaporte', size: '30%'},
+							{ field: 'nombre', caption: 'Nombre', size: '30%'}
 						],
 						records: torneos,										
 					});										
@@ -49,12 +51,13 @@
 				<s:textfield type = "number" name = "jugador.pasaporte" label = "Pasaporte" pattern="[0-9]+ "/>
 				<s:textfield name = "jugador.nombre" label = "Nombre" />								
 				<s:textfield name="fechaNacimiento"  label = "Fecha Nacimiento (dd-mm-aaaa)"/>							
-				<s:textfield type = "number" name="jugador.altura" label = "Altura" pattern="[0-9]+" min = "0" max = "220"/>
-				<s:textfield type = "number" name="jugador.peso" label = "Peso" pattern="[0-9]+" min = "0" max = "150"/>
+				<s:textfield type = "number" name="jugador.altura" label = "Altura (cm)" pattern="[0-9]+" min = "0" max = "220"/>
+				<s:textfield type = "number" name="jugador.peso" label = "Peso (kg)" pattern="[0-9]+" min = "0" max = "150"/>
 				<s:textfield name="jugador.posicion" label = "Posicion"/>
 				<s:select name = "pais" label="Pais" list="listaPaises" 
 					listKey="id_Pais" listValue="nombre"></s:select>
-				<s:select name = "equipo" label = "Equipo Actual" list="{'si','no'}"></s:select>
+				<s:select name = "equipo" label="Equipo" list="listaEquipos" 
+					listKey="id_Equipo" listValue="nombre"></s:select>
 				<s:select name = "activo" label = "Activo?" list="{'si','no'}"></s:select>
 				<s:submit align = "center"></s:submit>
 			</s:form>

@@ -28,7 +28,7 @@ public class ClienteRESTEquipos implements ConsultasEquipos{
 	
 	private Client cliente;		
 	private final Logger log = Logger.getLogger(ConsultasEquipos.class);
-	private String mensajeErrorCliente = "Error";	
+	private String mensajeErrorCliente = "Error";
 	private boolean existeConflicto;
 	
 	
@@ -53,7 +53,7 @@ public class ClienteRESTEquipos implements ConsultasEquipos{
 			envioExitoso = false;
 		}
 		respuesta.close();
-		return envioExitoso;		
+		return envioExitoso;
 	}
 
 	public List<EquipoModelo> getEquipoPorTipo(boolean deTipoClubes) {
