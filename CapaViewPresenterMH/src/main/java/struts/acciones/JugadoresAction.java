@@ -89,9 +89,7 @@ public class JugadoresAction extends ActionSupport{
 	private void cargarDatosJugador(){
 		//se valida si el jugador es inactivo, por default es activo
 		if(this.getActivo().equalsIgnoreCase("no"))
-			this.getJugador().setEstado(false);
-		else
-			this.getJugador().setEstado(true);
+			this.getJugador().setEstado(false);			
 		//se crea una representacion de pais
 		PaisModelo paisSeleccionado = new PaisModelo();
 		//se obtiene el id del pais seleccionado en el dropdown
@@ -99,6 +97,7 @@ public class JugadoresAction extends ActionSupport{
 		paisSeleccionado.setId_Pais(idPais);
 		//se define el objeto pais al objeto Jugador
 		this.getJugador().setPais(paisSeleccionado);
+		
 		//Se obtiene la fecha de nacimiento del textbox correspondiente. 
 		DateFormat formateador;
 		Date fechaNacimientoJugador = null;
@@ -114,7 +113,7 @@ public class JugadoresAction extends ActionSupport{
 		EquipoModelo equipoJugador = new EquipoModelo();
 		//Se obtiene el id del equipo seleccionado en el dropdown
 		int idEquipo = Integer.parseInt(equipo);
-		equipoJugador.setId_Equipo(idEquipo);		
+		equipoJugador.setId_Equipo(idEquipo);
 		//Se define el objeto equipo al objeto Jugador
 		this.getJugador().setEquipoActual(equipoJugador);		
 	}

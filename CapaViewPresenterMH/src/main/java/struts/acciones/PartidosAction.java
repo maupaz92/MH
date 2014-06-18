@@ -65,7 +65,6 @@ public class PartidosAction extends ActionSupport{
 			this.setNombreTorneoConfigurado("Torneo: "+this.getNombreTorneoSeleccionado());
 			//se define el tipo del torneo a partir del seleccionado
 			this.setIdTorneoConfigurado(this.getIdTorneoSeleccionado());
-			this.setTipoTorneoConfigurado(this.getTipoTorneoSeleccionado());
 			//se obtiene el tipo de torneo seleccionado
 			Boolean pedirEquiposTipoSeleccion = Boolean.valueOf(this.getTipoTorneoSeleccionado());			
 			//se solicitan los equipos, el parametro se niega debido a la especificacion del metodo			 

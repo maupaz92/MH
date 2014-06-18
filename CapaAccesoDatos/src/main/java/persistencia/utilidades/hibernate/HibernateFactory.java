@@ -2,17 +2,10 @@ package persistencia.utilidades.hibernate;
 
 
 
-import java.util.List;
-
-import modelos.recursos.JugadorModelo;
-
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
-
-import persistencia.implementaciones.lectura.LectorJugadores;
-import persistencia.interfaces.LectorJugadoresDAO;
 
 
 
@@ -54,11 +47,8 @@ public class HibernateFactory {
     }
     
     public static void main(String[] args){
-    	/*SessionFactory session = HibernateFactory.getSessionFactory();
-    	session.close();*/
-    	LectorJugadoresDAO lector = new LectorJugadores();
-    	List<Object> resultado = lector.getJugadoresPorSeleccion(3);
-    	System.out.println(resultado.toString());
+    	SessionFactory session = HibernateFactory.getSessionFactory();
+    	session.close();
     }
     
     

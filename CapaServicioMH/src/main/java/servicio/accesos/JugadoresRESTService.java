@@ -7,7 +7,6 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
@@ -38,7 +37,6 @@ public class JugadoresRESTService {
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
 	public void registrarNuevoJugador(JugadorModelo jugador){		
-		this.getLog().info(jugador.toString());
 		boolean registroExitoso = this.getGestorJugadores().registrarJugador(jugador);
 		//si el registro no se puede llevar 
 		if(!registroExitoso){			
@@ -58,7 +56,7 @@ public class JugadoresRESTService {
 	 */
 	@GET
 	@Produces({"application/json", "application/xml"})
-	public Response getJugadoresRegistrados(){
+	public Response getEquiposRegistrados(){
 		//se obtiene la lista de equipos en el sistema
 		List<JugadorModelo> jugadores = this.getGestorJugadores().getJugadoresRegistrados();
 		//se construye un "wrapper" generico para enviar la lista
@@ -66,43 +64,8 @@ public class JugadoresRESTService {
 		return Response.ok(jugadoresWrap).build();				
 	}
 	
-	@Path("/club")
-	@GET
-	@Produces({"application/json", "application/xml"})
-	public Response getJugadoresPorClub(
-			@QueryParam("idClub") int idClub){
-		
-		/*
-		//se obtiene la lista de equipos en el sistema
-		List<JugadorModelo> jugadores = this.getGestorJugadores().getJugadoresRegistrados();
-		//se construye un "wrapper" generico para enviar la lista
-		GenericEntity<List<JugadorModelo>> jugadoresWrap = new GenericEntity<List<JugadorModelo>>(jugadores){};
-		return Response.ok(jugadoresWrap).build();	
-		*/			
-		this.getLog().info(Integer.toString(idClub));
-		return Response.ok().build();
-	}
-	
-	@Path("/jugador")
-	@GET
-	@Produces({"application/json", "application/xml"})
-	public JugadorModelo getJugador(){
-		JugadorModelo j = new JugadorModelo();
-		j.setNombre("mauricio");
-		j.setPasaporte(12);
-		j.setAltura(null);
-		j.setEquipoActual(null);
-		j.setEstado(null);
-		j.setFechaNacimiento(null);
-		j.setPais(null);
-		return j;
-	}
-	
-	
-	
-	
-	
-	//getters & setters	
+	//getters & setters
+	@SuppressWarnings("unused")
 	private Logger getLog() {
 		return log;
 	}

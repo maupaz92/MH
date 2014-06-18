@@ -14,10 +14,9 @@
 		<div id="torneos" style="width: 80%; height: 400px; margin: 10px;"></div>
 		<s:actionerror />
 		<script>	
-			$(function () {
-				var urlObjetivo = "http://localhost:8080/CapaServicioMH/torneos";
+			$(function () {						
 				$.ajax({
-					url: urlObjetivo,
+					url: 'http://localhost:8080/CapaServicioMH/torneos',
 					dataType: 'json',
 					success: function(response){
 						var torneos = [];
@@ -66,14 +65,24 @@
 			function algo(){
 				var idEquipo1 = document.getElementById("equipo1").value;
 				var idEquipo2 = document.getElementById("equipo2").value;
-				var torneoTipoSelecciones = document.getElementById("tipoTorneoConfigurado").value;
-				var urlEquipo1 = "http://localhost:8080/CapaServicioMH/jugadores/club?"+idEquipo1;
-				var urlEquipo2 = "http://localhost:8080/CapaServicioMH/jugadores/club?"+idEquipo2;
-				if(torneoTipoSelecciones == "true"){					
-					urlEquipo1 = "http://localhost:8080/CapaServicioMH/jugadores/seleccion?"+idEquipo1;
-					urlEquipo2 = "http://localhost:8080/CapaServicioMH/jugadores/seleccion?"+idEquipo2;
-				}
-				alert(urlEquipo1+urlEquipo2);							
+								
+				$.ajax({
+					url: 'http://localhost:8080/CapaServicioMH/torneos',
+					dataType: 'json',
+					success: function(response){
+						var torneos = [];
+						var conteo = 1;
+						$.each(response, function(key, value){														
+							torneos.push({
+								recid: conteo,
+								id: value.id,
+								nombre: value.nombre, 
+								tipo: value.tipoSelecciones,															
+							});
+							conteo++;							
+						});																																											
+					}
+				});
 				
 				w2ui['estadisticas1'].add({ recid: 2, pasaporte: 'passport', nombre: 'jandro', minutos: 0, golesAnotados: 0, tirosMarco: 0, asistencias: 0, recuperacionesBalon: 0,
 					tarjetasAmarillas: 0, tarjetasRojas: 0, penalesDetenidos: 0, penalesCometidos: 0, rematesSalvados: 0});
@@ -94,7 +103,7 @@
 				<h3>Partido</h3>
 				<s:property value = "nombreTorneoConfigurado" /> <br>					
 				<s:textfield name = "idTorneoConfigurado"></s:textfield>
-				<s:textfield id = "tipoTorneoConfigurado" name = "tipoTorneoConfigurado"></s:textfield>
+				
 				Equipos: <s:select id = "equipo1" name = "equipo1" theme="simple" list="listaEquipos" listKey="id_Equipo" listValue="nombre"></s:select>
 				<s:select id = "equipo2" name = "equipo2" theme="simple" list="listaEquipos" listKey="id_Equipo" listValue="nombre"></s:select><br>
 				

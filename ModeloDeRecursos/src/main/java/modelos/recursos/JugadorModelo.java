@@ -1,5 +1,8 @@
 package modelos.recursos;
 
+
+
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -13,9 +16,13 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  */
 @XmlRootElement
-public class JugadorModelo{
+public class JugadorModelo implements Serializable{
 
-	private Integer pasaporte;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5095105324317248308L;
+	private int pasaporte;
 	private String nombre;
 	private Boolean estado;	
 	private String posicion;
@@ -28,7 +35,6 @@ public class JugadorModelo{
 	
 	
 	public JugadorModelo(){
-		/*
 		pasaporte = -1;
 		nombre = "";
 		estado = true;
@@ -37,8 +43,7 @@ public class JugadorModelo{
 		peso = -1;
 		fechaNacimiento = new Date(1);
 		equipoActual = new EquipoModelo();
-		pais = new PaisModelo();
-		*/	
+		pais = new PaisModelo();		
 	}
 	
 	public JugadorModelo(JugadorModelo jugador){
@@ -64,7 +69,7 @@ public class JugadorModelo{
 	
 	//----------getters & setters
 	@XmlAttribute
-	public Integer getPasaporte() {
+	public int getPasaporte() {
 		return pasaporte;
 	}
 
@@ -72,7 +77,7 @@ public class JugadorModelo{
 		this.pasaporte = pasaporte;
 	}
 
-	@XmlAttribute
+	@XmlElement
 	public String getNombre() {
 		return nombre;
 	}
@@ -144,11 +149,6 @@ public class JugadorModelo{
 	}
 	
 	
-	public static void main(String[] args){
-		JugadorModelo j = new JugadorModelo();
-		j.setAltura(12);
-		
-	}
 
 }
 
