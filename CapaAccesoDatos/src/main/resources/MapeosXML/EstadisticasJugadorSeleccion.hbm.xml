@@ -7,11 +7,12 @@
  <class name="EstadisticaJugadorRegularesModelo" table="Estadisticas_Regulares">
       <meta attribute="class-description">
          Esta clase contiene los metadatos necesarios para mapear a la base de 
-         datos los objetos de Estadisticas Regulares asociados a un Jugador.
+         datos los objetos de Estadisticas de Seleccion asociados a un Jugador.
       </meta>
-      <composite-id name="id" class="Order$Id">
-        <key-property name="customerId" length="10"/>
-        <key-property name="orderNumber"/>
+      <composite-id name="id" class="EstadisticaJugadorRegularesModelo">
+        <key-many-to-one name="pasaporte" class="JugadorModelo" column="Pasaporte_XFIFA"/>
+        <key-property name="id_Torneo" column="Torneo" type="int"/>
+        <key-property name="ano" column="Ano" type="int"/>
     </composite-id>
     
      <property name="nota_XFIFA" column="Nota_XFIFA" type="float"/>

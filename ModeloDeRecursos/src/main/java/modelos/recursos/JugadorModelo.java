@@ -31,7 +31,7 @@ public class JugadorModelo implements Serializable{
 	private Date fechaNacimiento;
 	private EquipoModelo equipoActual;
 	private PaisModelo pais;
-	
+
 	
 	
 	public JugadorModelo(){
@@ -147,6 +147,8 @@ public class JugadorModelo implements Serializable{
 	public void setPais(PaisModelo pais) {
 		this.pais = pais;
 	}
+	
+	
 
 }
 

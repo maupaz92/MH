@@ -9,9 +9,11 @@
          Esta clase contiene los metadatos necesarios para mapear a la base de 
          datos los objetos de Estadisticas Regulares asociados a un Jugador.
       </meta>
-      <composite-id name="id" class="Order$Id">
-        <key-property name="customerId" length="10"/>
-        <key-property name="orderNumber"/>
+      
+      <composite-id name="id" class="EstadisticaJugadorRegularesModelo">
+        <key-many-to-one name="pasaporte" class="JugadorModelo" column="Pasaporte_XFIFA"/>
+        <key-property name="id_Equipo" column="Equipo" type="int"/>
+        <key-property name="ano" column="Ano" type="int"/>
     </composite-id>
     
       <property name="nota_XFIFA" column="Nota_XFIFA" type="float"/>
@@ -29,7 +31,7 @@
       <property name="penales_Cometidos" column="Penales_Cometidos" type="int"/>
       <property name="penales_Detenidos" column="Penales_Detenidos" type="int"/>
       <property name="remates_Salvados" column="Remates_Salvados" type="int"/>
-      <property name="ano" column="Ano" type="int"/>
+      
    </class>
     
 </hibernate-mapping>

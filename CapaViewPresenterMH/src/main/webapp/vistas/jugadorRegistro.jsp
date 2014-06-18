@@ -48,7 +48,7 @@
 			<h2>Nuevo Jugador</h2>
 			<s:actionerror />
 			<s:form action = "registrarJugadorLinkJugadores">
-				<s:textfield type = "number" name = "jugador.pasaporte" label = "Pasaporte" pattern="[0-9]+ "/>
+				<s:textfield type = "number" name = "jugador.pasaporte" label = "Pasaporte" pattern="d{10}" requiredLabel="true" maxlenght="10"/>
 				<s:textfield name = "jugador.nombre" label = "Nombre" />								
 				<s:textfield name="fechaNacimiento"  label = "Fecha Nacimiento (dd-mm-aaaa)"/>							
 				<s:textfield type = "number" name="jugador.altura" label = "Altura (cm)" pattern="[0-9]+" min = "0" max = "220"/>
