@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+<hibernate-mapping package="modelos.recursos">
+ <class name="PartidoModelo" table="Partidos">
+      <meta attribute="class-description">
+         Esta clase contiene los metadatos necesarios para mapear a la base de 
+         datos los objetos Partido.
+      </meta>
+      <id name="id_Partido" type="int" column="Id_Partido" >
+      	<generator class="identity"></generator>
+      </id>
+      <property name="id_Torneo" type="int" column="Id_Torneo"></property>
+      <property name="equipoA" column="Id_EquipoA" type="int" not-null="true"/>
+      <property name="equipoB" column="Id_EquipoB" type="int" not-null="true"/>
+      <property name="marcadorA" column="Marcador_EquipoA" type="int" not-null="true"/>
+      <property name="marcadorB" column="Marcador_EquipoB" type="int" not-null="true"/>
+      <property name="fecha" type="java.util.Date" column="Fecha_Partido" not-null="true"/>
+   </class> 
+    
+</hibernate-mapping>
