@@ -66,7 +66,7 @@ public class EstadisticasJugadorSeleccionModelo implements Serializable{
 	}
 	
 	public double getNota_XFIFA() {
-
+		return this.nota_XFIFA;
 	}	
 	
 	public void setNota_XFIFA(double nota_XFIFA) {
