@@ -22,14 +22,19 @@ public class EstadisticasJugadorSeleccionModelo implements Serializable{
 	
 	private static final long serialVersionUID = 8289733517215125165L;
 	private JugadorModelo jugador;
+
 	private int torneo;
 	
 	private double nota_XFIFA;
+
+
+	
 	private int juegos_Totales;
-	private int goles_Anotados;
 	private int juegos_Ganados;	
 	private int juegos_Perdidos;
 	private int juegos_Empatados;
+	
+	private int goles_Anotados;	
 	private int minutos_Jugados;
 	private int balones_Recuperados;	
 	private int asistencias;
@@ -39,7 +44,7 @@ public class EstadisticasJugadorSeleccionModelo implements Serializable{
 	private int penales_Cometidos;
 	private int penales_Detenidos;
 	private int remates_Salvados;
-	private int ano;	
+	private int ano;
 	
 	public EstadisticasJugadorSeleccionModelo(){}
 	
@@ -57,11 +62,13 @@ public class EstadisticasJugadorSeleccionModelo implements Serializable{
 	}
 	public void setTorneo(int torneo) {
 		this.torneo = torneo;
+
 	}
 	
 	public double getNota_XFIFA() {
-		return nota_XFIFA;
-	}
+
+	}	
+	
 	public void setNota_XFIFA(double nota_XFIFA) {
 		this.nota_XFIFA = nota_XFIFA;
 	}

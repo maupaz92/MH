@@ -66,6 +66,19 @@ public class JugadorModelo implements Serializable{
 	}
 	
 	
+	/**
+	 * metodo que deja la instancia actual del {@link JugadorModelo}
+	 * con el nombre y pasaporte definido, los demas campos nulos.
+	 */
+	public void limpiarIdentificacion(){
+		this.altura = null;
+		this.equipoActual = null;
+		this.estado = null;
+		this.fechaNacimiento = null;
+		this.pais = null;
+		this.peso = null;
+		this.posicion = null;		
+	}
 	
 	//----------getters & setters
 	@XmlAttribute
