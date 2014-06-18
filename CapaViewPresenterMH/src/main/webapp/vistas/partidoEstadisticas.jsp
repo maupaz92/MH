@@ -63,7 +63,9 @@
 				});								
 			});
 			
-			function algo(){
+			
+			
+			function cargarJugadoresPorEquipo(){
 				var idEquipo1 = document.getElementById("equipo1").value;
 				var idEquipo2 = document.getElementById("equipo2").value;
 				var torneoTipoSelecciones = document.getElementById("tipoTorneoConfigurado").value;
@@ -95,9 +97,10 @@
 								penalesCometidos: 0, 
 								rematesSalvados: 0,					
 							});
+							conteo++;
 						});
-						w2ui['estadisticas1'].records = jugadores1;
-						w2ui['estadisticas1'].refresh();
+						w2ui['gridJugadoresEquipo1'].records = jugadores1;
+						w2ui['gridJugadoresEquipo1'].refresh();
 					}
 				});
 				$.ajax({
@@ -122,49 +125,52 @@
 								penalesCometidos: 0, 
 								rematesSalvados: 0,					
 							});
+							conteo++;
 						});
-						w2ui['estadisticas2'].records = jugadores2;
-						w2ui['estadisticas2'].refresh();
+						w2ui['gridJugadoresEquipo2'].records = jugadores2;
+						w2ui['gridJugadoresEquipo2'].refresh();
 					}
 				});
 			}
 			
 		</script>
 		<s:form action="cargarEquiposLinkPartidos">
-			<s:textfield id = "idTorneoSeleccionado" name = "idTorneoSeleccionado"></s:textfield>
-			<s:textfield id = "tipoTorneoSeleccionado" name = "tipoTorneoSeleccionado"></s:textfield>
-			<s:textfield id = "nombreTorneoSeleccionado" name = "nombreTorneoSeleccionado"></s:textfield>
+			<s:textfield id = "idTorneoSeleccionado" name = "idTorneoSeleccionado" type="hidden"></s:textfield>
+			<s:textfield id = "tipoTorneoSeleccionado" name = "tipoTorneoSeleccionado" type="hidden"></s:textfield>
+			<s:textfield id = "nombreTorneoSeleccionado" name = "nombreTorneoSeleccionado" type="hidden"></s:textfield>
 			<s:submit value = "Cargar Equipos"/>
 		</s:form>
 	</div>
 	
 	<div id = "contenedorPartido" class = "rightFloat">
 		<div id = "detallesPartido" class = "">
-			<s:form>
+			<s:form action="registrarPartidoLinkPartidos">
 				<h3>Partido</h3>
 				<s:property value = "nombreTorneoConfigurado" /> <br>					
-				<s:textfield name = "idTorneoConfigurado"></s:textfield>
-				<s:textfield id = "tipoTorneoConfigurado" name = "tipoTorneoConfigurado"></s:textfield>
-				Equipos: <s:select id = "equipo1" name = "equipo1" theme="simple" list="listaEquipos" listKey="id_Equipo" listValue="nombre"></s:select>
-				<s:select id = "equipo2" name = "equipo2" theme="simple" list="listaEquipos" listKey="id_Equipo" listValue="nombre"></s:select><br>
+				<s:textfield name = "idTorneoConfigurado" type="hidden"></s:textfield>
+				<s:textfield id = "estadisticasEquipo1" name = "estadisticasEquipo1" type="hidden"></s:textfield>
+				<s:textfield id = "estadisticasEquipo2" name = "estadisticasEquipo2" type="hidden"></s:textfield>
+				<s:textfield id = "tipoTorneoConfigurado" name = "tipoTorneoConfigurado" type="hidden"></s:textfield>
+				Equipos: <s:select id = "equipo1" name = "idEquipo1" theme="simple" list="listaEquipos" listKey="id_Equipo" listValue="nombre"></s:select>
+				<s:select id = "equipo2" name = "idEquipo2" theme="simple" list="listaEquipos" listKey="id_Equipo" listValue="nombre"></s:select><br>
 				
-				Marcador: <s:textfield type = "number" name="marcador1" size="3" theme="simple" pattern="[0-9]+" min = "0" max = "99"/>
-				<s:textfield type = "number" name="marcador2" size="3" pattern="[0-9]+" theme="simple" min = "0" max = "99"/>
+				Marcador: <s:textfield type = "number" name="golesEquipo1" size="3" theme="simple" pattern="[0-9]+" min = "0" max = "99"/>
+				<s:textfield type = "number" name="golesEquipo2" size="3" pattern="[0-9]+" theme="simple" min = "0" max = "99"/>
 				<br>
-				Fecha (dd-mm-aaaa)": <s:textfield  name="fecha" theme="simple"/>
-				<br><input type = "button" onclick="algo();" value="Cargar Jugadores">
-				<s:submit value="registrar" align = "center" theme = "simple" />
+				Fecha (dd-mm-aaaa)": <s:textfield  name="fechaPartido" theme="simple"/>
+				<br><input type = "button" onclick="cargarJugadoresPorEquipo();" value="Cargar Jugadores">
+				<s:submit id = "registrar" value="registrar" align = "center" theme = "simple" />
 			</s:form>
 		</div>
 		
-		<div id="estadisticas1" class = "estadisticas"></div>
+		<div id="gridJugadoresEquipo1" class = "estadisticas"></div>
 		<script>	
 			$(function () {						
-				$('#estadisticas1').w2grid({ 
-					name: 'estadisticas1',					
+				$('#gridJugadoresEquipo1').w2grid({ 
+					name: 'gridJugadoresEquipo1',					
 					multiSelect: false,
 					columns: 
-					[				
+					[						
 						{ field: 'nombre', caption: 'Nombre', size: '30%'},
 						{ field: 'pasaporte', caption: 'Pasaporte', size: '15%'},
 						{ field: 'minutos', caption: 'Mins', size: '5%', editable: {type: 'int', style: 'text-align: center', inTag: 'maxlength=3'}},
@@ -177,20 +183,45 @@
 						{ field: 'penalesDetenidos', caption: 'P.D.', size: '5%', editable: {type: 'int', style: 'text-align: center', inTag: 'maxlength=2'}},
 						{ field: 'penalesCometidos', caption: 'P.C.', size: '5%', editable: {type: 'int', style: 'text-align: center', inTag: 'maxlength=2'}},
 						{ field: 'rematesSalvados', caption: 'R.S', size: '5%', editable: {type: 'int', style: 'text-align: center', inTag: 'maxlength=2'}}
-					],	
-					records: [
-						{ recid: 1, pasaporte: 'passport', nombre: 'mauricio', minutos: 0, golesAnotados: 0, tirosMarco: 0, asistencias: 0, recuperacionesBalon: 0,
-							tarjetasAmarillas: 0, tarjetasRojas: 0, penalesDetenidos: 0, penalesCometidos: 0, rematesSalvados: 0}
-					]
-				});						
+					]						
+				});	
+				$("#registrar").click(function(){				
+					
+					var estadisticasJugadores1 = w2ui['gridJugadoresEquipo1'].getChanges();					
+					w2ui['gridJugadoresEquipo1'].mergeChanges();
+					var resultadorEstadisticas1 = "";					
+					var index = 0;
+					while(index < estadisticasJugadores1.length){														
+						var fila = estadisticasJugadores1[index].recid;
+						var estats = w2ui['gridJugadoresEquipo1'].get(fila);
+						var stringEstats = JSON.stringify(estats);
+						resultadorEstadisticas1 = resultadorEstadisticas1 + stringEstats + "-";
+						index++;
+					}
+					
+					document.getElementById("estadisticasEquipo1").value = resultadorEstadisticas1.substring(0, resultadorEstadisticas1.length-1);
+					
+					var estadisticasJugadores2 = w2ui['gridJugadoresEquipo2'].getChanges();					
+					w2ui['gridJugadoresEquipo2'].mergeChanges();
+					var resultadoFinal = "";					
+					var conteo = 0;
+					while(conteo < estadisticasJugadores2.length){						
+						var fila2 = estadisticasJugadores2[conteo].recid;
+						var estadistica2 = w2ui['gridJugadoresEquipo2'].get(fila2);
+						var stringEstadistica = JSON.stringify(estadistica2);						
+						resultadoFinal = resultadoFinal + stringEstadistica + "-";
+						conteo++;
+					}					
+					document.getElementById("estadisticasEquipo2").value = resultadoFinal.substring(0, resultadoFinal.length-1);
+				});
 			});
 		</script>
 		
-		<div id="estadisticas2" class = "estadisticas"></div>
+		<div id="gridJugadoresEquipo2" class = "estadisticas"></div>
 		<script>	
 			$(function () {						
-				$('#estadisticas2').w2grid({ 
-					name: 'estadisticas2',					
+				$('#gridJugadoresEquipo2').w2grid({ 
+					name: 'gridJugadoresEquipo2',					
 					multiSelect: false,
 					columns: 
 					[				
@@ -206,10 +237,6 @@
 						{ field: 'penalesDetenidos', caption: 'P.D.', size: '5%', editable: {type: 'int', style: 'text-align: center', inTag: 'maxlength=2'}},
 						{ field: 'penalesCometidos', caption: 'P.C.', size: '5%', editable: {type: 'int', style: 'text-align: center', inTag: 'maxlength=2'}},
 						{ field: 'rematesSalvados', caption: 'R.S', size: '5%', editable: {type: 'int', style: 'text-align: center', inTag: 'maxlength=2'}}
-					],	
-					records: [
-						{ recid: 1, pasaporte: 'passport', nombre: 'mauricio', minutos: 0, golesAnotados: 0, tirosMarco: 0, asistencias: 0, recuperacionesBalon: 0,
-							tarjetasAmarillas: 0, tarjetasRojas: 0, penalesDetenidos: 0, penalesCometidos: 0, rematesSalvados: 0}
 					]
 				});						
 			});

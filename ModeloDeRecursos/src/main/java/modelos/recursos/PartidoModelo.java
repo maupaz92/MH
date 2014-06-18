@@ -26,12 +26,9 @@ public class PartidoModelo {
 		return id_Partido;
 	}
 
-
 	public void setId_Partido(int id_Partido) {
 		this.id_Partido = id_Partido;
 	}
-
-
 	
 	@XmlAttribute	
 	public int getId_Torneo() {
@@ -67,7 +64,6 @@ public class PartidoModelo {
 	}
 
 	@XmlAttribute
-
 	public int getMarcadorB() {
 		return marcadorB;
 	}
@@ -76,8 +72,6 @@ public class PartidoModelo {
 	}
 
 	@XmlAttribute
-
-
 	public Date getFecha() {
 		return fecha;
 	}

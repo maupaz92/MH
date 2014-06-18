@@ -13,14 +13,20 @@ public class EstadisticasJugadorRegularesModelo implements Serializable{
 	 * Actúa como una FK a nivel de base de datos. 
 	 *  */
 	
+	
 	private JugadorModelo jugador;	
 	private int club;
+	private int ano;
+	
+	
 	private double nota_XFIFA;
 	private int juegos_Totales;
-	private int goles_Anotados;
 	private int juegos_Ganados;
 	private int juegos_Perdidos;
 	private int juegos_Empatados;
+	
+	
+	private int goles_Anotados;	
 	private int minutos_Jugados;
 	private int balones_Recuperados;
 	private int asistencias;
@@ -30,7 +36,7 @@ public class EstadisticasJugadorRegularesModelo implements Serializable{
 	private int penales_Cometidos;
 	private int penales_Detenidos;
 	private int remates_Salvados;
-	private int ano;
+	
 	
 	
 		public EstadisticasJugadorRegularesModelo(){}

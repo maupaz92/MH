@@ -1,12 +1,19 @@
 package struts.acciones;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import modelos.recursos.EquipoModelo;
+import modelos.recursos.PartidoModelo;
 
 import org.jboss.resteasy.logging.Logger;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.opensymphony.xwork2.ActionSupport;
 
 import comunicacion.servicios.clientes.rest.ClienteRESTEquipos;
@@ -30,6 +37,14 @@ public class PartidosAction extends ActionSupport{
 	private String idTorneoConfigurado;
 	private String tipoTorneoConfigurado;
 	private String nombreTorneoConfigurado;
+	
+	private String idEquipo1;
+	private String idEquipo2;
+	private int golesEquipo1;
+	private int golesEquipo2;
+	private String fechaPartido;
+	private String estadisticasEquipo1;
+	private String estadisticasEquipo2;
 	
 	private ConsultasEquipos clienteEquipos;
 	private List<EquipoModelo> listaEquipos;
@@ -81,7 +96,71 @@ public class PartidosAction extends ActionSupport{
 		return "vistaRegistrarPartido";
 	}
 	
+	
+	public String registrarPartido(){						
+		//Se obtiene la fecha de nacimiento del textbox correspondiente. 
+		DateFormat formateador = new SimpleDateFormat("dd-MM-yyyy");
+		Date fechaPartidoRegistrado = null;		
+		try {
+			fechaPartidoRegistrado = formateador.parse(this.getFechaPartido());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		this.crearEstadisticas();
+		PartidoModelo partido = new PartidoModelo();
+		partido.setEquipoA(Integer.parseInt(this.getIdEquipo1()));
+		partido.setEquipoB(Integer.parseInt(this.getIdEquipo2()));
+		partido.setMarcadorA(this.getGolesEquipo1());
+		partido.setMarcadorB(this.getGolesEquipo2());
+		partido.setFecha(fechaPartidoRegistrado);
+		
+		this.limpiarCamposPartido();
+		return "vistaRegistrarPartido";
+	}
 
+	
+	/**
+	 * metodo que limpia el formulario de partido despues de un 
+	 * registro
+	 */
+	private void limpiarCamposPartido(){
+		this.setGolesEquipo1(0);
+		this.setGolesEquipo2(0);
+		this.setFechaPartido("");
+		
+	}
+	
+	
+	/**
+	 * 
+	 */
+	private void crearEstadisticas(){
+		
+		String[] estadisticasJugadoresEquipo1 = this.getEstadisticasEquipo1().split("-");
+		for (String string : estadisticasJugadoresEquipo1) {
+			this.getLOG().info(string);
+			ObjectMapper mapeo = new ObjectMapper();
+			mapeo.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//getters & setters
 	public List<String> getListaEquiposParcial() {
@@ -159,6 +238,62 @@ public class PartidosAction extends ActionSupport{
 
 	public void setIdTorneoConfigurado(String idTorneoConfigurado) {
 		this.idTorneoConfigurado = idTorneoConfigurado;
+	}
+
+	public String getIdEquipo1() {
+		return idEquipo1;
+	}
+
+	public void setIdEquipo1(String idEquipo1) {
+		this.idEquipo1 = idEquipo1;
+	}
+
+	public int getGolesEquipo1() {
+		return golesEquipo1;
+	}
+
+	public void setGolesEquipo1(int golesEquipo1) {
+		this.golesEquipo1 = golesEquipo1;
+	}
+
+	public int getGolesEquipo2() {
+		return golesEquipo2;
+	}
+
+	public void setGolesEquipo2(int golesEquipo2) {
+		this.golesEquipo2 = golesEquipo2;
+	}
+
+	public String getIdEquipo2() {
+		return idEquipo2;
+	}
+
+	public void setIdEquipo2(String idEquipo2) {
+		this.idEquipo2 = idEquipo2;
+	}
+
+	public String getFechaPartido() {
+		return fechaPartido;
+	}
+
+	public void setFechaPartido(String fechaPartido) {
+		this.fechaPartido = fechaPartido;
+	}
+
+	public String getEstadisticasEquipo1() {
+		return estadisticasEquipo1;
+	}
+
+	public void setEstadisticasEquipo1(String estadisticasEquipo1) {
+		this.estadisticasEquipo1 = estadisticasEquipo1;
+	}
+
+	public String getEstadisticasEquipo2() {
+		return estadisticasEquipo2;
+	}
+
+	public void setEstadisticasEquipo2(String estadisticasEquipo2) {
+		this.estadisticasEquipo2 = estadisticasEquipo2;
 	}
 
 }
