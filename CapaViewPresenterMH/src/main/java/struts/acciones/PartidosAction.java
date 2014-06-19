@@ -156,6 +156,7 @@ public class PartidosAction extends ActionSupport{
 		//se itera sobre la lista total de estadisticas
 		for(int conteo = 0; conteo < this.getListaFinalEstadisticas().size(); conteo++){
 			EstadisticaParcial est = this.getListaFinalEstadisticas().get(conteo);
+			est.setAno(fechaPartidoRegistrado.getYear());
 			this.getLOG().info(est.toString());
 			estadisticas.agregarEstadisticas(est);
 		}

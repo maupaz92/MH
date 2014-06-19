@@ -4,7 +4,7 @@
      
 <hibernate-mapping package="modelos.recursos">
     <class name="JugadorModelo" table="Jugador" >
-        <id name="pasaporte" type="int">
+        <id name="Pasaporte" type="int">
             <column name="Pasaporte_XFIFA" />   
             <generator class= "assigned" />         
         </id>

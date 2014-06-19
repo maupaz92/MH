@@ -37,18 +37,24 @@ public class LectorEstadisticas implements LectorEstadisticasDAO{
 	public Object getEstadisticaSeleccion(JugadorModelo jugador,int torneo, int year) {
 		//Se obtiene la sesion
 		Session session = HibernateFactory.getSessionFactory().openSession();       
-		session.beginTransaction();
-		        
+		session.beginTransaction();		
+		System.out.println("Buscando Estadisticas"); 
+		Query query = session.createQuery("from EstadisticasJugadorSeleccionModelo e where e.jugador = :iJugador AND  e.torneo = :iTorneo AND e.ano = :iAno");					
+		query.setParameter("iJugador", jugador);
+		query.setParameter("iTorneo", torneo);
+		query.setParameter("iAno", year);
+		Object resultado = query.uniqueResult();//se obtiene la lista del query	
+		return resultado;
 		//Se crea un objeto de Estadisticas que sera utilizado para realizar la busqueda segun los parametros de ingreso.
-		EstadisticasJugadorSeleccionModelo estadisticasBusqueda = new EstadisticasJugadorSeleccionModelo();
+		/*EstadisticasJugadorSeleccionModelo estadisticasBusqueda = new EstadisticasJugadorSeleccionModelo();
 		estadisticasBusqueda.setJugador(jugador);
 		estadisticasBusqueda.setTorneo(torneo);
 		estadisticasBusqueda.setAno(year);
 				
 		//Se realiza la busqueda utilizando el objeto de Estadisticas creado anteriormente.
-		Object estadisticasResultado = session.get(EstadisticasJugadorRegularesModelo.class, estadisticasBusqueda);
+		Object estadisticasResultado = session.get(EstadisticasJugadorRegularesModelo.class, estadisticasBusqueda);*/
 					
-		return estadisticasResultado;
+		
 	}
 
 	@SuppressWarnings("unchecked")
@@ -57,7 +63,7 @@ public class LectorEstadisticas implements LectorEstadisticasDAO{
 		//se obtiene la sesion
 		Session session = HibernateFactory.getSessionFactory().openSession();		
 		//se define el query
-		Query query = session.createQuery("from EstadisticasJugadorRegularesModelo e where e.jugador.pasaporte = :idJugador");					
+		Query query = session.createQuery("from EstadisticasJugadorRegularesModelo e where e.jugador.Pasaporte = :idJugador");					
 		Integer identificacion = jugador.getPasaporte();
 		query.setParameter("idJugador", identificacion);
 		lista = query.list();//se obtiene la lista del query		

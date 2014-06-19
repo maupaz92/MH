@@ -43,4 +43,6 @@ public interface LectorJugadoresDAO {
 	 * seleccion
 	 */
 	public List<Object> getJugadoresPorSeleccion(int idEquipo);
+	
+	public Integer getSeleccionJugador(int pasaporte);
 }

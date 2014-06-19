@@ -4,6 +4,7 @@ import java.util.List;
 
 
 
+
 import modelos.recursos.JugadorModelo;
 
 import org.hibernate.Query;
@@ -63,8 +64,35 @@ public class LectorJugadores implements LectorJugadoresDAO{
 			//Se obtiene el identificador del Pais al que pertenece el Equipo Consultado. 
 			Integer idPais = (Integer) query.list().get(0);	
 			return idPais;
-
 		  
 	  }
+	
+	
+	public Integer getSeleccionJugador(int pasaporte)
+	{
+		Session session = HibernateFactory.getSessionFactory().openSession();
+		
+		//Obtener idPais para el jugador
+		Query query = session.createQuery("Select pais.id_Pais from JugadorModelo a where a.Pasaporte = :idJugador");
+		query.setInteger("idJugador", pasaporte);	
+		@SuppressWarnings("unchecked")
+		Integer idPais = (Integer)query.list().get(0);//se obtiene la lista del query*/	
+		
+		
+		//Obtener NombrePais para el idPais
+		Query query1 = session.createQuery("Select nombre from PaisModelo e where e.id_Pais = :idP");
+		query1.setInteger("idP", idPais);	
+		@SuppressWarnings("unchecked")
+		String nombrePais = (String) query1.list().get(0);//se obtiene la lista del query*/	
+		
+		
+		//Obtener idEquipo para el pais especifico
+		Query query2 = session.createQuery("Select id_Equipo from EquipoModelo d where d.nombre = :name");
+		query2.setParameter("name", nombrePais);	
+		@SuppressWarnings("unchecked")
+		Integer idTeam = (Integer) query2.list().get(0);//se obtiene la lista del query*/	
+		return idTeam;
+				
+	}
 
 }

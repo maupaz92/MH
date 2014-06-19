@@ -61,6 +61,7 @@ public class EstadisticasJugadorSeleccionModelo implements Serializable{
 		this.penales_Cometidos = estadistica.getPenalesCometidos();
 		this.penales_Detenidos = estadistica.getPenalesDetenidos();
 		this.remates_Salvados = estadistica.getRematesSalvados();
+		this.ano = estadistica.getAno();
 		this.setJuegos_Empatados(0);
 		this.setJuegos_Ganados(0);
 		this.setJuegos_Perdidos(0);

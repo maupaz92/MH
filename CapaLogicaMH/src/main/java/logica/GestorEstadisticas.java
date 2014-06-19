@@ -92,6 +92,9 @@ public class GestorEstadisticas {
 				//Crear EstadisticasJugadorRegularesModelo a partir de la EstadisticaParcial
 				EstadisticasJugadorRegularesModelo nuevaEstadistica = new EstadisticasJugadorRegularesModelo(e);
 				nuevaEstadistica.setJugador(jugador);
+				nuevaEstadistica.setClub(e.getIdTorneoEquipo());
+				nuevaEstadistica.setAno(e.getAno());
+				nuevaEstadistica.setJuegos_Totales(nuevaEstadistica.getJuegos_Totales()+1);
 				//Calcular partidoganado, empatado o perdido
 				analizarMarcadorRegulares(partido,jugador,nuevaEstadistica);
 				//Calcular NotaXFIFA
@@ -113,15 +116,21 @@ public class GestorEstadisticas {
 	public void registrarEstadisticasSeleccion(List<EstadisticaParcial> estadisticasParciales, Integer idPartido)
 	{
 		
-		PartidoModelo partido = (PartidoModelo) this.getLectorEstadisticas().getPartido(idPartido);			
+		PartidoModelo partido = (PartidoModelo) this.getLectorEstadisticas().getPartido(idPartido);	
+		System.out.println("TAMAÑO LISTA: "+estadisticasParciales.size());
+		
 		for(int i=0;i<estadisticasParciales.size();i++)
 		{
 			
 			EstadisticaParcial e = estadisticasParciales.get(i);
 			JugadorModelo jugador = (JugadorModelo) this.getLectorJugadores().getJugador(e.getPasaporteJugador());
-			Boolean existeEstadistica = existeEstadisticaSeleccionEspecifica(jugador,e.getIdTorneoEquipo(),e.getAno());
+			System.out.println("Pasaporte: "+e.getPasaporteJugador());
+			System.out.println("Año: "+e.getAno());
+			Boolean existeEstadistica = existeEstadisticaSeleccionEspecifica(jugador,e.getIdTorneoEquipo(), e.getAno());
+			System.out.println(existeEstadistica.toString());
 			if(existeEstadistica)
 			{
+				System.out.println("SI EXISTE");
 				//Obtener EstadisticaEspecifica
 				EstadisticasJugadorSeleccionModelo estadisticasOld = (EstadisticasJugadorSeleccionModelo) this.getLectorEstadisticas().getEstadisticaSeleccion(jugador, e.getIdTorneoEquipo(), e.getAno());
 					
@@ -140,17 +149,18 @@ public class GestorEstadisticas {
 			}
 			else
 			{
-				/*//Crear EstadisticasJugadorRegularesModelo a partir de la EstadisticaParcial
+				//Crear EstadisticasJugadorRegularesModelo a partir de la EstadisticaParcial
 				EstadisticasJugadorSeleccionModelo nuevaEstadistica = new EstadisticasJugadorSeleccionModelo(e);
 				nuevaEstadistica.setJugador(jugador);
-				nuevaEstadistica
+				nuevaEstadistica.setTorneo(e.getIdTorneoEquipo());
+				nuevaEstadistica.setJuegos_Totales(nuevaEstadistica.getJuegos_Totales()+1);
 				//Calcular partidoganado, empatado o perdido
-				analizarMarcadorRegulares(partido,jugador,nuevaEstadistica);
+				analizarMarcadorSeleccion(partido,jugador,nuevaEstadistica);
 				//Calcular NotaXFIFA
-				calcularNotaXFIFARegulares(nuevaEstadistica);
+				calcularNotaXFIFASeleccion(nuevaEstadistica);
 				//Se hace Save y se guarda la nueva estadistica
 				this.getRegistradorObjetosBD().guardarNuevoRecurso(nuevaEstadistica);
-				*/
+				
 			}
 		}
 		
@@ -168,12 +178,12 @@ public class GestorEstadisticas {
 	private boolean existeEstadisticaRegularEspecifica(JugadorModelo jugador, int equipo, int year)
 	{
 		Object resultado = this.getLectorEstadisticas().getEstadisticaRegular(jugador, equipo, year);
+				
 		if(resultado!=null)
-		{
+		{			
 			return true;
-			
 		}else{
-	
+		
 		return false;
 		}
 		
@@ -190,16 +200,17 @@ public class GestorEstadisticas {
 	private boolean existeEstadisticaSeleccionEspecifica(JugadorModelo jugador, int torneo, int year)
 	{
 
-		Object resultado = this.getLectorEstadisticas().getEstadisticaRegular(jugador, torneo, year);
+		Object resultado = new Object();
+		resultado = this.getLectorEstadisticas().getEstadisticaSeleccion(jugador, torneo, year);
+		
 		if(resultado!=null)
 		{
 			return true;
 			
 		}else{
-	
-		return false;
-		}
+			return false;
 		
+		}	
 		
 	}
 	
@@ -276,9 +287,9 @@ public class GestorEstadisticas {
 		}
 		if(equipoJugador==equipoB && marcadorB>marcadorA)
 		{
-			antiguas.setJuegos_Ganados(antiguas.getJuegos_Ganados()+1);
-			
+			antiguas.setJuegos_Ganados(antiguas.getJuegos_Ganados()+1);			
 		}
+		
 	}
 	
 	/**
@@ -290,11 +301,14 @@ public class GestorEstadisticas {
 	 */
 	private void analizarMarcadorSeleccion(PartidoModelo partido, JugadorModelo jugador, EstadisticasJugadorSeleccionModelo antiguas)
 	{
-		int equipoJugador = jugador.getEquipoActual().getId_Equipo();
+		int equipoJugador = this.getLectorJugadores().getSeleccionJugador(jugador.getPasaporte());
 		int equipoA = partido.getEquipoA();
 		int equipoB = partido.getEquipoB();
 		int marcadorA = partido.getMarcadorA();
 		int marcadorB = partido.getMarcadorB();
+		System.out.println("equipoJugador "+equipoJugador);
+		System.out.println("EquipoA "+equipoA);
+		System.out.println("EquipoB "+equipoB);
 		
 		if(equipoJugador==equipoA && marcadorA>marcadorB)
 		{
@@ -316,6 +330,7 @@ public class GestorEstadisticas {
 			
 		}
 	}
+	
 	
 	/**
 	 * Metodo Utilizado para el calculo de la nota XFIFA segun un conjunto de estadisticas Regulares.
