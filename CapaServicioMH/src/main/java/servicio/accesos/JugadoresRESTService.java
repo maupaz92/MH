@@ -57,7 +57,7 @@ public class JugadoresRESTService {
 	 */
 	@GET
 	@Produces({"application/json", "application/xml"})
-	public Response getEquiposRegistrados(){
+	public Response getJugadoresRegistrados(){
 		//se obtiene la lista de equipos en el sistema
 		List<JugadorModelo> jugadores = this.getGestorJugadores().getJugadoresRegistrados();
 		//se construye un "wrapper" generico para enviar la lista

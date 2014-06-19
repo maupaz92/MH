@@ -15,6 +15,7 @@ public class RegistroRESTServices  extends Application {
 		singletons.add(new TorneosRESTService());
 		singletons.add(new EquiposRESTService());
 		singletons.add(new JugadoresRESTService());
+		singletons.add(new EstadisticasRESTService());
 	}
 	
 	@Override
