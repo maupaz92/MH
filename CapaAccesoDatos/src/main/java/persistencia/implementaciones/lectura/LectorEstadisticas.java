@@ -6,10 +6,11 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 
+
+
 import modelos.recursos.EstadisticasJugadorRegularesModelo;
 import modelos.recursos.EstadisticasJugadorSeleccionModelo;
 import modelos.recursos.JugadorModelo;
-
 import persistencia.interfaces.LectorEstadisticasDAO;
 import persistencia.utilidades.hibernate.HibernateFactory;
 
@@ -74,6 +75,20 @@ public class LectorEstadisticas implements LectorEstadisticasDAO{
 		query.setParameter("idJugador", identificacion);
 		lista = query.list();//se obtiene la lista del query		
 		return lista;
+	}
+
+	@SuppressWarnings("unchecked")
+	public Object getPartido(Integer idPartido) {
+		List<Object> lista = null;
+		//se obtiene la sesion
+		Session session = HibernateFactory.getSessionFactory().openSession();		
+		//se define el query
+		Query query = session.createQuery("from PartidoModelo e where e.id_Partido = :idP");					
+		query.setParameter("idP", idPartido);
+		//se obtiene la lista del query
+		lista = query.list();
+		//Se obtiene el objecto Partido resultante
+		return lista.get(0);
 	}
 
 }

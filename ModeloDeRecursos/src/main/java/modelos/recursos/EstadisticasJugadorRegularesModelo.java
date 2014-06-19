@@ -41,6 +41,21 @@ public class EstadisticasJugadorRegularesModelo implements Serializable{
 	
 		public EstadisticasJugadorRegularesModelo(){}
 	
+		
+		public EstadisticasJugadorRegularesModelo(EstadisticaParcial estadistica)
+		{
+			this.goles_Anotados = estadistica.getGolesAnotados();
+			this.minutos_Jugados = estadistica.getMinutosJugados();
+			this.balones_Recuperados = estadistica.getBalonesRecuperados();
+			this.asistencias = estadistica.getAsistencias();
+			this.tiros_Marco = estadistica.getTirosMarco();
+			this.tarjetas_Amarillas = estadistica.getTarjetasAmarillas();
+			this.tarjetas_Rojas = estadistica.getTarjetasRojas();
+			this.penales_Cometidos = estadistica.getPenalesCometidos();
+			this.penales_Detenidos = estadistica.getPenalesDetenidos();
+			this.remates_Salvados = estadistica.getRematesSalvados();
+			
+		}
 	
 	
 	//----------getters & setters

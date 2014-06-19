@@ -3,6 +3,7 @@ package persistencia.interfaces;
 import java.util.List;
 
 
+
 import modelos.recursos.JugadorModelo;
 
 
@@ -51,4 +52,6 @@ public interface LectorEstadisticasDAO {
 	 * Conjunto de objetos EstadisticasJugadorSeleccion obtenidas segun el identificador del jugador ingresado.
 	 */
 	public List<Object> getEstadisticasSeleccionPorJugador(JugadorModelo jugador);
+	
+	public Object getPartido(Integer idPartido);
 }
