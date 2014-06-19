@@ -1,5 +1,6 @@
 package struts.acciones;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -8,11 +9,14 @@ import java.util.Date;
 import java.util.List;
 
 import modelos.recursos.EquipoModelo;
+import modelos.recursos.EstadisticaParcial;
 import modelos.recursos.PartidoModelo;
 
 import org.jboss.resteasy.logging.Logger;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -48,6 +52,7 @@ public class PartidosAction extends ActionSupport{
 	
 	private ConsultasEquipos clienteEquipos;
 	private List<EquipoModelo> listaEquipos;
+	private List<EstadisticaParcial> listaFinalEstadisticas;
 	
 	private final Logger LOG = Logger.getLogger(PartidosAction.class);
 	
@@ -98,7 +103,7 @@ public class PartidosAction extends ActionSupport{
 	
 	
 	public String registrarPartido(){						
-		//Se obtiene la fecha de nacimiento del textbox correspondiente. 
+		//Se obtiene la fecha del partido 
 		DateFormat formateador = new SimpleDateFormat("dd-MM-yyyy");
 		Date fechaPartidoRegistrado = null;		
 		try {
@@ -106,13 +111,39 @@ public class PartidosAction extends ActionSupport{
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		this.crearEstadisticas();
+		
+		/*
+		//se crea el partido
 		PartidoModelo partido = new PartidoModelo();
+		//id parcial
+		partido.setId_Partido(0);
+		partido.setId_Torneo(Integer.parseInt(this.getIdTorneoConfigurado()));
 		partido.setEquipoA(Integer.parseInt(this.getIdEquipo1()));
 		partido.setEquipoB(Integer.parseInt(this.getIdEquipo2()));
 		partido.setMarcadorA(this.getGolesEquipo1());
 		partido.setMarcadorB(this.getGolesEquipo2());
 		partido.setFecha(fechaPartidoRegistrado);
+		*/
+		//registrar partido
+
+		//se define la lista donde se almacenaran las estadisticas totales 
+		this.setListaFinalEstadisticas(new ArrayList<EstadisticaParcial>());
+		
+		//se define si el partido se configura para un torneo de selecciones o de clubes
+		Boolean esTorneoDeSelecciones = Boolean.valueOf(this.getTipoTorneoConfigurado());
+		
+		if(esTorneoDeSelecciones){
+			this.configurarEstadistica(this.getEstadisticasEquipo1(), Integer.parseInt(this.getIdTorneoConfigurado()));
+			this.configurarEstadistica(this.getEstadisticasEquipo2(), Integer.parseInt(this.getIdTorneoConfigurado()));
+		}else{
+			this.configurarEstadistica(this.getEstadisticasEquipo1(), Integer.parseInt(this.getIdEquipo1()));
+			this.configurarEstadistica(this.getEstadisticasEquipo2(), Integer.parseInt(this.getIdEquipo2()));
+		}							
+		
+		for(int conteo = 0; conteo < this.getListaFinalEstadisticas().size(); conteo++){
+			EstadisticaParcial est = this.getListaFinalEstadisticas().get(conteo);
+			this.getLOG().info(est.toString());
+		}
 		
 		this.limpiarCamposPartido();
 		return "vistaRegistrarPartido";
@@ -134,13 +165,26 @@ public class PartidosAction extends ActionSupport{
 	/**
 	 * 
 	 */
-	private void crearEstadisticas(){
+	private void configurarEstadistica(String representacionEstadisticas, int idTorneoEquipo){
 		
-		String[] estadisticasJugadoresEquipo1 = this.getEstadisticasEquipo1().split("-");
-		for (String string : estadisticasJugadoresEquipo1) {
-			this.getLOG().info(string);
+		String[] estadisticasJugadoresEquipo1 = representacionEstadisticas.split("-");
+		for (String estadisticaRecuperada : estadisticasJugadoresEquipo1) {			
 			ObjectMapper mapeo = new ObjectMapper();
 			mapeo.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			EstadisticaParcial nuevoRegistro = null;
+			try{
+				nuevoRegistro = mapeo.readValue(estadisticaRecuperada, EstadisticaParcial.class);
+			} catch (JsonParseException e) {
+				e.printStackTrace();
+			} catch (JsonMappingException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			if(nuevoRegistro != null){
+				nuevoRegistro.setIdTorneoEquipo(idTorneoEquipo);
+				this.getListaFinalEstadisticas().add(nuevoRegistro);
+			}
 		}
 		
 	}
@@ -294,6 +338,14 @@ public class PartidosAction extends ActionSupport{
 
 	public void setEstadisticasEquipo2(String estadisticasEquipo2) {
 		this.estadisticasEquipo2 = estadisticasEquipo2;
+	}
+
+	private List<EstadisticaParcial> getListaFinalEstadisticas() {
+		return listaFinalEstadisticas;
+	}
+
+	private void setListaFinalEstadisticas(List<EstadisticaParcial> listaFinalEstadisticas) {
+		this.listaFinalEstadisticas = listaFinalEstadisticas;
 	}
 
 }

@@ -34,6 +34,15 @@ public class EstadisticaParcial {
 		
 	}
 
+	@Override
+	public String toString() {
+	
+		return "Pasaporte Jugador: "+pasaporteJugador+" id Torneo o Equipo: "+idTorneoEquipo+" year: "+ano+" goles: "+golesAnotados
+				+" minutos jugados: "+" recuperaciones: "+" asistencias: "+" tiros a marcos: "+tirosMarco+" amarillas: "+tarjetasAmarillas+
+				" rojas: "+tarjetasRojas+" penal comentidos: "+penalesCometidos+" penales detenidos: "+penalesDetenidos+" remates salvados: "+
+				rematesSalvados;
+			
+	}
 
 	//getters & setters
 	
@@ -167,6 +176,7 @@ public class EstadisticaParcial {
 	public void setIdTorneoEquipo(int idTorneoEquipo) {
 		this.idTorneoEquipo = idTorneoEquipo;
 	}
+	
 	
 	
 	

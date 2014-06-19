@@ -85,17 +85,17 @@
 							jugadores1.push({
 								recid: conteo,
 								nombre: value.nombre,								
-								pasaporte: value.pasaporte,								
-								minutos: 0, 
+								pasaporteJugador: value.pasaporte,								
+								minutosJugados: 0, 
 								golesAnotados: 0, 
 								tirosMarco: 0, 
 								asistencias: 0, 
-								recuperacionesBalon: 0,
+								balonesRecuperados: 0,
 								tarjetasAmarillas: 0, 
 								tarjetasRojas: 0, 
 								penalesDetenidos: 0, 
 								penalesCometidos: 0, 
-								rematesSalvados: 0,					
+								rematesSalvados: 0,			
 							});
 							conteo++;
 						});
@@ -113,17 +113,17 @@
 							jugadores2.push({
 								recid: conteo,
 								nombre: value.nombre,								
-								pasaporte: value.pasaporte,								
-								minutos: 0, 
+								pasaporteJugador: value.pasaporte,								
+								minutosJugados: 0, 
 								golesAnotados: 0, 
 								tirosMarco: 0, 
 								asistencias: 0, 
-								recuperacionesBalon: 0,
+								balonesRecuperados: 0,
 								tarjetasAmarillas: 0, 
 								tarjetasRojas: 0, 
 								penalesDetenidos: 0, 
 								penalesCometidos: 0, 
-								rematesSalvados: 0,					
+								rematesSalvados: 0,
 							});
 							conteo++;
 						});
@@ -172,12 +172,12 @@
 					columns: 
 					[						
 						{ field: 'nombre', caption: 'Nombre', size: '30%'},
-						{ field: 'pasaporte', caption: 'Pasaporte', size: '15%'},
-						{ field: 'minutos', caption: 'Mins', size: '5%', editable: {type: 'int', style: 'text-align: center', inTag: 'maxlength=3'}},
+						{ field: 'pasaporteJugador', caption: 'Pasaporte', size: '15%'},
+						{ field: 'minutosJugados', caption: 'Mins', size: '5%', editable: {type: 'int', style: 'text-align: center', inTag: 'maxlength=3'}},
 						{ field: 'golesAnotados', caption: 'Goles', size: '5%', editable: {type: 'int', style: 'text-align: center', inTag: 'maxlength=2'}},
 						{ field: 'tirosMarco', caption: 'T.M.', size: '5%', editable: {type: 'int', style: 'text-align: center', inTag: 'maxlength=2'}},
 						{ field: 'asistencias', caption: 'Asis', size: '5%', editable: {type: 'int', style: 'text-align: center', inTag: 'maxlength=2'}},
-						{ field: 'recuperacionesBalon', caption: 'R.B.', size: '5%', editable: {type: 'int', style: 'text-align: center', inTag: 'maxlength=2'}},
+						{ field: 'balonesRecuperados', caption: 'R.B.', size: '5%', editable: {type: 'int', style: 'text-align: center', inTag: 'maxlength=2'}},
 						{ field: 'tarjetasAmarillas', caption: 'T.A', size: '5%', editable: {type: 'int', style: 'text-align: center', inTag: 'maxlength=1'}},
 						{ field: 'tarjetasRojas', caption: 'T.R.', size: '5%', editable: {type: 'int', style: 'text-align: center', inTag: 'maxlength=1'}},
 						{ field: 'penalesDetenidos', caption: 'P.D.', size: '5%', editable: {type: 'int', style: 'text-align: center', inTag: 'maxlength=2'}},
@@ -224,14 +224,14 @@
 					name: 'gridJugadoresEquipo2',					
 					multiSelect: false,
 					columns: 
-					[				
+					[						 	
 						{ field: 'nombre', caption: 'Nombre', size: '30%'},
-						{ field: 'pasaporte', caption: 'Pasaporte', size: '15%'},
-						{ field: 'minutos', caption: 'Mins', size: '5%', editable: {type: 'int', style: 'text-align: center', inTag: 'maxlength=3'}},
+						{ field: 'pasaporteJugador', caption: 'Pasaporte', size: '15%'},
+						{ field: 'minutosJugados', caption: 'Mins', size: '5%', editable: {type: 'int', style: 'text-align: center', inTag: 'maxlength=3'}},
 						{ field: 'golesAnotados', caption: 'Goles', size: '5%', editable: {type: 'int', style: 'text-align: center', inTag: 'maxlength=2'}},
 						{ field: 'tirosMarco', caption: 'T.M.', size: '5%', editable: {type: 'int', style: 'text-align: center', inTag: 'maxlength=2'}},
 						{ field: 'asistencias', caption: 'Asis', size: '5%', editable: {type: 'int', style: 'text-align: center', inTag: 'maxlength=2'}},
-						{ field: 'recuperacionesBalon', caption: 'R.B.', size: '5%', editable: {type: 'int', style: 'text-align: center', inTag: 'maxlength=2'}},
+						{ field: 'balonesRecuperados', caption: 'R.B.', size: '5%', editable: {type: 'int', style: 'text-align: center', inTag: 'maxlength=2'}},
 						{ field: 'tarjetasAmarillas', caption: 'T.A', size: '5%', editable: {type: 'int', style: 'text-align: center', inTag: 'maxlength=1'}},
 						{ field: 'tarjetasRojas', caption: 'T.R.', size: '5%', editable: {type: 'int', style: 'text-align: center', inTag: 'maxlength=1'}},
 						{ field: 'penalesDetenidos', caption: 'P.D.', size: '5%', editable: {type: 'int', style: 'text-align: center', inTag: 'maxlength=2'}},

@@ -8,12 +8,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class PartidoModelo {
 
-	private int id_Partido;
-	private int id_Torneo;
-	private int equipoA;
-	private int equipoB;
-	private int marcadorA;
-	private int marcadorB;
+	private Integer id_Partido;
+	private Integer id_Torneo;
+	private Integer equipoA;
+	private Integer equipoB;
+	private Integer marcadorA;
+	private Integer marcadorB;
 	private Date fecha;
 	
 	public PartidoModelo()
@@ -22,7 +22,7 @@ public class PartidoModelo {
 	}
 	
 	@XmlAttribute	
-	public int getId_Partido() {
+	public Integer getId_Partido() {
 		return id_Partido;
 	}
 
@@ -31,7 +31,7 @@ public class PartidoModelo {
 	}
 	
 	@XmlAttribute	
-	public int getId_Torneo() {
+	public Integer getId_Torneo() {
 		return id_Torneo;
 	}
 	public void setId_Torneo(int id_Torneo) {
@@ -39,7 +39,7 @@ public class PartidoModelo {
 	}
 
 	@XmlAttribute
-	public int getEquipoA() {
+	public Integer getEquipoA() {
 		return equipoA;
 	}
 	public void setEquipoA(int equipoA) {
@@ -48,7 +48,7 @@ public class PartidoModelo {
 	
 	@XmlAttribute
 
-	public int getEquipoB() {
+	public Integer getEquipoB() {
 		return equipoB;
 	}
 	public void setEquipoB(int equipoB) {
@@ -56,7 +56,7 @@ public class PartidoModelo {
 	}
 	
 	@XmlAttribute
-	public int getMarcadorA() {
+	public Integer getMarcadorA() {
 		return marcadorA;
 	}
 	public void setMarcadorA(int marcadorA) {
@@ -64,7 +64,7 @@ public class PartidoModelo {
 	}
 
 	@XmlAttribute
-	public int getMarcadorB() {
+	public Integer getMarcadorB() {
 		return marcadorB;
 	}
 	public void setMarcadorB(int marcadorB) {
