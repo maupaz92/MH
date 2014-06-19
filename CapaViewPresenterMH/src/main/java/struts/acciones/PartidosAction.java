@@ -105,7 +105,11 @@ public class PartidosAction extends ActionSupport{
 		return "vistaRegistrarPartido";
 	}
 	
-	
+	/**
+	 * metodo que obtiene los datos de las estadisticas de los jugadores
+	 * para un torneo y los equipos
+	 * @return
+	 */
 	public String registrarPartido(){						
 		//Se obtiene la fecha del partido 
 		DateFormat formateador = new SimpleDateFormat("dd-MM-yyyy");
@@ -114,8 +118,7 @@ public class PartidosAction extends ActionSupport{
 			fechaPartidoRegistrado = formateador.parse(this.getFechaPartido());
 		} catch (ParseException e) {
 			e.printStackTrace();
-		}
-		
+		}		
 		
 		//se crea el partido
 		PartidoModelo partido = new PartidoModelo();
@@ -127,31 +130,37 @@ public class PartidosAction extends ActionSupport{
 		partido.setMarcadorA(this.getGolesEquipo1());
 		partido.setMarcadorB(this.getGolesEquipo2());
 		partido.setFecha(fechaPartidoRegistrado);
-		
+		this.getLOG().info(partido.toString());
 		int idPartido = this.getClienteEstadisticas().enviarRegistroDePartido(partido);
-
+		
+		
 		//se define la lista donde se almacenaran las estadisticas totales 
 		this.setListaFinalEstadisticas(new ArrayList<EstadisticaParcial>());		
 		//se define si el partido se configura para un torneo de selecciones o de clubes
 		Boolean esTorneoDeSelecciones = Boolean.valueOf(this.getTipoTorneoConfigurado());
+		//se crea el contenedor de las estadisticas
+		ConjuntoEstadisticasParciales estadisticas = new ConjuntoEstadisticasParciales();
+		estadisticas.setIdentificadorPartido(idPartido);
+		
 		//si el torneo en el que se registra las estadisticas es de paises
 		if(esTorneoDeSelecciones){
+			estadisticas.setDeSeleccion(true);
 			this.configurarEstadistica(this.getEstadisticasEquipo1(), Integer.parseInt(this.getIdTorneoConfigurado()));
 			this.configurarEstadistica(this.getEstadisticasEquipo2(), Integer.parseInt(this.getIdTorneoConfigurado()));
 			//o de clubes
 		}else{
+			estadisticas.setDeSeleccion(false);
 			this.configurarEstadistica(this.getEstadisticasEquipo1(), Integer.parseInt(this.getIdEquipo1()));
 			this.configurarEstadistica(this.getEstadisticasEquipo2(), Integer.parseInt(this.getIdEquipo2()));
-		}							
-		//se crea el contenedor de las estadisticas
-		ConjuntoEstadisticasParciales estadisticas = new ConjuntoEstadisticasParciales();
-		estadisticas.setIdentificadorPartido(idPartido);
+		}									
 		//se itera sobre la lista total de estadisticas
 		for(int conteo = 0; conteo < this.getListaFinalEstadisticas().size(); conteo++){
-			EstadisticaParcial est = this.getListaFinalEstadisticas().get(conteo);			
+			EstadisticaParcial est = this.getListaFinalEstadisticas().get(conteo);
+			this.getLOG().info(est.toString());
 			estadisticas.agregarEstadisticas(est);
 		}
 		this.getClienteEstadisticas().enviarRegistroDeEstadisticas(estadisticas);
+		
 		this.limpiarCamposPartido();
 		return "vistaRegistrarPartido";
 	}

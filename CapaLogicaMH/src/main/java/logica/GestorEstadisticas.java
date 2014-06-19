@@ -12,10 +12,12 @@ import modelos.recursos.PartidoModelo;
 import persistencia.implementaciones.actualizaciones.Actualizador;
 import persistencia.implementaciones.escritura.Registrador;
 import persistencia.implementaciones.lectura.LectorEstadisticas;
+import persistencia.implementaciones.lectura.LectorJugadores;
 import persistencia.interfaces.ActualizadorDAO;
 import persistencia.interfaces.LectorEstadisticasDAO;
 import persistencia.interfaces.LectorJugadoresDAO;
 import persistencia.interfaces.RegistradorDAO;
+
 
 public class GestorEstadisticas {
 	
@@ -24,12 +26,14 @@ public class GestorEstadisticas {
 	private ActualizadorDAO actualizadorObjetosBD;
 	private LectorJugadoresDAO lectorJugadores;
 	
+	
 
 	public GestorEstadisticas()
 	{
 		setRegistradorObjetosBD(new Registrador());
 		setLectorEstadisticas(new LectorEstadisticas());
 		setActualizadorObjetosBD(new Actualizador());
+		setLectorJugadores(new LectorJugadores());
 	}
 
 	/**
@@ -57,12 +61,12 @@ public class GestorEstadisticas {
 	public void registrarEstadisticasRegulares(List<EstadisticaParcial> estadisticasParciales, Integer idPartido)
 	{
 		PartidoModelo partido = (PartidoModelo) this.getLectorEstadisticas().getPartido(idPartido);
-		
-		
+			
 		for(int i=0;i<estadisticasParciales.size();i++)
 		{
 			
 			EstadisticaParcial e = estadisticasParciales.get(i);
+			System.out.println("pasaporte"+e.getPasaporteJugador());
 			JugadorModelo jugador = (JugadorModelo) this.getLectorJugadores().getJugador(e.getPasaporteJugador());
 			Boolean existeEstadistica = existeEstadisticaRegularEspecifica(jugador,e.getIdTorneoEquipo(),e.getAno());
 			if(existeEstadistica)
@@ -109,8 +113,7 @@ public class GestorEstadisticas {
 	public void registrarEstadisticasSeleccion(List<EstadisticaParcial> estadisticasParciales, Integer idPartido)
 	{
 		
-		PartidoModelo partido = (PartidoModelo) this.getLectorEstadisticas().getPartido(idPartido);		
-		
+		PartidoModelo partido = (PartidoModelo) this.getLectorEstadisticas().getPartido(idPartido);			
 		for(int i=0;i<estadisticasParciales.size();i++)
 		{
 			
@@ -137,16 +140,17 @@ public class GestorEstadisticas {
 			}
 			else
 			{
-				//Crear EstadisticasJugadorRegularesModelo a partir de la EstadisticaParcial
-				EstadisticasJugadorRegularesModelo nuevaEstadistica = new EstadisticasJugadorRegularesModelo(e);
+				/*//Crear EstadisticasJugadorRegularesModelo a partir de la EstadisticaParcial
+				EstadisticasJugadorSeleccionModelo nuevaEstadistica = new EstadisticasJugadorSeleccionModelo(e);
 				nuevaEstadistica.setJugador(jugador);
+				nuevaEstadistica
 				//Calcular partidoganado, empatado o perdido
 				analizarMarcadorRegulares(partido,jugador,nuevaEstadistica);
 				//Calcular NotaXFIFA
 				calcularNotaXFIFARegulares(nuevaEstadistica);
 				//Se hace Save y se guarda la nueva estadistica
 				this.getRegistradorObjetosBD().guardarNuevoRecurso(nuevaEstadistica);
-				
+				*/
 			}
 		}
 		

@@ -7,9 +7,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Response;
-
 import org.jboss.resteasy.logging.Logger;
-
 import modelos.recursos.ConjuntoEstadisticasParciales;
 import modelos.recursos.PartidoModelo;
 import comunicacion.servicios.interfaces.ConsultasEquipos;
@@ -62,8 +60,9 @@ public class ClienteRESTEstadisticas implements ConsultasEstadisticas{
 		String url = SERVICE_URI+ROOT_URI+PARTIDO_REGISTER_URI;						
 		Response respuesta = null;	
 		//se procede a obtener la lista del servicio
+		this.log.info(partido.toString());
 		try{						
-			respuesta = this.getCliente().target(url).request().post(Entity.xml(partido));
+			respuesta = this.getCliente().target(url).request().post(Entity.entity(partido, "application/json"));
 		}catch(WebApplicationException excepcion){
 			//codigo de la respuesta
 			int codigoWeb = excepcion.getResponse().getStatus();
@@ -73,8 +72,10 @@ public class ClienteRESTEstadisticas implements ConsultasEstadisticas{
 				this.setMensajeErrorCliente(ERROR_SERVICIO_NO_DISPONIBLE);
 				log.info("Codigo retornado de la respuesta: "+Integer.toString(codigoWeb));		
 			}
-		}
-		return (Integer) respuesta.getEntity();
+		}				
+		PartidoModelo partidoRecibido = respuesta.readEntity(PartidoModelo.class);
+		this.getLog().info("Id del partido creado: "+partidoRecibido.getId_Partido());
+		return partidoRecibido.getId_Partido();
 	}
 
 	public String getMensajeError() {
@@ -86,7 +87,7 @@ public class ClienteRESTEstadisticas implements ConsultasEstadisticas{
 	}
 
 
-	private Client getCliente() {
+	public Client getCliente() {
 		return cliente;
 	}
 
@@ -94,5 +95,19 @@ public class ClienteRESTEstadisticas implements ConsultasEstadisticas{
 	private void setCliente(Client cliente) {
 		this.cliente = cliente;
 	}
+	
+	private Logger getLog(){
+		return log;
+	}
 
+	/*
+	public static void main(String[] args){
+		
+		ClienteRESTEstadisticas c = new ClienteRESTEstadisticas();
+		Response r = c.getCliente().target("http://localhost:8080/CapaServicioMH/estadisticas/partidosX").
+				request().post(Entity.text(new String("hola")));
+		String s = r.readEntity(String.class);
+		c.log.info(s);
+	}
+	*/
 }

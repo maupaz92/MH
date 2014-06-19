@@ -65,6 +65,7 @@ public class JugadoresAction extends ActionSupport{
 	 * @return
 	 */
 	public String registrarJugador(){
+		
 		//se cargan los datos del jugador
 		this.cargarDatosJugador();
 		this.getLog().info(this.getJugador().toString());
@@ -231,7 +232,6 @@ public class JugadoresAction extends ActionSupport{
 		this.clienteJugadores = clienteJugadores;
 	}
 
-	@SuppressWarnings("unused")
 	private Logger getLog() {
 		return log;
 	}

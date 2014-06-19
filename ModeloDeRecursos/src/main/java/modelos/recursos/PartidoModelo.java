@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
+
 @XmlRootElement
 public class PartidoModelo {
 
@@ -18,10 +19,17 @@ public class PartidoModelo {
 	
 	public PartidoModelo()
 	{
-		
-	}
+		/*
+		id_Partido = new Integer(1);
+		id_Torneo = new Integer(1);
+		equipoA = new Integer(1);
+		equipoB = new Integer(1);
+		marcadorA = new Integer(1);
+		marcadorB = new Integer(1);
+		*/
+	}		
 	
-	@XmlAttribute	
+	@XmlAttribute
 	public Integer getId_Partido() {
 		return id_Partido;
 	}
@@ -47,7 +55,6 @@ public class PartidoModelo {
 	}
 	
 	@XmlAttribute
-
 	public Integer getEquipoB() {
 		return equipoB;
 	}
@@ -80,6 +87,10 @@ public class PartidoModelo {
 	}
 	
 	
-	
+	@Override
+	public String toString() {	
+		return "Id partido: "+id_Partido+" id torneo: "+id_Torneo+" id equipo A: "+equipoA+" id equipo B "+equipoB+" marcador A: "+marcadorA+
+				" marcador B: "+marcadorB+" fecha: "+fecha;
+	}
 	
 }

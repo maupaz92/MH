@@ -48,6 +48,26 @@ public class EstadisticasJugadorSeleccionModelo implements Serializable{
 	
 	public EstadisticasJugadorSeleccionModelo(){}
 	
+	
+	public EstadisticasJugadorSeleccionModelo(EstadisticaParcial estadistica)
+	{
+		this.goles_Anotados = estadistica.getGolesAnotados();
+		this.minutos_Jugados = estadistica.getMinutosJugados();
+		this.balones_Recuperados = estadistica.getBalonesRecuperados();
+		this.asistencias = estadistica.getAsistencias();
+		this.tiros_Marco = estadistica.getTirosMarco();
+		this.tarjetas_amarillas = estadistica.getTarjetasAmarillas();
+		this.tarjetas_rojas = estadistica.getTarjetasRojas();
+		this.penales_Cometidos = estadistica.getPenalesCometidos();
+		this.penales_Detenidos = estadistica.getPenalesDetenidos();
+		this.remates_Salvados = estadistica.getRematesSalvados();
+		this.setJuegos_Empatados(0);
+		this.setJuegos_Ganados(0);
+		this.setJuegos_Perdidos(0);
+		this.setJuegos_Totales(0);
+		
+	}
+	
 	//----------getters & setters
 	
 

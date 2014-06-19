@@ -13,16 +13,24 @@ public class ConjuntoEstadisticasParciales {
 	
 	private List<EstadisticaParcial> listaEstadisticas;
 	private int identificadorPartido;
+	private boolean deSeleccion;
+	
 	
 	public ConjuntoEstadisticasParciales(){
 		listaEstadisticas = new ArrayList<EstadisticaParcial>();				
 	}
 	
+	/**
+	 * 
+	 * @param estadistica
+	 */
 	public void agregarEstadisticas(EstadisticaParcial estadistica){
 		listaEstadisticas.add(estadistica);
 	}
 
-	@XmlElement(name = "estadisticas")
+	//getters & setters
+	
+	@XmlElement
 	public List<EstadisticaParcial> getListaEstadisticas() {
 		return listaEstadisticas;
 	}
@@ -31,13 +39,21 @@ public class ConjuntoEstadisticasParciales {
 	public void setListaEstadisticas(List<EstadisticaParcial> listaEstadisticas) {
 		this.listaEstadisticas = listaEstadisticas;
 	}
-
+	@XmlElement
 	public int getIdentificadorPartido() {
 		return identificadorPartido;
 	}
 
 	public void setIdentificadorPartido(int identificadorPartido) {
 		this.identificadorPartido = identificadorPartido;
+	}
+	@XmlElement
+	public boolean isDeSeleccion() {
+		return deSeleccion;
+	}
+
+	public void setDeSeleccion(boolean deSeleccion) {
+		this.deSeleccion = deSeleccion;
 	}
 	
 	
