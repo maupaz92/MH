@@ -6,6 +6,7 @@ import java.util.List;
 
 import modelos.recursos.EstadisticaParcial;
 import modelos.recursos.EstadisticasJugadorRegularesModelo;
+import modelos.recursos.EstadisticasJugadorSeleccionModelo;
 import modelos.recursos.JugadorModelo;
 import modelos.recursos.PartidoModelo;
 import persistencia.implementaciones.actualizaciones.Actualizador;
@@ -71,13 +72,13 @@ public class GestorEstadisticas {
 						getEstadisticaRegular(jugador, e.getIdTorneoEquipo(), e.getAno());
 				
 				//Sumar campo por campo estadisticasRegistradas + las estadisticas recibidas
-				calcularEstadisticas(estadisticasOld,e);
+				calcularEstadisticasRegulares(estadisticasOld,e);
 				
 				//Calcular partido ganado, empatado o perdido.
-				analizarMarcador(partido,jugador,estadisticasOld);
+				analizarMarcadorRegulares(partido,jugador,estadisticasOld);
 				
 				//Calcular NotaXFIFA
-				calcularNotaXFIFA(estadisticasOld);
+				calcularNotaXFIFARegulares(estadisticasOld);
 				
 				//Hacer update
 				this.getActualizadorObjetosBD().actualizarRecurso(estadisticasOld);
@@ -86,12 +87,12 @@ public class GestorEstadisticas {
 			{
 				//Crear EstadisticasJugadorRegularesModelo a partir de la EstadisticaParcial
 				EstadisticasJugadorRegularesModelo nuevaEstadistica = new EstadisticasJugadorRegularesModelo(e);
-				
+				nuevaEstadistica.setJugador(jugador);
 				//Calcular partidoganado, empatado o perdido
-				analizarMarcador(partido,jugador,nuevaEstadistica);
+				analizarMarcadorRegulares(partido,jugador,nuevaEstadistica);
 				//Calcular NotaXFIFA
-				calcularNotaXFIFA(nuevaEstadistica);
-				//Hacer Save
+				calcularNotaXFIFARegulares(nuevaEstadistica);
+				//Se hace Save y se guarda la nueva estadistica
 				this.getRegistradorObjetosBD().guardarNuevoRecurso(nuevaEstadistica);
 				
 			}
@@ -100,13 +101,67 @@ public class GestorEstadisticas {
 	}
 	
 	/**
+	 * 
+	 * @param estadisticasParciales
+	 * @param idPartido
+	 * Metodo para registrar Estadisticas Regulares de un Jugador en la base de datos.
+	 */
+	public void registrarEstadisticasSeleccion(List<EstadisticaParcial> estadisticasParciales, Integer idPartido)
+	{
+		
+		PartidoModelo partido = (PartidoModelo) this.getLectorEstadisticas().getPartido(idPartido);		
+		
+		for(int i=0;i<estadisticasParciales.size();i++)
+		{
+			
+			EstadisticaParcial e = estadisticasParciales.get(i);
+			JugadorModelo jugador = (JugadorModelo) this.getLectorJugadores().getJugador(e.getPasaporteJugador());
+			Boolean existeEstadistica = existeEstadisticaSeleccionEspecifica(jugador,e.getIdTorneoEquipo(),e.getAno());
+			if(existeEstadistica)
+			{
+				//Obtener EstadisticaEspecifica
+				EstadisticasJugadorSeleccionModelo estadisticasOld = (EstadisticasJugadorSeleccionModelo) this.getLectorEstadisticas().getEstadisticaSeleccion(jugador, e.getIdTorneoEquipo(), e.getAno());
+					
+				
+				//Sumar campo por campo estadisticasRegistradas + las estadisticas recibidas
+				calcularEstadisticasSeleccion(estadisticasOld,e);
+				
+				//Calcular partido ganado, empatado o perdido.
+				analizarMarcadorSeleccion(partido,jugador,estadisticasOld);
+				
+				//Calcular NotaXFIFA
+				calcularNotaXFIFASeleccion(estadisticasOld);
+				
+				//Hacer update
+				this.getActualizadorObjetosBD().actualizarRecurso(estadisticasOld);
+			}
+			else
+			{
+				//Crear EstadisticasJugadorRegularesModelo a partir de la EstadisticaParcial
+				EstadisticasJugadorRegularesModelo nuevaEstadistica = new EstadisticasJugadorRegularesModelo(e);
+				nuevaEstadistica.setJugador(jugador);
+				//Calcular partidoganado, empatado o perdido
+				analizarMarcadorRegulares(partido,jugador,nuevaEstadistica);
+				//Calcular NotaXFIFA
+				calcularNotaXFIFARegulares(nuevaEstadistica);
+				//Se hace Save y se guarda la nueva estadistica
+				this.getRegistradorObjetosBD().guardarNuevoRecurso(nuevaEstadistica);
+				
+			}
+		}
+		
+	}
+	
+	
+	
+	/**
 	 * @param jugador
 	 * @param equipo
 	 * @param year
 	 * @return
 	 * Metodo para verificar si existe una estadistica regular especifica para una combinacion jugador, equipo y año.
 	 */
-	public boolean existeEstadisticaRegularEspecifica(JugadorModelo jugador, int equipo, int year)
+	private boolean existeEstadisticaRegularEspecifica(JugadorModelo jugador, int equipo, int year)
 	{
 		Object resultado = this.getLectorEstadisticas().getEstadisticaRegular(jugador, equipo, year);
 		if(resultado!=null)
@@ -128,7 +183,7 @@ public class GestorEstadisticas {
 	 * @return
 	 * Metodo para verificar si existe una estadistica registrada para un combinacion jugador, torneo y año.
 	 */
-	public boolean existeEstadisticaSeleccionEspecifica(JugadorModelo jugador, int torneo, int year)
+	private boolean existeEstadisticaSeleccionEspecifica(JugadorModelo jugador, int torneo, int year)
 	{
 
 		Object resultado = this.getLectorEstadisticas().getEstadisticaRegular(jugador, torneo, year);
@@ -150,7 +205,7 @@ public class GestorEstadisticas {
 	 * @param nuevas
 	 * metodo para realizar la suma de las estadisticas existentes con las nuevas. 
 	 */
-	public void calcularEstadisticas(EstadisticasJugadorRegularesModelo antiguas, EstadisticaParcial nuevas)
+	private void calcularEstadisticasRegulares(EstadisticasJugadorRegularesModelo antiguas, EstadisticaParcial nuevas)
 	{
 		antiguas.setAsistencias(antiguas.getAsistencias()+nuevas.getAsistencias());
 		antiguas.setBalones_Recuperados(antiguas.getBalones_Recuperados()+nuevas.getBalonesRecuperados());
@@ -167,12 +222,33 @@ public class GestorEstadisticas {
 
 	/**
 	 * 
+	 * @param antiguas
+	 * @param nuevas
+	 *  metodo para realizar la suma de las estadisticas existentes con las nuevas.
+	 */
+	private void calcularEstadisticasSeleccion(EstadisticasJugadorSeleccionModelo antiguas, EstadisticaParcial nuevas)
+	{
+		antiguas.setAsistencias(antiguas.getAsistencias()+nuevas.getAsistencias());
+		antiguas.setBalones_Recuperados(antiguas.getBalones_Recuperados()+nuevas.getBalonesRecuperados());
+		antiguas.setGoles_Anotados(antiguas.getGoles_Anotados()+nuevas.getGolesAnotados());
+		antiguas.setJuegos_Totales(antiguas.getJuegos_Totales()+1);
+		antiguas.setMinutos_Jugados(antiguas.getMinutos_Jugados()+nuevas.getMinutosJugados());
+		antiguas.setPenales_Cometidos(antiguas.getPenales_Cometidos()+nuevas.getPenalesCometidos());
+		antiguas.setPenales_Detenidos(antiguas.getPenales_Detenidos()+nuevas.getPenalesDetenidos());
+		antiguas.setRemates_Salvados(antiguas.getRemates_Salvados()+nuevas.getRematesSalvados());
+		antiguas.setTarjetas_amarillas(antiguas.getTarjetas_amarillas()+nuevas.getTarjetasAmarillas());
+		antiguas.setTarjetas_rojas(antiguas.getTarjetas_rojas()+nuevas.getTarjetasRojas());
+		antiguas.setTiros_Marco(antiguas.getTiros_Marco()+nuevas.getTirosMarco());
+	}
+	
+	/**
+	 * 
 	 * @param partido
 	 * @param jugador
 	 * @param antiguas
 	 * Metodo utilizado para verificar si sumar uno a Partidos Ganadas, Empatados o Perdidos
 	 */
-	public void analizarMarcador(PartidoModelo partido, JugadorModelo jugador, EstadisticasJugadorRegularesModelo antiguas)
+	private void analizarMarcadorRegulares(PartidoModelo partido, JugadorModelo jugador, EstadisticasJugadorRegularesModelo antiguas)
 	{
 		int equipoJugador = jugador.getEquipoActual().getId_Equipo();
 		int equipoA = partido.getEquipoA();
@@ -201,7 +277,47 @@ public class GestorEstadisticas {
 		}
 	}
 	
-	public void calcularNotaXFIFA(EstadisticasJugadorRegularesModelo estadisticas)
+	/**
+	 * 
+	 * @param partido
+	 * @param jugador
+	 * @param antiguas
+	 * Metodo utilizado para verificar si sumar uno a Partidos Ganadas, Empatados o Perdidos
+	 */
+	private void analizarMarcadorSeleccion(PartidoModelo partido, JugadorModelo jugador, EstadisticasJugadorSeleccionModelo antiguas)
+	{
+		int equipoJugador = jugador.getEquipoActual().getId_Equipo();
+		int equipoA = partido.getEquipoA();
+		int equipoB = partido.getEquipoB();
+		int marcadorA = partido.getMarcadorA();
+		int marcadorB = partido.getMarcadorB();
+		
+		if(equipoJugador==equipoA && marcadorA>marcadorB)
+		{
+			antiguas.setJuegos_Ganados(antiguas.getJuegos_Ganados()+1);
+			
+		}
+		if((equipoJugador==equipoA || equipoJugador==equipoB) && marcadorA==marcadorB)
+		{
+			antiguas.setJuegos_Empatados(antiguas.getJuegos_Empatados()+1);
+						
+		}
+		if(equipoJugador==equipoA && marcadorA<marcadorB)
+		{
+			antiguas.setJuegos_Perdidos(antiguas.getJuegos_Perdidos()+1);					
+		}
+		if(equipoJugador==equipoB && marcadorB>marcadorA)
+		{
+			antiguas.setJuegos_Ganados(antiguas.getJuegos_Ganados()+1);
+			
+		}
+	}
+	
+	/**
+	 * Metodo Utilizado para el calculo de la nota XFIFA segun un conjunto de estadisticas Regulares.
+	 * @param estadisticas
+	 */
+	private void calcularNotaXFIFARegulares(EstadisticasJugadorRegularesModelo estadisticas)
 	{
 		int goles = (estadisticas.getGoles_Anotados()*25);
 		int tirosMarco = (estadisticas.getTiros_Marco()*5);
@@ -218,6 +334,32 @@ public class GestorEstadisticas {
 				
 		
 	}
+	
+	
+	/**
+	 * Metodo Utilizado para el calculo de la nota XFIFA segun un conjunto de estadisticas de Seleccion.
+	 * @param estadisticas
+	 */
+	private void calcularNotaXFIFASeleccion(EstadisticasJugadorSeleccionModelo estadisticas)
+	{
+		int goles = (estadisticas.getGoles_Anotados()*25);
+		int tirosMarco = (estadisticas.getTiros_Marco()*5);
+		int asistencias = (estadisticas.getAsistencias()*15);
+		int balonesRecuperados = (estadisticas.getBalones_Recuperados()*10);
+		int penalesDetenidos = (estadisticas.getPenales_Detenidos()*25);
+		int rematesSalvados = (estadisticas.getRemates_Salvados()*20);
+		int totalMinutos = estadisticas.getMinutos_Jugados();
+		double coeficienteGanador = (estadisticas.getJuegos_Ganados()/estadisticas.getJuegos_Totales());
+		double resultado = (goles+tirosMarco+asistencias+balonesRecuperados+penalesDetenidos+rematesSalvados)/(totalMinutos+coeficienteGanador);
+		
+		estadisticas.setNota_XFIFA(resultado);
+				
+				
+		
+	}
+	
+	
+	
 	//getters & settters
 	public RegistradorDAO getRegistradorObjetosBD() {
 		return registradorObjetosBD;
