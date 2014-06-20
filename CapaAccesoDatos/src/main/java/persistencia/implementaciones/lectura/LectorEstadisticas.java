@@ -20,18 +20,14 @@ public class LectorEstadisticas implements LectorEstadisticasDAO{
 	public Object getEstadisticaRegular(JugadorModelo jugador,int club, int year) {
 		//Se obtiene la sesion
 		Session session = HibernateFactory.getSessionFactory().openSession();       
-        session.beginTransaction();
-        
-        //Se crea un objeto de Estadisticas que sera utilizado para realizar la busqueda segun los parametros de ingreso.
-		EstadisticasJugadorRegularesModelo estadisticasBusqueda = new EstadisticasJugadorRegularesModelo();
-		estadisticasBusqueda.setJugador(jugador);
-		estadisticasBusqueda.setClub(club);
-		estadisticasBusqueda.setAno(year);
-		
-		//Se realiza la busqueda utilizando el objeto de Estadisticas creado anteriormente.
-		Object estadisticasResultado = session.get(EstadisticasJugadorRegularesModelo.class, estadisticasBusqueda);
-			
-		return estadisticasResultado;
+		session.beginTransaction();		
+		System.out.println("Buscando Estadisticas"); 
+		Query query = session.createQuery("from EstadisticasJugadorRegularesModelo e where e.jugador = :iJugador AND  e.club = :iClub AND e.ano = :iAno");					
+		query.setParameter("iJugador", jugador);
+		query.setParameter("iClub", club);
+		query.setParameter("iAno", year);
+		Object resultado = query.uniqueResult();//se obtiene la lista del query	
+		return resultado;
 	}
 
 	public Object getEstadisticaSeleccion(JugadorModelo jugador,int torneo, int year) {
@@ -45,14 +41,7 @@ public class LectorEstadisticas implements LectorEstadisticasDAO{
 		query.setParameter("iAno", year);
 		Object resultado = query.uniqueResult();//se obtiene la lista del query	
 		return resultado;
-		//Se crea un objeto de Estadisticas que sera utilizado para realizar la busqueda segun los parametros de ingreso.
-		/*EstadisticasJugadorSeleccionModelo estadisticasBusqueda = new EstadisticasJugadorSeleccionModelo();
-		estadisticasBusqueda.setJugador(jugador);
-		estadisticasBusqueda.setTorneo(torneo);
-		estadisticasBusqueda.setAno(year);
-				
-		//Se realiza la busqueda utilizando el objeto de Estadisticas creado anteriormente.
-		Object estadisticasResultado = session.get(EstadisticasJugadorRegularesModelo.class, estadisticasBusqueda);*/
+		
 					
 		
 	}

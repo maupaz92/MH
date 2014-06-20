@@ -60,20 +60,22 @@ public class GestorEstadisticas {
 	 */
 	public void registrarEstadisticasRegulares(List<EstadisticaParcial> estadisticasParciales, Integer idPartido)
 	{
-		PartidoModelo partido = (PartidoModelo) this.getLectorEstadisticas().getPartido(idPartido);
-			
+		PartidoModelo partido = (PartidoModelo) this.getLectorEstadisticas().getPartido(idPartido);	
+		System.out.println("Registrando Estadisticas Regulares");	
+		
 		for(int i=0;i<estadisticasParciales.size();i++)
 		{
 			
 			EstadisticaParcial e = estadisticasParciales.get(i);
-			System.out.println("pasaporte"+e.getPasaporteJugador());
-			JugadorModelo jugador = (JugadorModelo) this.getLectorJugadores().getJugador(e.getPasaporteJugador());
-			Boolean existeEstadistica = existeEstadisticaRegularEspecifica(jugador,e.getIdTorneoEquipo(),e.getAno());
+			JugadorModelo jugador = (JugadorModelo) this.getLectorJugadores().getJugador(e.getPasaporteJugador());			
+			Boolean existeEstadistica = existeEstadisticaRegularEspecifica(jugador,e.getIdTorneoEquipo(), e.getAno());
+			
 			if(existeEstadistica)
 			{
+				
 				//Obtener EstadisticaEspecifica
-				EstadisticasJugadorRegularesModelo estadisticasOld = (EstadisticasJugadorRegularesModelo) this.getLectorEstadisticas().
-						getEstadisticaRegular(jugador, e.getIdTorneoEquipo(), e.getAno());
+				EstadisticasJugadorRegularesModelo estadisticasOld = (EstadisticasJugadorRegularesModelo) this.getLectorEstadisticas().getEstadisticaRegular(jugador, e.getIdTorneoEquipo(), e.getAno());
+					
 				
 				//Sumar campo por campo estadisticasRegistradas + las estadisticas recibidas
 				calcularEstadisticasRegulares(estadisticasOld,e);
@@ -93,7 +95,6 @@ public class GestorEstadisticas {
 				EstadisticasJugadorRegularesModelo nuevaEstadistica = new EstadisticasJugadorRegularesModelo(e);
 				nuevaEstadistica.setJugador(jugador);
 				nuevaEstadistica.setClub(e.getIdTorneoEquipo());
-				nuevaEstadistica.setAno(e.getAno());
 				nuevaEstadistica.setJuegos_Totales(nuevaEstadistica.getJuegos_Totales()+1);
 				//Calcular partidoganado, empatado o perdido
 				analizarMarcadorRegulares(partido,jugador,nuevaEstadistica);
@@ -117,7 +118,7 @@ public class GestorEstadisticas {
 	{
 		
 		PartidoModelo partido = (PartidoModelo) this.getLectorEstadisticas().getPartido(idPartido);	
-		System.out.println("TAMAÑO LISTA: "+estadisticasParciales.size());
+		System.out.println("Registrando Estadisticas Seleccion");
 		
 		for(int i=0;i<estadisticasParciales.size();i++)
 		{
@@ -177,7 +178,8 @@ public class GestorEstadisticas {
 	 */
 	private boolean existeEstadisticaRegularEspecifica(JugadorModelo jugador, int equipo, int year)
 	{
-		Object resultado = this.getLectorEstadisticas().getEstadisticaRegular(jugador, equipo, year);
+		Object resultado = new Object();
+		resultado = this.getLectorEstadisticas().getEstadisticaRegular(jugador, equipo, year);
 				
 		if(resultado!=null)
 		{			
@@ -306,9 +308,7 @@ public class GestorEstadisticas {
 		int equipoB = partido.getEquipoB();
 		int marcadorA = partido.getMarcadorA();
 		int marcadorB = partido.getMarcadorB();
-		System.out.println("equipoJugador "+equipoJugador);
-		System.out.println("EquipoA "+equipoA);
-		System.out.println("EquipoB "+equipoB);
+		
 		
 		if(equipoJugador==equipoA && marcadorA>marcadorB)
 		{
